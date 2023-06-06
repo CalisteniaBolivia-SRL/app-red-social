@@ -1,0 +1,6 @@
+{
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "yaml.schemas": {
+        "https://json.schemastore.org/github-workflow.json": "file:///Users/rickypazd/Documents/GitHub/CalisteniaBolivia-SRL/calistenia-app-red-social/.github/workflows/main.yml"
+    }
+}
