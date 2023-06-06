@@ -551,7 +551,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.servisofts.calisteniav2;
 				PRODUCT_NAME = calistenia_rs_app;
-				PROVISIONING_PROFILE_SPECIFIER = calistenia_app_red_social_provisioning_profile;
+				PROVISIONING_PROFILE_SPECIFIER = app_red_social;
 				SWIFT_OBJC_BRIDGING_HEADER = "calistenia_rs_app-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
