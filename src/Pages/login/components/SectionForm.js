@@ -27,7 +27,7 @@ export default class SectionForm extends Component {
                     }}
                     inputs={{
                         usuario: {
-                            defaultValue:"rickypazd@icloud.com",
+                            // defaultValue:"rickypazd@icloud.com",
                             placeholder: "Correo",
                             isRequired: true, keyboardType: "email-address", autoCapitalize: "none", type: "email",  onKeyPress: (evt) => {
                                 if (evt.key === "Enter") {
