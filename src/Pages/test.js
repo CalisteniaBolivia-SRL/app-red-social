@@ -31,8 +31,8 @@ class formulario extends Component {
         }
         let space = 16;
         return <SPage hidden>
-            {/* <Container>
-                <SView col={"xs-11"} center>
+            <Container>
+                {/* <SView col={"xs-11"} center>
                     <SHr />
                     <SHr h={space * 2} />
                     <SText fontSize={16} bold color={STheme.color.text}>{"REGISTRO CONDUCTOR"}</SText>
@@ -78,8 +78,8 @@ class formulario extends Component {
                     <SHr h={space} />
                     <SHr h={space} />
                     <SHr h={space * 3} />
-                </SView>
-            </Container> */}
+                </SView> */}
+            </Container>
         </SPage>
     }
 }
