@@ -469,7 +469,7 @@ PODS:
     - React-Core
   - RNSVG (12.5.1):
     - React-Core
-  - servisofts-socket (3.0.1):
+  - servisofts-socket (3.0.4):
     - CocoaAsyncSocket
     - React-Core
   - Yoga (1.14.0)
@@ -677,7 +677,7 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: fa8275d5086566e22a26ddc385ab5772e7f9b1bd
-  FBReactNativeSpec: 75310cef4fc5ec096dba2769b797fc271277fb55
+  FBReactNativeSpec: 2b7b342a024ff0513a645f598ac371aa8ec22cfe
   FBSDKCoreKit: 4afd6ff53d8133a433dbcda44451c9498f8c6ce4
   FBSDKLoginKit: 7181765f2524d7ebf82d9629066c8e6caafc99d0
   FBSDKShareKit: 0c0d51b3af47075a85ed9bea0e28b2fc70e3594b
@@ -745,7 +745,7 @@ SPEC CHECKSUMS:
   RNScreens: ea4cd3a853063cda19a4e3c28d2e52180c80f4eb
   RNShare: a5dc3b9c53ddc73e155b8cd9a94c70c91913c43c
   RNSVG: d7d7bc8229af3842c9cfc3a723c815a52cdd1105
-  servisofts-socket: 7df93adbe9f1a0b95bbf769908665a2773c9921d
+  servisofts-socket: 5997e69ddd8c542bbe14d8a2eb42eb2900ea474d
   Yoga: d1fc3575b8b68891ff5ef3c276daa855e841eb32
 
 PODFILE CHECKSUM: 72150c5bedecf2edaa319b5540a58779080419c8
