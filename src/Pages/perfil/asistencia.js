@@ -6,6 +6,7 @@ import SSocket from 'servisofts-socket';
 import Model from '../../Model';
 import { AccentBar, BottomNavigator, Container, PButtom, Publicacion } from '../../Components';
 import usuario_dato from '../../Model/tapeke/usuario_dato';
+import Dia from './components/Dia';
 
 
 class asistencia extends Component {
@@ -37,20 +38,25 @@ class asistencia extends Component {
     }
 
     renderDias(data, i) {
-        let day = parseFloat(i) + 1
-        let fecha = new SDate().setDay(day)
-        let isSelect = fecha.equalDay(this.state.curDay)
+        // let isSelect = fecha.equalDay(this.state.curDay)
+        let hoy = new SDate(this.state.curDay).getDayOfWeek()
+        let isSelect = false
         let color = isSelect ? STheme.color.white : STheme.color.text
-        return <SView width={80} height={90} card style={{
-            margin: 4,
-            backgroundColor: isSelect ? STheme.color.secondary : STheme.color.card
-        }} center onPress={() => {
-            this.setState({ curDay: fecha })
-        }}>
-            <SText font={"Roboto"} fontSize={14} color={color}>{fecha.getDayOfWeekJson().textSmall}</SText>
-            <SHr />
-            <SText font={"LondonTwo"} fontSize={24} color={color}>{day}</SText>
-        </SView>
+        return <>
+            {/* <SView col={"xs-12"} row> */}
+                <SView col={"xs-1.5"}  height={90} card style={{
+                    // margin: 4,
+                    backgroundColor: isSelect ? STheme.color.secondary : STheme.color.card
+                }} center onPress={() => {
+                    //this.setState({ curDay: fecha })
+                }}>
+                    <SText font={"Roboto"} fontSize={14} color={color}>{data.fecha}</SText>
+                    <SText font={"Roboto"} fontSize={14} color={color}>{data.diaMes || ""}</SText>
+                    <SHr />
+
+                </SView>
+            {/* </SView> */}
+        </>
     }
 
     getPerfil() {
@@ -124,13 +130,13 @@ class asistencia extends Component {
         let publicacionesMias = Object.values(publicaciones).filter(obj => obj.key_usuario == usuario.key);
         this.state.nroPublicaciones = Object.keys(publicacionesMias).length;
 
-        console.log(publicacionesMias)
+        // console.log(publicacionesMias)
         //console.log(Object.keys(publicacionesMias).length)
 
         return <SList
             data={publicacionesMias}
             order={[{ key: "fecha_on", order: "desc" }]}
-            space={0}
+            space={0.2}
             render={(a) => {
                 // let user = Model.usuario.Action.getByKey(a.key_usuario);
                 // if (!user) return <SLoad/>
@@ -139,7 +145,64 @@ class asistencia extends Component {
             }}
         />
     }
-    getCalendario() {
+
+    getCabecera() {
+        return <>
+            <SView col={"xs-12"} row center>
+                <Dia dia="LUN" />
+            </SView>
+        </>
+    }
+
+    getCalendario(mes, ano) {
+
+        let primerDiaSemana = new Date(ano, mes, 1).getDay();
+        let fechaFin = new Date(ano, mes + 1, 1);
+        fechaFin = fechaFin.setDate(fechaFin.getDate() - 1);
+        let ultimoDiaSemana = new Date(fechaFin).getDay();
+        let ultimoDiaMes = new Date(fechaFin).getDate()
+
+
+
+        console.log(ultimoDiaMes)
+        let calendario = [];
+        var index = 0;
+        var diaMes = 0;
+        for (let i = 0; i < 6; i++) {
+
+            for (let j = 0; j < 7; j++) {
+                index++;
+
+                if (i == 0 && j < primerDiaSemana) {
+                    //primer semana del mes
+                    calendario.push({ index, dia_semana: j, semana: i, fecha: null })
+                } else {
+
+                    if (diaMes < ultimoDiaMes) {
+                        diaMes++;
+                        //Aqui verificamos si asistio o no a entrenar
+
+                        //asistencia getbykeyusuario y paso key_usuario
+                        // var dataAsistencia = Model.asistencia.Action.getByKey(Model.usuario.Action.getUsuarioLog(), mes, ano);
+
+                        // var dataAsistencia = Model.asistencia.Action.getByKeyUsuario()
+                        // console.log(dataAsistencia)
+
+                        calendario.push({ diaMes, index, dia_semana: j, semana: i, fecha: "" })
+
+                    } else {
+                        calendario.push({ index, dia_semana: j, semana: i, fecha: null })
+                    }
+                    // index++;
+                }
+            }
+
+
+        }
+
+
+
+
         return <>
             <SView col={"xs-12"} row
                 center
@@ -149,7 +212,7 @@ class asistencia extends Component {
                     borderTopRightRadius: 12,
                 }}
             >
-                <SView col={"xs-2"}  onPress={() => {
+                <SView col={"xs-2"} onPress={() => {
                     this.setState({ curDay: this.state.curDay.addMonth(-1) })
                 }}>
                     <SIcon name='Iprevious' height={20} fill={STheme.color.secondary} />
@@ -166,18 +229,24 @@ class asistencia extends Component {
                 </SView>
             </SView>
             <SHr height={3} />
-            <SView col={"xs-12"} height={110}>
-                <SScrollView2 ref={ref => this.scroll = ref} contentContainerStyle={{
+            <SView col={"xs-12"} row>
+                {this.getCabecera()}
+            </SView>
+            <SView col={"xs-12"} row>
+                {/* <SScrollView2 ref={ref => this.scroll = ref} contentContainerStyle={{
                     width: null
-                }}>
-                    <SList
-                        horizontal
-                        // center
-                        space={0}
-                        data={new Array(SDate.getDaysInMonth(this.state.curDay.getYear(), this.state.curDay.getMonth())).fill(0)}
-                        render={this.renderDias.bind(this)}
-                    />
-                </SScrollView2>
+                }}> */}
+                <SList2
+                    horizontal
+                    // center
+                    // space={4.1}
+                    space={0}
+                    // data={new Array(SDate.getDaysInMonth(this.state.curDay.getYear(), this.state.curDay.getMonth())).fill(0)}
+                    data={calendario}
+                    render={this.renderDias.bind(this)}
+                // order={this.state.curDay.getFirstDayOfWeek(this.state.curDay)}
+                />
+                {/* </SScrollView2> */}
             </SView>
         </>
     }
@@ -215,7 +284,7 @@ class asistencia extends Component {
                 <SText fontSize={11} color={STheme.color.text}>18/05/23  -  17-04-23</SText>
             </SView>
             <SHr height={15} />
-            {this.getCalendario()}
+            {this.getCalendario(this.state.curDay.getMonth() - 1, this.state.curDay.getYear())}
         </SView>
     }
     render() {
