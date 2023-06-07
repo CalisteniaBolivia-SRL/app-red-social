@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SForm, SHr, SNavigation, SPage, SPopup, SText, SLoad, SInput, SView, SInput2, STheme, SIcon } from 'servisofts-component';
+import { SForm, SHr, SNavigation, SPage, SPopup, SText, SLoad, SInput, SView, STheme, SIcon } from 'servisofts-component';
 import Container from '../Components/Container';
 // import TopBar from '../../Components/TopBar';
 
@@ -31,7 +31,7 @@ class formulario extends Component {
         }
         let space = 16;
         return <SPage hidden>
-            <Container>
+            {/* <Container>
                 <SView col={"xs-11"} center>
                     <SHr />
                     <SHr h={space * 2} />
@@ -77,10 +77,9 @@ class formulario extends Component {
                     <SInput2 placeholder={"SOAT"} />
                     <SHr h={space} />
                     <SHr h={space} />
-                    {/* <PButtom>Registro</PButtom> */}
                     <SHr h={space * 3} />
                 </SView>
-            </Container>
+            </Container> */}
         </SPage>
     }
 }

@@ -5,6 +5,8 @@ import filtros from "./filtros";
 import servicio from "./servicio";
 import sucursal_servicio from "./sucursal_servicio";
 import sucursal_paquete from "./sucursal_paquete";
+import asistencia from "./asistencia";
+
 export default {
     sucursal,
     paquete,
@@ -12,6 +14,8 @@ export default {
     filtros,
     servicio,
     sucursal_servicio,
-    sucursal_paquete
+    sucursal_paquete,
+    asistencia
+
    
 }
