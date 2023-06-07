@@ -8,7 +8,6 @@ import { AccentBar, BottomNavigator, Container, PButtom, Publicacion } from '../
 import usuario_dato from '../../Model/tapeke/usuario_dato';
 import Dia from './components/Dia';
 
-
 class asistencia extends Component {
     constructor(props) {
         super(props);
@@ -20,21 +19,13 @@ class asistencia extends Component {
 
     componentDidMount() {
         // console.log(this.state.curDay.getDay() * 73 )
-        this?.scroll?.scrollTo({ x: (this.state?.curDay?.getDay() - 1) * 88 })
-    }
+        //this?.scroll?.scrollTo({ x: (this.state?.curDay?.getDay() - 1) * 88 })
 
-    renderDataHeaderItem({ val, label }) {
-        return <SView center col={"xs-4"}>
-            <SText bold fontSize={16}>{val}</SText>
-            <SText>{label}</SText>
-        </SView>
-    }
-    renderDataHeader = () => {
-        return <SView col={"xs-12"} row>
-            {this.renderDataHeaderItem({ val: this.state.nroPublicaciones, label: "Publicaci..." })}
-            {this.renderDataHeaderItem({ val: 0, label: "Seguidores" })}
-            {this.renderDataHeaderItem({ val: 0, label: "Seguidos" })}
-        </SView>
+        Model.asistencia.Action.getByKeyUsuario().then(resp => {
+            this.setState({ data: resp.data })
+        }).catch(e => {
+
+        })
     }
 
     renderDias(data, i) {
@@ -42,108 +33,38 @@ class asistencia extends Component {
         let hoy = new SDate(this.state.curDay).getDayOfWeek()
         let isSelect = false
         let color = isSelect ? STheme.color.white : STheme.color.text
+        console.log(data.asistiendo)
         return <>
-            {/* <SView col={"xs-12"} row> */}
             <SView col={"xs-1.7"} height={90} style={{
                 borderWidth: 1, borderColor: STheme.color.gray,
-                backgroundColor: isSelect ? STheme.color.secondary : STheme.color.card
+                // backgroundColor:  data.asistiendo ? "#D93444": STheme.color.card
+                backgroundColor: STheme.color.card
             }} center onPress={() => {
                 //this.setState({ curDay: fecha })
             }}>
-                <SText font={"Roboto"} fontSize={14} color={color}>{data.fecha}</SText>
+                {/* <SText font={"Roboto"} fontSize={14} color={color}>{data.fecha}</SText> */}
                 <SText font={"Roboto"} fontSize={14} color={color}>{data.diaMes || ""}</SText>
+                {data?.dataAsis ?
+                    <>
+                        <SHr height={3}/>
+                        <SView style={{
+                            borderWidth: 1,
+                            borderRadius: 5,
+                            borderColor: "#D93444",
+                            padding: 3
+                        }}>
+                            <SText font={"Roboto"} fontSize={11} color={color}>{data.dataAsis.horario || ""}</SText>
+                        </SView>
+                        <SHr height={3}/>
+                        <SView width={25} height={25} card style={{ borderRadius: 45, overflow: 'hidden' }}>
+                            <SImage src={SSocket.api.root + "paquete/" + data.dataAsis.key_paquete} />
+                        </SView>
+                    </>
+                    : null}
+
                 <SHr />
-
             </SView>
-            {/* </SView> */}
         </>
-    }
-
-    getPerfil() {
-        var usuario = Model.usuario.Action.getUsuarioLog();
-        if (!usuario) return <SLoad />
-        return (<SView col={"xs-12"}>
-            <SView col={"xs-12"} row center>
-                <SView style={{
-                    width: 80,
-                    height: 80,
-                    justifyContent: "center",
-                    alignItems: "center"
-                }}>
-                    <SView style={{
-                        width: "100%", height: "100%", backgroundColor: STheme.color.card, borderRadius: 100, overflow: "hidden",
-                    }} border={STheme.color.card}>
-
-                        {/* <SImage src={SSocket.api.root + "usuario/" + usuario?.key + "?date=" + new Date().getTime()} style={{ resizeMode: 'cover'}} /> */}
-                        <SInput ref={r => this.r_image = r} type={"image"} style={{
-                            width: "100%",
-                            height: "100%",
-                            backgroundColor: "none"
-                        }}
-                            defaultValue={SSocket.api.root + "usuario/" + usuario?.key + "?date=" + new Date().getTime()}
-                        />
-                    </SView>
-                </SView>
-                <SView width={8} />
-                <SView flex center >
-                    {this.renderDataHeader()}
-                </SView>
-
-            </SView>
-            <SHr h={4} />
-            <SView col={"xs-12"}>
-                <SText bold fontSize={16}>{usuario["Nombres"] + " " + usuario["Apellidos"]}</SText>
-                <SText fontSize={14}>{usuario["CI"]}</SText>
-            </SView>
-        </SView>
-        )
-    }
-    renderMenu() {
-        var usuario = Model.usuario.Action.getUsuarioLog();
-        if (!usuario) return <SLoad />
-        return <SView col={"xs-12"} row>
-            <SView card padding={8} row width={130} center onPress={() => {
-                SNavigation.navigate("/perfil/editar", { key: usuario.key });
-            }}>
-                <SText bold>Editar perfil</SText>
-            </SView>
-            <SView flex />
-            <SView card padding={8} row width={130} center onPress={() => {
-                SNavigation.navigate("/perfil/editar", { key: usuario.key });
-            }}>
-                <SText bold>Asistencia</SText>
-            </SView>
-            <SView flex />
-            <SView card padding={8} row width={130} center onPress={() => {
-                Model.usuario.Action.unlogin();
-                // SNavigation.navigate("/perfil/editar", { key: this.data.key });
-            }}>
-                <SText bold>Cerrar sesión</SText>
-            </SView>
-        </SView>
-    }
-    renderPublicaciones() {
-        let publicaciones = Model.publicacion.Action.getAll();
-        let usuario = Model.usuario.Action.getUsuarioLog();
-        if (!publicaciones) return <SLoad />
-        if (!usuario) return <SLoad />
-        let publicacionesMias = Object.values(publicaciones).filter(obj => obj.key_usuario == usuario.key);
-        this.state.nroPublicaciones = Object.keys(publicacionesMias).length;
-
-        // console.log(publicacionesMias)
-        //console.log(Object.keys(publicacionesMias).length)
-
-        return <SList
-            data={publicacionesMias}
-            order={[{ key: "fecha_on", order: "desc" }]}
-            space={0}
-            render={(a) => {
-                // let user = Model.usuario.Action.getByKey(a.key_usuario);
-                // if (!user) return <SLoad/>
-                // console.log(user);
-                return <Publicacion.CardPerfil data={a} col={"xs-4"} row center />
-            }}
-        />
     }
 
     getCabecera() {
@@ -161,53 +82,58 @@ class asistencia extends Component {
     }
 
     getCalendario(mes, ano) {
-
         let primerDiaSemana = new Date(ano, mes, 1).getDay();
         let fechaFin = new Date(ano, mes + 1, 1);
         fechaFin = fechaFin.setDate(fechaFin.getDate() - 1);
         let ultimoDiaSemana = new Date(fechaFin).getDay();
         let ultimoDiaMes = new Date(fechaFin).getDate()
-
-
-
-        console.log(ultimoDiaMes)
+        var dataAsistencia = this.state.data;
+        if (!dataAsistencia) return null;
         let calendario = [];
         var index = 0;
         var diaMes = 0;
+        var asisti = false;
+        var data;
         for (let i = 0; i < 6; i++) {
-
             for (let j = 0; j < 7; j++) {
                 index++;
-
                 if (i == 0 && j < primerDiaSemana) {
                     //primer semana del mes
                     calendario.push({ index, dia_semana: j, semana: i, fecha: null })
                 } else {
-
                     if (diaMes < ultimoDiaMes) {
                         diaMes++;
                         //Aqui verificamos si asistio o no a entrenar
 
-                        //asistencia getbykeyusuario y paso key_usuario
-                        // var dataAsistencia = Model.asistencia.Action.getByKey(Model.usuario.Action.getUsuarioLog(), mes, ano);
+                        let fechaActual = new Date(ano, mes, diaMes)
+                        let asistido;
+                        // let asistio = Object.values(dataAsistencia).find(obj2 => obj2.fecha_on == fechaActual);
+                        Object.values(dataAsistencia).map((obj) => {
+                            // dato = Object.values(sucursal_paquetes).find(obj2 => obj2.key_paquete == obj.key);
+                            // if (!dato) return null
+                            // dataMostrar.push(obj)
+                            let formatFecha = new Date(obj.fecha_on)
 
-                        // var dataAsistencia = Model.asistencia.Action.getByKeyUsuario()
-                        // console.log(dataAsistencia)
+                            // asistido = Object.values(obj).filter((a) => new SDate(a.fecha_on).toString("yyyy-MM-dd") == new SDate(fechaActual).toString("yyyy-MM-dd"))
+                            if (new SDate(obj.fecha_on).toString("yyyy-MM-dd") == new SDate(fechaActual).toString("yyyy-MM-dd")) {
+                                console.log("yes")
+                                asisti = true
+                                data = obj;
 
-                        calendario.push({ diaMes, index, dia_semana: j, semana: i, fecha: "" })
-
+                            }
+                        })
+                        calendario.push({ diaMes, index, dia_semana: j, semana: i, fecha: "", asistiendo: asisti, dataAsis: data })
+                        asisti = false
+                        data = null;
                     } else {
+                        asisti = false
+                        data = null;
                         calendario.push({ index, dia_semana: j, semana: i, fecha: null })
                     }
                     // index++;
                 }
             }
-
-
         }
-
-
-
 
         return <>
             <SView col={"xs-12"} row
@@ -234,24 +160,15 @@ class asistencia extends Component {
                     <SIcon name='Inext' height={20} fill={STheme.color.secondary} />
                 </SView>
             </SView>
-            {/* <SView col={"xs-12"} row> */}
-                {this.getCabecera()}
-            {/* </SView> */}
-            <SView col={"xs-12"} row>
-                {/* <SScrollView2 ref={ref => this.scroll = ref} contentContainerStyle={{
-                    width: null
-                }}> */}
+            {this.getCabecera()}
+            <SView col={"xs-12"} row center>
                 <SList2
                     horizontal
-                    // center
-                    // space={4.1}
                     space={0}
                     // data={new Array(SDate.getDaysInMonth(this.state.curDay.getYear(), this.state.curDay.getMonth())).fill(0)}
                     data={calendario}
                     render={this.renderDias.bind(this)}
-                // order={this.state.curDay.getFirstDayOfWeek(this.state.curDay)}
                 />
-                {/* </SScrollView2> */}
             </SView>
         </>
     }
@@ -302,9 +219,7 @@ class asistencia extends Component {
         >
             <Container>
                 {this.getBody()}
-
             </Container>
-
         </SPage>
         );
     }
