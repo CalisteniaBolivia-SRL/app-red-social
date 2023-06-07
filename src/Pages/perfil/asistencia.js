@@ -44,17 +44,17 @@ class asistencia extends Component {
         let color = isSelect ? STheme.color.white : STheme.color.text
         return <>
             {/* <SView col={"xs-12"} row> */}
-                <SView col={"xs-1.5"}  height={90} card style={{
-                    // margin: 4,
-                    backgroundColor: isSelect ? STheme.color.secondary : STheme.color.card
-                }} center onPress={() => {
-                    //this.setState({ curDay: fecha })
-                }}>
-                    <SText font={"Roboto"} fontSize={14} color={color}>{data.fecha}</SText>
-                    <SText font={"Roboto"} fontSize={14} color={color}>{data.diaMes || ""}</SText>
-                    <SHr />
+            <SView col={"xs-1.7"} height={90} style={{
+                borderWidth: 1, borderColor: STheme.color.gray,
+                backgroundColor: isSelect ? STheme.color.secondary : STheme.color.card
+            }} center onPress={() => {
+                //this.setState({ curDay: fecha })
+            }}>
+                <SText font={"Roboto"} fontSize={14} color={color}>{data.fecha}</SText>
+                <SText font={"Roboto"} fontSize={14} color={color}>{data.diaMes || ""}</SText>
+                <SHr />
 
-                </SView>
+            </SView>
             {/* </SView> */}
         </>
     }
@@ -136,7 +136,7 @@ class asistencia extends Component {
         return <SList
             data={publicacionesMias}
             order={[{ key: "fecha_on", order: "desc" }]}
-            space={0.2}
+            space={0}
             render={(a) => {
                 // let user = Model.usuario.Action.getByKey(a.key_usuario);
                 // if (!user) return <SLoad/>
@@ -148,8 +148,14 @@ class asistencia extends Component {
 
     getCabecera() {
         return <>
-            <SView col={"xs-12"} row center>
+            <SView col={"xs-12"} row >
+                <Dia dia="DOM" />
                 <Dia dia="LUN" />
+                <Dia dia="MAR" />
+                <Dia dia="MIE" />
+                <Dia dia="JUE" />
+                <Dia dia="VIE" />
+                <Dia dia="SAB" />
             </SView>
         </>
     }
@@ -228,10 +234,9 @@ class asistencia extends Component {
                     <SIcon name='Inext' height={20} fill={STheme.color.secondary} />
                 </SView>
             </SView>
-            <SHr height={3} />
-            <SView col={"xs-12"} row>
+            {/* <SView col={"xs-12"} row> */}
                 {this.getCabecera()}
-            </SView>
+            {/* </SView> */}
             <SView col={"xs-12"} row>
                 {/* <SScrollView2 ref={ref => this.scroll = ref} contentContainerStyle={{
                     width: null
