@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SNavigation, SPage, SText, SView, STheme, SImage, SInput, SLoad, SButtom, SIcon, SWebView, STable2, SMath, SDate, SList, SList2, SScrollView2 } from 'servisofts-component';
+import { SHr, SNavigation, SPage, SText, SView, STheme, SImage, SInput, SLoad, SButtom, SIcon, SWebView, STable2, SMath, SDate, SList2, SScrollView2 } from 'servisofts-component';
 import { WebView } from 'react-native';
 import SSocket from 'servisofts-socket';
 import Model from '../../Model';
 import { AccentBar, BottomNavigator, Container, PButtom, Publicacion } from '../../Components';
 import usuario_dato from '../../Model/tapeke/usuario_dato';
 import Dia from './components/Dia';
+import MiPlan from './components/MiPlan';
 
 class asistencia extends Component {
     constructor(props) {
@@ -18,6 +19,8 @@ class asistencia extends Component {
     }
 
     componentDidMount() {
+
+
         // console.log(this.state.curDay.getDay() * 73 )
         //this?.scroll?.scrollTo({ x: (this.state?.curDay?.getDay() - 1) * 88 })
 
@@ -26,14 +29,15 @@ class asistencia extends Component {
         }).catch(e => {
 
         })
+
     }
 
     renderDias(data, i) {
-        // let isSelect = fecha.equalDay(this.state.curDay)
         let hoy = new SDate(this.state.curDay).getDayOfWeek()
         let isSelect = false
         let color = isSelect ? STheme.color.white : STheme.color.text
         console.log(data.asistiendo)
+        let datosArray = data?.dataAsis
         return <>
             <SView col={"xs-1.7"} height={90} style={{
                 borderWidth: 1, borderColor: STheme.color.gray,
@@ -42,26 +46,30 @@ class asistencia extends Component {
             }} center onPress={() => {
                 //this.setState({ curDay: fecha })
             }}>
-                {/* <SText font={"Roboto"} fontSize={14} color={color}>{data.fecha}</SText> */}
+                {data?.paquete ?
+                    <SView col={"xs-12"} flex style={{ alignItems: "flex-end" }}>
+                        <SView width={20} height={20} card style={{ borderRadius: 45, overflow: 'hidden', }}>
+                            <SImage src={SSocket.api.root + "paquete/" + data.paquete.key_paquete} />
+                        </SView>
+                    </SView>
+                    : null
+                }
                 <SText font={"Roboto"} fontSize={14} color={color}>{data.diaMes || ""}</SText>
-                {data?.dataAsis ?
-                    <>
-                        <SHr height={3}/>
-                        <SView style={{
-                            borderWidth: 1,
-                            borderRadius: 5,
-                            borderColor: "#D93444",
-                            padding: 3
-                        }}>
-                            <SText font={"Roboto"} fontSize={11} color={color}>{data.dataAsis.horario || ""}</SText>
-                        </SView>
-                        <SHr height={3}/>
-                        <SView width={25} height={25} card style={{ borderRadius: 45, overflow: 'hidden' }}>
-                            <SImage src={SSocket.api.root + "paquete/" + data.dataAsis.key_paquete} />
-                        </SView>
-                    </>
-                    : null}
-
+                <SView col={"xs-12"} row center>
+                    {data?.dataAsis ? data.dataAsis.map((k) => {
+                        return (
+                            <SView style={{
+                                borderWidth: 1,
+                                borderRadius: 5,
+                                borderColor: "#D93444",
+                                padding: 2
+                            }} width={32} >
+                                <SText font={"Roboto"} fontSize={10} color={color}>{k.horario || ""}</SText>
+                            </SView>
+                        )
+                    })
+                        : null}
+                </SView>
                 <SHr />
             </SView>
         </>
@@ -94,6 +102,9 @@ class asistencia extends Component {
         var diaMes = 0;
         var asisti = false;
         var data;
+        var dato;
+        var dataMostrar = [];
+
         for (let i = 0; i < 6; i++) {
             for (let j = 0; j < 7; j++) {
                 index++;
@@ -109,25 +120,31 @@ class asistencia extends Component {
                         let asistido;
                         // let asistio = Object.values(dataAsistencia).find(obj2 => obj2.fecha_on == fechaActual);
                         Object.values(dataAsistencia).map((obj) => {
-                            // dato = Object.values(sucursal_paquetes).find(obj2 => obj2.key_paquete == obj.key);
+                            // dato = Object.values(obj).find(obj2 => new SDate(obj2.fecha_on).toString("yyyy-MM-dd") == new SDate(fechaActual).toString("yyyy-MM-dd"));
                             // if (!dato) return null
-                            // dataMostrar.push(obj)
-                            let formatFecha = new Date(obj.fecha_on)
+
+                            // let formatFecha = new Date(obj.fecha_on)
 
                             // asistido = Object.values(obj).filter((a) => new SDate(a.fecha_on).toString("yyyy-MM-dd") == new SDate(fechaActual).toString("yyyy-MM-dd"))
                             if (new SDate(obj.fecha_on).toString("yyyy-MM-dd") == new SDate(fechaActual).toString("yyyy-MM-dd")) {
                                 console.log("yes")
                                 asisti = true
                                 data = obj;
+                                dataMostrar.push(obj)
 
                             }
                         })
-                        calendario.push({ diaMes, index, dia_semana: j, semana: i, fecha: "", asistiendo: asisti, dataAsis: data })
+
+                        console.log(dataMostrar)
+
+                        calendario.push({ diaMes, index, dia_semana: j, semana: i, fecha: "", asistiendo: asisti, dataAsis: dataMostrar, paquete: dataMostrar[0] })
                         asisti = false
                         data = null;
+                        dataMostrar = []
                     } else {
                         asisti = false
                         data = null;
+                        dataMostrar = []
                         calendario.push({ index, dia_semana: j, semana: i, fecha: null })
                     }
                     // index++;
@@ -182,29 +199,7 @@ class asistencia extends Component {
                 Hola, {usuario.Nombres}
             </SText>
             <SHr height={15} />
-            <SText bold fontSize={18}>Mi Plan </SText>
-            <SHr />
-            <SView col={"xs-6.5"} height={107} row
-                backgroundColor={STheme.color.secondary}
-                style={{ borderRadius: 10, padding: 8 }}
-            >
-                <SIcon name='Iplan' width={38} height={38} />
-                <SHr />
-                <SText bold fontSize={18} color={STheme.color.white}>Calistenia</SText>
-                <SHr height={5} />
-                <SText fontSize={11} color={STheme.color.white}>1 hora</SText>
-            </SView>
-            <SView width={10} />
-            <SView col={"xs-5"} height={107} row
-                backgroundColor={STheme.color.primary}
-                style={{ borderRadius: 10, padding: 8, borderColor: STheme.color.gray, borderWidth: 1 }}
-            >
-                <SIcon name='Icalendar' width={38} height={38} />
-                <SHr />
-                <SText bold fontSize={18} color={STheme.color.text}>Mensualidad</SText>
-                <SHr height={5} />
-                <SText fontSize={11} color={STheme.color.text}>18/05/23  -  17-04-23</SText>
-            </SView>
+            <MiPlan data={usuario} />
             <SHr height={15} />
             {this.getCalendario(this.state.curDay.getMonth() - 1, this.state.curDay.getYear())}
         </SView>
@@ -220,6 +215,7 @@ class asistencia extends Component {
             <Container>
                 {this.getBody()}
             </Container>
+            <SHr height={40}/>
         </SPage>
         );
     }

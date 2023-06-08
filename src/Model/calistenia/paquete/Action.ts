@@ -1,4 +1,7 @@
 import { SAction } from "servisofts-model";
-export default class Action extends SAction {
+import SSocket from 'servisofts-socket'
+import Model from "../..";
 
+export default class Action extends SAction {
+   
 }
