@@ -74,7 +74,7 @@ class index extends Component {
         if (!usuario) return <SLoad />
         return <SView col={"xs-12"} row>
             <SView card padding={8} row width={115} center onPress={() => {
-                SNavigation.navigate("/perfil/editar", { key: usuario.key });
+                SNavigation.navigate("/perfil/datos", { key: usuario.key });
             }}>
                 <SText bold>Editar perfil</SText>
             </SView>
