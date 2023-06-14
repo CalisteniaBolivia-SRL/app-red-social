@@ -11,6 +11,7 @@ import Card from './components/Card';
 import SSocket from 'servisofts-socket'
 import * as amortizar from "./amortizar"
 import SShared from '../../Components/SShared';
+import BarraCargando from '../../Components/BarraCargando';
 
 class qr extends Component {
     constructor(props) {
@@ -31,7 +32,7 @@ class qr extends Component {
             key_usuario: Model.usuario.Action.getKey(),
             key_paquete: this.params.pk,
             key_sucursal: this.params.sucursal
-        }, 60 * 1000).then(e => {
+        }, 60 * 2000).then(e => {
             this.setState({ loading: false, dataqr: e.data })
         }).catch(e => {
             this.setState({ loading: false })
@@ -64,6 +65,21 @@ class qr extends Component {
         return "data:image/jpeg;base64," + obj?.image_data;
     }
 
+    getQRComponent() {
+        if (!this.state?.dataqr) {
+            return <SView col={"xs-12"} height center >
+                <SText color={STheme.color.gray} col={"xs-10"} center bold>{"Solicitando el código QR al banco.\nEs posible que tome un poco de tiempo."}</SText>
+                <SHr h={16} />
+                <BarraCargando col={"xs-11"} />
+            </SView>
+        }
+        return <SImage src={"data:image/png;base64, " + this.state?.dataqr?.qrImage} width={"100%"} height={"100%"}
+            enablePreview
+            style={{
+                // resizeMode: "contain"
+                // resizeMode: "cover"
+            }} />
+    }
     render() {
         var defaultData = {
             ...this.params,
@@ -91,19 +107,14 @@ class qr extends Component {
                             <SView col={"xs-12"} center >
 
                                 <SView center col={"xs-9"} colSquare backgroundColor={"#fff"} style={{ borderRadius: 16 }}>
-                                    <SImage src={"data:image/png;base64, " + this.state?.dataqr?.qrImage} width={"100%"} height={"100%"}
-                                        enablePreview
-                                        style={{
-                                            // resizeMode: "contain"
-                                            // resizeMode: "cover"
-                                        }} />
+                                    {this.getQRComponent()}
                                     {/* <SView style={{ position: "absolute", width: 40, height: 40, transform: [{ rotate: "0deg" }], left: 20, top: 20 }} ><SIcon name={"BarraQr"} fill={STheme.color.black}></SIcon></SView>
                                         <SView style={{ position: "absolute", width: 40, height: 40, transform: [{ rotate: "270deg" }], left: 20, bottom: 15 }} ><SIcon name={"BarraQr"} fill={STheme.color.black} ></SIcon></SView>
                                         <SView style={{ position: "absolute", width: 40, height: 40, transform: [{ rotate: "90deg" }], right: 20, top: 20 }} ><SIcon name={"BarraQr"} fill={STheme.color.black}></SIcon></SView>
                                         <SView style={{ position: "absolute", width: 40, height: 40, transform: [{ rotate: "180deg" }], right: 20, bottom: 15 }} ><SIcon name={"BarraQr"} fill={STheme.color.black}></SIcon></SView> */}
                                 </SView>
                                 <SHr />
-                                <SText>{this.state?.dataqr?.qrid}</SText>
+                                <SText fontSize={10}  color={STheme.color.gray}>{this.state?.dataqr?.qrid}</SText>
                             </SView>
 
                             <SHr height={16} />
