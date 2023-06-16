@@ -122,7 +122,7 @@ class detalle extends Component {
         return (
             <SPage hidden footer={<BackButtom />}>
                 <Header data={this.sucursal} />
-                <SView  center margin={50}>
+                {/* <SView  center margin={50}>
                     <SView width={100} height={100} >
                         <SImage src={SSocket.api.root + "sucursal/" + this.sucursal.key} width={"100%"} height={"100%"}
                             style={{
@@ -130,7 +130,7 @@ class detalle extends Component {
                             }}
                         />
                     </SView>
-                </SView>
+                </SView> */}
                 
                 <Container>
                     <Sucursal.Tituto icon='TitEntrenador' titulo={'ENTRENADORES'} />
