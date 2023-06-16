@@ -13,7 +13,34 @@ class index extends Component {
         super(props);
         this.state = {
             nroPublicaciones: 0,
+            nroLike: 0,
+            publicaciones: [],
+            publicacionesMias: []
         };
+    }
+
+    componentDidMount() {
+        var usuario = {}
+        var canti = 0;
+        var mias= {}
+        SSocket.sendPromise({
+            component: "publicacion",
+            type: "getAll",
+            estado: "cargando",
+        }).then(res => {
+            usuario = Model.usuario.Action.getUsuarioLog();
+            if (!this.state.publicaciones) return <SLoad />
+            if (!usuario) return <SLoad />
+            mias = Object.values(res.data).filter(obj => obj.key_usuario == usuario.key)
+            canti = Object.keys(mias).length;
+            this.setState({ publicacionesMias: mias });
+            this.setState({ nroPublicaciones: canti});
+            const sumLike = mias.map(item => item.likes).reduce((prev, curr) => prev + curr, 0);
+            this.setState({nroLike: sumLike});
+            // console.log(sumLike + " suma")
+        }).catch(err => {
+            console.log(err)
+        })
     }
 
     renderDataHeaderItem({ val, label }) {
@@ -26,7 +53,7 @@ class index extends Component {
         return <SView col={"xs-12"} row>
             {this.renderDataHeaderItem({ val: this.state.nroPublicaciones, label: "Publicaci..." })}
             {this.renderDataHeaderItem({ val: 0, label: "Seguidores" })}
-            {this.renderDataHeaderItem({ val: 0, label: "Seguidos" })}
+            {this.renderDataHeaderItem({ val: this.state.nroLike, label: "Me gusta" })}
         </SView>
     }
 
@@ -74,7 +101,7 @@ class index extends Component {
         if (!usuario) return <SLoad />
         return <SView col={"xs-12"} row>
             <SView card padding={8} row width={115} center onPress={() => {
-                SNavigation.navigate("/perfil/editar", { key: usuario.key });
+                SNavigation.navigate("/perfil/datos", { key: usuario.key });
             }}>
                 <SText bold>Editar perfil</SText>
             </SView>
@@ -94,19 +121,22 @@ class index extends Component {
         </SView>
     }
     renderPublicaciones() {
-        let publicaciones = Model.publicacion.Action.getAll();
-        let usuario = Model.usuario.Action.getUsuarioLog();
-        if (!publicaciones) return <SLoad />
-        if (!usuario) return <SLoad />
-        let publicacionesMias = Object.values(publicaciones).filter(obj => obj.key_usuario == usuario.key);
-        this.state.nroPublicaciones = Object.keys(publicacionesMias).length;
+        // let publicaciones = Model.publicacion.Action.getAll();
 
-        console.log(publicacionesMias)
+        // let usuario = Model.usuario.Action.getUsuarioLog();
+        // if (!this.state.publicaciones) return <SLoad />
+        // if (!usuario) return <SLoad />
+        // let publicacionesMias = Object.values(this.state.publicaciones).filter(obj => obj.key_usuario == usuario.key);
+        // if (!publicacionesMias) return <SLoad />
+        // this.state.nroPublicaciones = Object.keys(publicacionesMias).length;
+
+
+        // console.log(publicacionesMias)
         //console.log(Object.keys(publicacionesMias).length)
 
         return <SList2
             horizontal
-            data={publicacionesMias}
+            data={this.state.publicacionesMias}
             order={[{ key: "fecha_on", order: "desc" }]}
             space={0}
             render={(a) => {
