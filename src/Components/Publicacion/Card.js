@@ -28,13 +28,13 @@ class index extends Component<PublicacionPropsType> {
     renderAuthor() {
         // var key_usuario = Model.usuario.Action.getKey() ?? null;
         var key_usuario = Model.usuario.Action.getKey();
-        // let user = Model.usuario.Action.getByKey(this.props.data.key_usuario);
+        let user = Model.usuario.Action.getByKey(this.props.data?.key_usuario);
         // if (!user) return null
         // let user = this.props.usuario;
-        let user = {
-            Nombres: "Name",
-            Apellidos: "Last Name"
-        }
+        // let user = {
+        //     Nombres: "Name",
+        //     Apellidos: "Last Name"
+        // }
         return <SView col={"xs-12"} row height={50} center>
             <SView width={50} height style={{
                 justifyContent: "center"

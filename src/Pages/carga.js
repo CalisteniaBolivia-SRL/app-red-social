@@ -15,6 +15,7 @@ class index extends Component {
     }
 
     componentDidMount() {
+        Model.usuario.Action.getAll({ force: true })
         new SThread(DURATION_ANIM, "carga_hilo", false).start(() => {
             SNavigation.replace("/root")
         })

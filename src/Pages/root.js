@@ -13,7 +13,12 @@ class index extends Component {
     }
 
 
+    componentDidMount() {
+        Model.usuario.Action.getAll({ force: true })
+
+    }
     clearData(resolv) {
+        this.componentDidMount();
         Model.sucursal.Action.CLEAR();
         Model.publicacion.Action.CLEAR();
     }
@@ -113,7 +118,7 @@ class index extends Component {
             <SPage
                 navBar={this.navBar()}
                 footer={this.footer()}
-                onRefresh={this.clearData}
+                onRefresh={this.clearData.bind(this)}
             >
                 <Container>
                     <SHr height={15} />
