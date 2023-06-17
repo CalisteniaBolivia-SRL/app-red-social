@@ -26,6 +26,8 @@ class CardLike extends Component<PublicacionLikePropsType> {
 
     render() {
         // if (!this.state.datas) return <SLoad />
+        var { key_usuario, nombre } = this.props.data;
+        console.log(this.props.data)
         return (<SView
             col={"xs-12"}
             style={{
@@ -46,7 +48,7 @@ class CardLike extends Component<PublicacionLikePropsType> {
                     borderRadius: 60,
                     overflow: "hidden"
                 }}>
-                    <SImage enablePreview src={SSocket.api.root + "usuario/" + this.state?.datas?.key + "?date=" + new Date().getTime()} width={"100%"} height={"100%"}
+                    <SImage enablePreview src={SSocket.api.root + "usuario/" + key_usuario + "?date=" + new Date().getTime()} width={"100%"} height={"100%"}
                         style={{
                             resizeMode: 'cover',
                         }}
@@ -57,7 +59,8 @@ class CardLike extends Component<PublicacionLikePropsType> {
                 <SView   col={"xs-12"}>
                     <SView flex col={"xs-12"}>
                         <SText color={STheme.color.text} fontSize={16} bold>
-                            {this.state?.datas?.Nombres} {this.state?.datas?.Apellidos}
+                            {/* {this.state?.datas?.Nombres} {this.state?.datas?.Apellidos} */}
+                            Nombre Usuario
                         </SText>
                     </SView>
                     <SHr height={2} />
