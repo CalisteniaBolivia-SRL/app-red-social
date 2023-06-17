@@ -80,7 +80,7 @@ class index extends Component<PublicacionPropsType> {
                         }).then((e) => {
                             Model.publicacion.Action._dispatch({
                                 component: "publicacion",
-                                type: "update_cantidad_like",
+                                type: "onLike",
                                 key_publicacion: this.props.data.key,
                                 key_usuario: Model.usuario.Action.getKey(),
                                 cantidad: 1,
@@ -99,11 +99,22 @@ class index extends Component<PublicacionPropsType> {
             <LikeAnimation ref={ref => this.likeanim = ref} />
         </SView>
     }
+    handlePressHeart = () => {
+        if (this.props.data.mylike) {
+            Model.publicacion_like.Action.dislike({
+                key_usuario: Model.usuario.Action.getKey(),
+                key_publicacion: this.props.data.key,
+            }).then((e) => {
+           
+            })
+        }
+    }
     renderActions() {
         const size = 28;
+
         return <SView col={"xs-12"} row height={size} center>
-            <SView width={size} height>
-                <SIcon name={'Heart'} height={24} fill={STheme.color.text} />
+            <SView width={size} height onPress={this.handlePressHeart.bind(this)}>
+                {this.props.data.mylike ? <SIcon name={'Heart'} height={24} fill={STheme.color.text} /> : <SIcon name={'Heart'} height={24} fill={STheme.color.danger} />}
             </SView>
             <SView width={size / 2} />
             <SView width={size} height>

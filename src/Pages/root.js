@@ -69,11 +69,11 @@ class index extends Component {
 
     renderPublicidad() {
         return <>
-            <SView col={"xs-12"} card height={100} center 
-            style={{ borderWidth: 2, borderColor: STheme.color.secondary, borderRadius: 20, overflow: "hidden" }}
-            onPress={() => {
-                SNavigation.navigate("/servicio")
-            }}
+            <SView col={"xs-12"} card height={100} center
+                style={{ borderWidth: 2, borderColor: STheme.color.secondary, borderRadius: 20, overflow: "hidden" }}
+                onPress={() => {
+                    SNavigation.navigate("/servicio")
+                }}
             >
                 <SImage src={require('../Assets/img/fpublicidad.png')} style={{ resizeMode: 'cover', position: 'absolute' }} />
                 <SText font="Oswald-Bold" fontSize={20}>¡DESAFÍA TUS LÍMITES!</SText>
@@ -91,7 +91,9 @@ class index extends Component {
             height: 100,
             card: true
         }
-        let publicaciones = Model.publicacion.Action.getAll();
+        let publicaciones = Model.publicacion.Action.getAll({
+            key_usuario: Model.usuario.Action.getKey()
+        });
         if (!publicaciones) return <SLoad />
         return <SList
             data={publicaciones}
