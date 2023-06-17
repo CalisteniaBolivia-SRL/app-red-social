@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { SButtom, SHr, SIcon, SImage, SList, SLoad, SNavigation, SPage, SScrollView2, SText, STheme, SView } from 'servisofts-component';
-import { BottomNavigator, Container, NavBar, Pedido, Restaurante, TopBar, Sucursal } from '../../Components';
+import { BottomNavigator, Container, NavBar, Pedido, Restaurante, TopBar, Sucursal, Publicacion } from '../../Components';
 import Model from '../../Model';
 import SSocket from 'servisofts-socket'
 class likes extends Component {
@@ -24,10 +24,12 @@ class likes extends Component {
     render_with_data() {
         if (!this.state.data) return <SLoad />
         return <SList
-            space={14}
+        buscador
+        initSpace={10}
+            space={10}
             data={this.state.data}
             render={(data) => {
-                return <SText color={STheme.color.text}>Hola</SText>
+                return <Publicacion.CardLike data={data} />
             }}
         />
     }
@@ -35,6 +37,7 @@ class likes extends Component {
     render() {
         return (
             <SPage
+            footer={this.footer()}
                 onRefresh={(resolve) => {
                     this.componentDidMount();
                     resolve()
@@ -42,7 +45,7 @@ class likes extends Component {
                 title={"Me gusta"}
             >
                 <Container>
-                    <SText>LIKES</SText>
+                    <SHr height={15}/>
                     {this.render_with_data()}
                 </Container>
             </SPage>
