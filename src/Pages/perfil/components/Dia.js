@@ -10,8 +10,10 @@ export default class Dia extends Component {
 
     render() {
         return (
-            <SView col={"xs-12"} center backgroundColor={STheme.color.primary}>
-                <SText>{this.props.dia}</SText>
+            <SView col={"xs-1.7"}  center backgroundColor={"#8B8B8B"} height={35}
+            style={{borderWidth: 1, borderColor: STheme.color.lightGray}}
+            >
+                <SText color={STheme.color.white} font="Oswald-Bold" fontSize={14}>{this.props.dia}</SText>
             </SView>
         );
     }

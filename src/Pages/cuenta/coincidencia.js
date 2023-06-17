@@ -64,7 +64,7 @@ class coincidencia extends Component {
             render={(data) => {
                 return <CardUser datas={data} 
                 onPress={() => {
-                    s.navigate("/paquete/membresia/confirmar", { ...this.params });
+                    SNavigation.navigate("/cuenta/encontrado", { ...this.params, key: data.key });
                 }}
                 />
             }}
@@ -78,11 +78,12 @@ class coincidencia extends Component {
         };
         return (
             <SPage
-                center
+                
                 hidden
+
                 footer={<BackButtom />}
             >
-                <SView col={"xs-11"} flex backgroundColor={STheme.color.primary} center >
+                <SView col={"xs-11"}  backgroundColor={STheme.color.primary} center >
                     <Container>
                         <SHr height={30} />
                         <Header

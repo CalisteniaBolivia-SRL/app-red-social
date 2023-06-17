@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SDate, SHr, SIcon, SImage, SPage, SText, STheme, SView, SNavigation, SPopup, SLoad } from 'servisofts-component';
+import { SDate, SHr, SIcon, SImage, SPage, SText, STheme, SView, SNavigation, SPopup, SLoad, SThread } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
 import BoxMenuLat from './BoxMenuLat';
 import BoxMenuLatOtros from './BoxMenuLatOtros';
 import Model from '../../Model';
+import LikeAnimation from './LikeAnimation';
 export type PublicacionPropsType = {
     data: any,
     usuario: any,
@@ -27,16 +28,16 @@ class index extends Component<PublicacionPropsType> {
     renderAuthor() {
         // var key_usuario = Model.usuario.Action.getKey() ?? null;
         var key_usuario = Model.usuario.Action.getKey();
-        // let user = Model.usuario.Action.getByKey(this.props.data.key_usuario);
+        let user = Model.usuario.Action.getByKey(this.props.data?.key_usuario);
         // if (!user) return null
         // let user = this.props.usuario;
-        let user = {
-            Nombres:"Perico",
-            Apellidos:"De Los Palotes"
-        }
+        // let user = {
+        //     Nombres: "Name",
+        //     Apellidos: "Last Name"
+        // }
         return <SView col={"xs-12"} row height={50} center>
             <SView width={50} height style={{
-                justifyContent:"center"
+                justifyContent: "center"
             }} >
                 <SView style={{
                     backgroundColor: STheme.color.card, borderRadius: 100, width: 40, height: 40, overflow: "hidden"
@@ -52,29 +53,75 @@ class index extends Component<PublicacionPropsType> {
                 <SText bold>{user?.Nombres} {user?.Apellidos}</SText>
             </SView>
             <SView width={30} center onPress={() => {
-                SPopup.open({ key: "menuLat", content: (key_usuario == this.props.data.key_usuario) ? <BoxMenuLat datas={this.props.data} /> : <BoxMenuLatOtros datas={this.props.data} />  });
+                SPopup.open({ key: "menuLat", content: (key_usuario == this.props.data.key_usuario) ? <BoxMenuLat datas={this.props.data} /> : <BoxMenuLatOtros datas={this.props.data} /> });
             }} >
                 <SIcon name={"MenuLat"} fill={STheme.color.text} width={24} height={24} />
                 <SView width={5} />
             </SView>
         </SView>
     }
+
+    handleLike = () => {
+        this.likeanim.start();
+        Model.publicacion_like.Action.registro({
+            key_usuario: Model.usuario.Action.getKey(),
+            key_publicacion: this.props.data.key,
+        }).then((e) => {
+            Model.publicacion.Action._dispatch({
+                component: "publicacion",
+                type: "onLike",
+                key_publicacion: this.props.data.key,
+                key_usuario: Model.usuario.Action.getKey(),
+                cantidad: 1,
+            })
+        })
+    }
     renderImage() {
-        return <SView col={"xs-12"} colSquare>
+        return <SView col={"xs-12"} colSquare activeOpacity={1}
+            style={{
+                // backgroundColor: "#666"
+            }}
+            center
+            onPress={() => {
+                if (!this.nclick) this.nclick = 1
+                else this.nclick++;
+                new SThread(250, "double", true).start(() => {
+                    if (this.nclick >= 2) {
+                        console.log("Double")
+                        this.handleLike()
+                    } else {
+                        console.log("single")
+                    }
+                    this.nclick = 0;
+                })
+            }}>
             <SImage src={Model.publicacion._get_image_download_path(SSocket.api, this.props.data.key)} style={{
-                // resizeMode: "cover"
-                resizeMode:"contain"
+                resizeMode: "contain"
             }} />
+            <LikeAnimation ref={ref => this.likeanim = ref} />
         </SView>
+    }
+    handlePressHeart = () => {
+        if (this.props.data.mylike) {
+            Model.publicacion_like.Action.dislike({
+                key_usuario: Model.usuario.Action.getKey(),
+                key_publicacion: this.props.data.key,
+            })
+        } else {
+            this.handleLike()
+        }
     }
     renderActions() {
         const size = 28;
+
         return <SView col={"xs-12"} row height={size} center>
-            <SView width={size} height>
-                <SIcon name={'Heart'} height={24} fill={STheme.color.text} />
+            <SView width={size} height onPress={this.handlePressHeart.bind(this)}>
+                {this.props.data.mylike ? <SIcon name={'Heart'} height={24} fill={STheme.color.danger} /> : <SIcon name={'Heart'} height={24} stroke={STheme.color.text} />}
             </SView>
             <SView width={size / 2} />
-            <SView width={size} height>
+            <SView width={size} height onPress={() => {
+                SNavigation.navigate("/publicacion/comments", { pk: this.props.data.key })
+            }}>
                 <SIcon name={'Comment'} height={24} fill={STheme.color.text} />
             </SView>
             <SView flex />
@@ -94,8 +141,10 @@ class index extends Component<PublicacionPropsType> {
         </SView>
     }
     renderLikes() {
-        return <SView col={"xs-12"}>
-            <SText bold>{"0 Me gusta"}</SText>
+        return <SView col={"xs-12"} onPress={() => {
+            SNavigation.navigate("/publicacion/likes", { pk: this.props.data.key })
+        }}>
+            <SText bold>{(this.props?.data?.likes ?? 0) + " Me gusta"}</SText>
         </SView>
     }
     renderComments() {

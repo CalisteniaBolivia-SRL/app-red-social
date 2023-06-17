@@ -25,6 +25,10 @@ export default class CardUser extends Component {
                                 borderWidth:1
                             }}
                             row center 
+                            // onPress={() => {
+                            //     SNavigation.navigate("/paquete/membresia/confirmar", { ...this.props.datas });
+                            // }}
+                            onPress={this.props.onPress}
                         >
                             <SView col={"xs-4"} row >
                                 {/* USUARIO */}

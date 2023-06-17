@@ -13,6 +13,9 @@ class index extends Component {
     }
 
 
+    componentDidMount(){
+        SNavigation.goBack();
+    }
     clearData(resolv) {
         Model.sucursal.Action.CLEAR();
     }
@@ -30,7 +33,7 @@ class index extends Component {
                 onRefresh={this.clearData}
             >
                 <Container>
-
+                    <SText>DDD</SText>
                 </Container>
             </SPage>
         );
