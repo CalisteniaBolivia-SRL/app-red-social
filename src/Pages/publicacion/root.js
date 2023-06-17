@@ -30,7 +30,7 @@ class index extends Component {
                 onRefresh={this.clearData}
             >
                 <Container>
-
+                    <SText>DDD</SText>
                 </Container>
             </SPage>
         );
