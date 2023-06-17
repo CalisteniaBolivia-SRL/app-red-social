@@ -25,7 +25,7 @@ export default class Header extends Component {
     render() {
         if (!this.props.data) return <SLoad type='skeleton' col={"xs-12"} height={100} />
         return (<>
-            <SView col={"xs-12"} flex center >
+            <SView col={"xs-12"}  center >
                 <SView col={"xs-12 sm-10 md-8 lg-6 xl-4 xxl-4"} row height={150} backgroundColor={STheme.color.primary} center
                     onLayout={(evt) => {
                         this.setState({ layout: evt.nativeEvent.layout })
