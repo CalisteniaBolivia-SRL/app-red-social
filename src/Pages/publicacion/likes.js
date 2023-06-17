@@ -17,7 +17,7 @@ class likes extends Component {
 
     // componentDidMount() {
     //     SSocket.sendPromise({
-    //         ...Model.publicacion_like.
+    //         ...Model.publicacion.info,
     //         "component": "publicacion_like",
     //         "type": "publicacionLikeGetAll",
     //         "key_publicacion": this.pk
