@@ -23,35 +23,9 @@ class CardLike extends Component<PublicacionLikePropsType> {
         this.props.onPress(this.props.data)
     }
 
-    componentDidMount() {
-        console.log(this.props.data.key_usuario + " pppp")
-        // this.setState({ loading: true })
-
-        var dataUser = Model.usuario.Action.getByKey(this.props.data.key_usuario)
-        if (!dataUser) return
-        console.log(dataUser.Nombres + " -uuuu")
-        this.setState({ datas: dataUser })
-        // this.state.datas = dataUser
-
-        // Model.usuario.Action.getByKey(this.props.data.key_usuario).then((resp) => {
-        //     this.setState({ datas: resp })
-        //     this.setState({ loading: false })
-        // }).catch(e => {
-        //     this.setState({ loading: false })
-        //     console.error(e);
-        // })
-
-        // Model.usuario.Action.getByKey().then(resp => {
-        //     this.setState({ dataPaquete: resp.data })
-        //     console.log(this.state.dataPaquete)
-        // }).catch(e => {
-
-        // })
-    }
-
 
     render() {
-        if (!this.state.datas) return <SLoad />
+        // if (!this.state.datas) return <SLoad />
         return (<SView
             col={"xs-12"}
             style={{
