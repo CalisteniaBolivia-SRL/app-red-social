@@ -119,7 +119,9 @@ class index extends Component<PublicacionPropsType> {
                 {this.props.data.mylike ? <SIcon name={'Heart'} height={24} fill={STheme.color.danger} /> : <SIcon name={'Heart'} height={24} stroke={STheme.color.text} />}
             </SView>
             <SView width={size / 2} />
-            <SView width={size} height>
+            <SView width={size} height onPress={() => {
+                SNavigation.navigate("/publicacion/comments", { pk: this.props.data.key })
+            }}>
                 <SIcon name={'Comment'} height={24} fill={STheme.color.text} />
             </SView>
             <SView flex />
