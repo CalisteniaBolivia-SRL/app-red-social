@@ -21,4 +21,14 @@ export default class Action extends SAction {
             })
         })
     }
+
+    publicacionLikeGetAll(key) {
+        return SSocket.sendPromise({
+            ...this.model.info,
+            estado: "cargando",
+            type: "getAll",
+            key_publicacion: key
+        })
+    }
+
 }

@@ -41,17 +41,17 @@ class likes extends Component {
     }
 
     render_with_data() {
-        // var publicacionLike = Model.publicacion.Action.get;
-        // if (!this.state.data) return <SLoad />
+        var publicacionLike = Model.publicacion_like.Action.publicacionLikeGetAll(this.pk);
+        if (!publicacionLike) return <SLoad />
 
         return <SList
             // buscador={"true"}
 
             space={14}
-            // data={this.state.data}
+            data={publicacionLike}
             // order={[{ key: "fecha_on", order: "desc", peso: 1, }]}
             render={(data) => {
-                return <SText>Hola</SText>
+                return <SText color={STheme.color.text}>Hola</SText>
                 // return <Sucursal.Card image={1} datas={data} root={'/sucursal/detalle'} />
             }}
         />
