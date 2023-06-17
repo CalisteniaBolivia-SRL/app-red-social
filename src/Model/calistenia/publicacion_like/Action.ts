@@ -22,7 +22,7 @@ export default class Action extends SAction {
         })
     }
 
-    publicacionLikeGetAll(key) {
+    getAllPromise(key) {
         return SSocket.sendPromise({
             ...this.model.info,
             estado: "cargando",

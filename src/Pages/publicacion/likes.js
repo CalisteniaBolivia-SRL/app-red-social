@@ -11,59 +11,34 @@ class likes extends Component {
         this.state = {
         };
         this.pk = SNavigation.getParam("pk");
-
-    }
-    //PublicacionLikeGetAll (keypublicacion)
-
-    // componentDidMount() {
-    //     SSocket.sendPromise({
-    //         ...Model.publicacion.info,
-    //         "component": "publicacion_like",
-    //         "type": "publicacionLikeGetAll",
-    //         "key_publicacion": this.pk
-
-
-    //     }).then((e) => {
-    //         if (e.estado != "exito") return;
-    //         this.setState({ data: e.data })
-    //     }).catch((e) => {
-
-    //     })
-    // }
-
-
-    clearData(resolv) {
-        Model.sucursal.Action.CLEAR();
     }
 
-    navBar() {
-        return <TopBar type={"home"} />
+    componentDidMount() {
+        this.setState({ loading: true });
+        Model.publicacion_like.Action.getAllPromise(this.pk).then(e => {
+            this.setState({ loading: false, data: e.data });
+        }).catch(e => {
+            this.setState({ loading: false, error: e });
+        })
     }
-
     render_with_data() {
-        var publicacionLike = Model.publicacion_like.Action.publicacionLikeGetAll(this.pk);
-        if (!publicacionLike) return <SLoad />
-
+        if (!this.state.data) return <SLoad />
         return <SList
-            // buscador={"true"}
-
             space={14}
-            data={publicacionLike}
-            // order={[{ key: "fecha_on", order: "desc", peso: 1, }]}
+            data={this.state.data}
             render={(data) => {
                 return <SText color={STheme.color.text}>Hola</SText>
-                // return <Sucursal.Card image={1} datas={data} root={'/sucursal/detalle'} />
             }}
         />
     }
 
     render() {
-
         return (
             <SPage
-                // navBar={this.navBar()}
-                footer={this.footer()}
-                onRefresh={this.clearData}
+                onRefresh={(resolve) => {
+                    this.componentDidMount();
+                    resolve()
+                }}
                 title={"Me gusta"}
             >
                 <Container>
