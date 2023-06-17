@@ -24,8 +24,8 @@ class likes extends Component {
     render_with_data() {
         if (!this.state.data) return <SLoad />
         return <SList
-        buscador
-        initSpace={10}
+            buscador
+            initSpace={10}
             space={10}
             data={this.state.data}
             render={(data) => {
@@ -37,15 +37,29 @@ class likes extends Component {
     render() {
         return (
             <SPage
-            footer={this.footer()}
+                footer={this.footer()}
                 onRefresh={(resolve) => {
                     this.componentDidMount();
                     resolve()
                 }}
-                title={"Me gusta"}
+                hidden
             >
+                <SView style={{ width: "100%", height: 50, }} row >
+                    <SView width={50} height padding={12} onPress={() => {
+                        SNavigation.goBack();
+                    }}>
+                        <SIcon name='Back' fill={STheme.color.text} />
+                    </SView>
+                    <SView flex height center>
+                        <SText center fontSize={18} bold>Me gusta</SText>
+                    </SView>
+                    <SView width={50} height>
+
+                    </SView>
+                </SView>
+                <SHr h={1} color={STheme.color.card} />
                 <Container>
-                    <SHr height={15}/>
+                    <SHr height={15} />
                     {this.render_with_data()}
                 </Container>
             </SPage>
