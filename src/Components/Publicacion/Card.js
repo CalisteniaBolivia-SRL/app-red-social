@@ -103,7 +103,7 @@ class index extends Component<PublicacionPropsType> {
         const size = 28;
         return <SView col={"xs-12"} row height={size} center>
             <SView width={size} height>
-                <SIcon name={'Heart'} height={24} fill={STheme.color.text} />
+                <SIcon name={'Heart'} height={24} stroke={STheme.color.text}  />
             </SView>
             <SView width={size / 2} />
             <SView width={size} height>
@@ -126,7 +126,9 @@ class index extends Component<PublicacionPropsType> {
         </SView>
     }
     renderLikes() {
-        return <SView col={"xs-12"}>
+        return <SView col={"xs-12"} onPress={() => {
+            SNavigation.navigate("/publicacion/likes",{ pk: this.props.data.key })
+        }}>
             <SText bold>{this.props.data.likes + " Me gusta"}</SText>
         </SView>
     }
