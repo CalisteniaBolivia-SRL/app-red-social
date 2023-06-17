@@ -144,7 +144,7 @@ class index extends Component<PublicacionPropsType> {
         return <SView col={"xs-12"} onPress={() => {
             SNavigation.navigate("/publicacion/likes", { pk: this.props.data.key })
         }}>
-            <SText bold>{this.props.data.likes + " Me gusta"}</SText>
+            <SText bold>{(this.props?.data?.likes ?? 0) + " Me gusta"}</SText>
         </SView>
     }
     renderComments() {

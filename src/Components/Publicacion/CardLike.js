@@ -18,6 +18,9 @@ class CardLike extends Component<PublicacionLikePropsType> {
         };
     }
 
+    componentDidMount() {
+        Model.usuario.Action.getAll({ force: true })
+    }
     handlePress() {
         if (!this.props.onPress) return null;
         this.props.onPress(this.props.data)
@@ -27,6 +30,7 @@ class CardLike extends Component<PublicacionLikePropsType> {
     render() {
         // if (!this.state.datas) return <SLoad />
         var { key_usuario, nombre } = this.props.data;
+        let user = Model.usuario.Action.getByKey(key_usuario);
         console.log(this.props.data)
         return (<SView
             col={"xs-12"}
@@ -56,11 +60,10 @@ class CardLike extends Component<PublicacionLikePropsType> {
                 </SView>
             </SView>
             <SView col={"xs-8"} >
-                <SView   col={"xs-12"}>
+                <SView col={"xs-12"}>
                     <SView flex col={"xs-12"}>
                         <SText color={STheme.color.text} fontSize={16} bold>
-                            {/* {this.state?.datas?.Nombres} {this.state?.datas?.Apellidos} */}
-                            Nombre Usuario
+                            {user?.Nombres} {user?.Apellidos}
                         </SText>
                     </SView>
                     <SHr height={2} />

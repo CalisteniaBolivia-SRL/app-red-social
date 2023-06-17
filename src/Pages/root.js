@@ -18,9 +18,10 @@ class index extends Component {
 
     }
     clearData(resolv) {
-        this.componentDidMount();
         Model.sucursal.Action.CLEAR();
         Model.publicacion.Action.CLEAR();
+        this.componentDidMount();
+
     }
     render_with_data() {
         var sucursales = Model.sucursal.Action.getAll();

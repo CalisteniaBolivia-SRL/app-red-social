@@ -15,7 +15,7 @@ class comments extends Component {
 
 
     componentDidMount() {
-        // SNativeModules.setSoftInputMode("adjustResize")
+        SNativeModules.setSoftInputMode("adjustResize")
         this.setState({ loading: true });
         Model.publicacion_comentario.Action.getAllPromise(this.pk).then(e => {
             this.setState({ loading: false, data: e.data });
@@ -24,7 +24,7 @@ class comments extends Component {
         })
     }
     componentWillUnmount() {
-        // SNativeModules.setSoftInputMode("adjustPan")
+        SNativeModules.setSoftInputMode("adjustPan")
     }
 
     render() {
@@ -58,6 +58,7 @@ class comments extends Component {
                         <SList data={this.state.data}
                             space={32}
                             render={(obj) => {
+                                let user = Model.usuario.Action.getByKey(obj.key_usuario)
                                 return <SView col={"xs-12"}>
 
                                     <SHr />
@@ -72,7 +73,7 @@ class comments extends Component {
                                         </SView>
                                         <SView width={16} />
                                         <SView flex>
-                                            <SText fontSize={14} bold>{obj.key_usuario.substring(0, 8)}</SText>
+                                            <SText fontSize={14} bold>{user?.Nombres} {user?.Apellidos}</SText>
                                             <SHr h={8} />
                                             <SText fontSize={16}>{obj.descripcion}</SText>
                                         </SView>

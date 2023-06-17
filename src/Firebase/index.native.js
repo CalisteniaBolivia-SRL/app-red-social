@@ -43,8 +43,8 @@ class Firebase {
             });
             const unsubscribe = messaging().onMessage(async remoteMessage => {
                 console.log('Message received. ', remoteMessage);
-                
-                Notifications.postLocalNotification(remoteMessage.notification);
+
+                // Notifications.postLocalNotification({ title: remoteMessage.notification.title, body: remoteMessage.notification.body });
                 // Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
             });
         } catch (e) {
