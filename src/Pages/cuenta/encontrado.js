@@ -67,7 +67,9 @@ class encontrado extends Component {
         // if (!usuario) return <SLoad />
         // if (!sucursal_servicio) return <SLoad />
         // console.log(usuario)
-
+        var dataUser;
+        
+console.log(this.params.key)
         return <SList
             // buscador={"true"}
             space={14}

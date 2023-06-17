@@ -64,7 +64,7 @@ class coincidencia extends Component {
             render={(data) => {
                 return <CardUser datas={data} 
                 onPress={() => {
-                    SNavigation.navigate("/paquete/membresia/confirmar", { ...this.params });
+                    SNavigation.navigate("/cuenta/encontrado", { ...this.params, key: data.key });
                 }}
                 />
             }}
