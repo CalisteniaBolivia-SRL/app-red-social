@@ -32,8 +32,8 @@ class index extends Component<PublicacionPropsType> {
         // if (!user) return null
         // let user = this.props.usuario;
         let user = {
-            Nombres: "Perico",
-            Apellidos: "De Los Palotes"
+            Nombres: "Name",
+            Apellidos: "Last Name"
         }
         return <SView col={"xs-12"} row height={50} center>
             <SView width={50} height style={{
@@ -60,6 +60,22 @@ class index extends Component<PublicacionPropsType> {
             </SView>
         </SView>
     }
+
+    handleLike = () => {
+        this.likeanim.start();
+        Model.publicacion_like.Action.registro({
+            key_usuario: Model.usuario.Action.getKey(),
+            key_publicacion: this.props.data.key,
+        }).then((e) => {
+            Model.publicacion.Action._dispatch({
+                component: "publicacion",
+                type: "onLike",
+                key_publicacion: this.props.data.key,
+                key_usuario: Model.usuario.Action.getKey(),
+                cantidad: 1,
+            })
+        })
+    }
     renderImage() {
         return <SView col={"xs-12"} colSquare activeOpacity={1}
             style={{
@@ -69,23 +85,10 @@ class index extends Component<PublicacionPropsType> {
             onPress={() => {
                 if (!this.nclick) this.nclick = 1
                 else this.nclick++;
-
                 new SThread(250, "double", true).start(() => {
                     if (this.nclick >= 2) {
                         console.log("Double")
-                        this.likeanim.start();
-                        Model.publicacion_like.Action.registro({
-                            key_usuario: Model.usuario.Action.getKey(),
-                            key_publicacion: this.props.data.key,
-                        }).then((e) => {
-                            Model.publicacion.Action._dispatch({
-                                component: "publicacion",
-                                type: "onLike",
-                                key_publicacion: this.props.data.key,
-                                key_usuario: Model.usuario.Action.getKey(),
-                                cantidad: 1,
-                            })
-                        })
+                        this.handleLike()
                     } else {
                         console.log("single")
                     }
@@ -104,9 +107,9 @@ class index extends Component<PublicacionPropsType> {
             Model.publicacion_like.Action.dislike({
                 key_usuario: Model.usuario.Action.getKey(),
                 key_publicacion: this.props.data.key,
-            }).then((e) => {
-           
             })
+        } else {
+            this.handleLike()
         }
     }
     renderActions() {
@@ -114,7 +117,7 @@ class index extends Component<PublicacionPropsType> {
 
         return <SView col={"xs-12"} row height={size} center>
             <SView width={size} height onPress={this.handlePressHeart.bind(this)}>
-                {this.props.data.mylike ? <SIcon name={'Heart'} height={24} fill={STheme.color.text} /> : <SIcon name={'Heart'} height={24} fill={STheme.color.danger} />}
+                {this.props.data.mylike ? <SIcon name={'Heart'} height={24} fill={STheme.color.danger} /> : <SIcon name={'Heart'} height={24} stroke={STheme.color.text} />}
             </SView>
             <SView width={size / 2} />
             <SView width={size} height>
@@ -138,7 +141,7 @@ class index extends Component<PublicacionPropsType> {
     }
     renderLikes() {
         return <SView col={"xs-12"} onPress={() => {
-            SNavigation.navigate("/publicacion/likes",{ pk: this.props.data.key })
+            SNavigation.navigate("/publicacion/likes", { pk: this.props.data.key })
         }}>
             <SText bold>{this.props.data.likes + " Me gusta"}</SText>
         </SView>
