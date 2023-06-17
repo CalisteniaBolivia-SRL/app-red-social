@@ -96,7 +96,6 @@ class index extends Component<PublicacionPropsType> {
                 })
             }}>
             <SImage src={Model.publicacion._get_image_download_path(SSocket.api, this.props.data.key)} style={{
-                // resizeMode: "cover"
                 resizeMode: "contain"
             }} />
             <LikeAnimation ref={ref => this.likeanim = ref} />
