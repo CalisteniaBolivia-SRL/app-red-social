@@ -114,7 +114,7 @@ class index extends Component<PublicacionPropsType> {
 
         return <SView col={"xs-12"} row height={size} center>
             <SView width={size} height onPress={this.handlePressHeart.bind(this)}>
-                {this.props.data.mylike ? <SIcon name={'Heart'} height={24} fill={STheme.color.danger} /> : <SIcon name={'Heart'} height={24} stroke={STheme.color.text} />}
+                {this.props.data.mylike ? <SIcon name={'Heart'} height={24} fill={STheme.color.text} /> : <SIcon name={'Heart'} height={24} fill={STheme.color.danger} />}
             </SView>
             <SView width={size / 2} />
             <SView width={size} height>
