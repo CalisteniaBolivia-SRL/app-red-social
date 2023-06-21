@@ -74,7 +74,9 @@ class index extends Component<PublicacionPropsType> {
                 key_usuario: Model.usuario.Action.getKey(),
                 cantidad: 1,
             })
-        })
+        }).catch((error) => {
+            console.error(error)
+        });
     }
     renderImage() {
         return <SView col={"xs-12"} colSquare activeOpacity={1}
@@ -83,6 +85,7 @@ class index extends Component<PublicacionPropsType> {
             }}
             center
             onPress={() => {
+                if (!Model.usuario.Action.getKey()) return SNavigation.navigate("/login")
                 if (!this.nclick) this.nclick = 1
                 else this.nclick++;
                 new SThread(250, "double", true).start(() => {
@@ -98,7 +101,7 @@ class index extends Component<PublicacionPropsType> {
             <SImage src={Model.publicacion._get_image_download_path(SSocket.api, this.props.data.key)} style={{
                 resizeMode: "contain"
             }} />
-            <LikeAnimation ref={ref => this.likeanim = ref} />
+            {Model.usuario.Action.getKey() ? <LikeAnimation ref={ref => this.likeanim = ref} /> : null}
         </SView>
     }
     handlePressHeart = () => {
@@ -115,7 +118,12 @@ class index extends Component<PublicacionPropsType> {
         const size = 28;
 
         return <SView col={"xs-12"} row height={size} center>
-            <SView width={size} height onPress={this.handlePressHeart.bind(this)}>
+            <SView width={size} height 
+            onPress={() => {
+                Model.usuario.Action.getKey() ? this.handlePressHeart(this) : SNavigation.navigate("/login")
+            }}
+            // onPress={this.handlePressHeart.bind(this)}
+            >
                 {this.props.data.mylike ? <SIcon name={'Heart'} height={24} fill={STheme.color.danger} /> : <SIcon name={'Heart'} height={24} stroke={STheme.color.text} />}
             </SView>
             <SView width={size / 2} />
