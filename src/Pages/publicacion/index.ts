@@ -4,6 +4,7 @@ import add from './add';
 import edit from './edit';
 import likes from './likes';
 import comments from './comments';
+import post from './post';
 export const Parent = {
     name: "publicacion",
     path: `/publicacion`,
@@ -13,5 +14,6 @@ export default SPage.combinePages(Parent.name, {
     add,
     edit,
     likes,
-    comments
+    comments,
+     post,
 });
