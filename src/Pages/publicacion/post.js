@@ -9,22 +9,30 @@ class post extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            data
         };
         this.pk = SNavigation.getParam("pk");
     }
 
 
-    componentDidMount(){
+    componentDidMount() {
         // SNavigation.goBack();
-        let publicacion= Model.publicacion.Action.getByKey(this.pk);
+        var publicacion = Model.publicacion.Action.getByKey(this.pk);
         if (!publicacion) return <SLoad />
-        var key = this.pk
-        var data=[]
+        // var key = this.pk
+        // var datas = []
+        // var data =  {
+        //         "1e4836d2-1f58-49b5-80e5-7a74792e5725": {
+        //             ...publicacions
+        //         },
+        //     }
+
         // var datas ={data:{key:{publicacion}}};
-        data.key =key;
+        // datas.data[key] = { publicacion }
         // data
         // data = {this.pk: {publicacion}};
-        console.log(data )
+        console.log(publicacion)
+        this.setState({ data: publicacion })
 
     }
     clearData(resolv) {
@@ -36,7 +44,7 @@ class post extends Component {
     }
 
     render() {
-
+        console.log(this.state.data)
         return (
             <SPage
                 // navBar={this.navBar()}
@@ -45,7 +53,7 @@ class post extends Component {
             >
                 <Container>
                     <SText>post</SText>
-                    {/* <Publicacion.Card data={this.data} /> */}
+                    <Publicacion.CardPost data={this.state.data} />
                 </Container>
             </SPage>
         );
