@@ -20,7 +20,7 @@ class index extends Component {
             return;
         }
         if (!descripcion) {
-            SPopup.alert("Inserta una descripcion");
+            SPopup.alert("Inserta una descripción");
             return;
         }
         let data = {
