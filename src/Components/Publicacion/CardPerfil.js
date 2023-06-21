@@ -47,7 +47,7 @@ class index extends Component<CardPerfilPropsType> {
                 <SText bold>{user?.Nombres} {user?.Apellidos}</SText>
             </SView>
             <SView width={30} center onPress={() => {
-                SPopup.open({ key: "menuLat", content: (key_usuario == this.props.data.key_usuario) ? <BoxMenuLat datas={this.props.data} /> : <BoxMenuLatOtros datas={this.props.data} />  });
+                SPopup.open({ key: "menuLat", content: (key_usuario == this.props.data.key_usuario) ? <BoxMenuLat datas={this.props.data} /> : <BoxMenuLatOtros datas={this.props.data} /> });
             }} >
                 <SIcon name={"MenuLat"} fill={STheme.color.text} width={24} height={24} />
                 <SView width={5} />
@@ -55,7 +55,9 @@ class index extends Component<CardPerfilPropsType> {
         </SView>
     }
     renderImage() {
-        return <SView col={"xs-12"} colSquare>
+        return <SView col={"xs-12"} colSquare onPress={() => {
+            SNavigation.navigate("/publicacion/post", { pk: this.props.data.key })
+        }}>
             <SImage src={Model.publicacion._get_image_download_path(SSocket.api, this.props.data.key)} style={{
                 resizeMode: "cover"
             }} />
@@ -98,7 +100,7 @@ class index extends Component<CardPerfilPropsType> {
         </SView>
     }
     render() {
-        return (<SView {...this.props} style={{borderWidth:1, borderColor:STheme.color.primary}}>
+        return (<SView {...this.props} style={{ borderWidth: 1, borderColor: STheme.color.primary }}>
             {/* <SText>{JSON.stringify(this.props.data)}</SText> */}
             {/* {this.renderAuthor()} */}
             {this.renderImage()}
