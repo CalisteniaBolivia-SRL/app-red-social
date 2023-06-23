@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { SDate, SHr, SIcon, SImage, SPage, SText, STheme, SView, SNavigation, SPopup } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
 import Model from '../../Model';
+import SharedFunctions from './SharedFunctions';
 export type BoxMenuLatOtrosPropsType = {
     datas: any,
     onPress?: (obj) => {},
@@ -51,7 +52,13 @@ class index extends Component<BoxMenuLatOtrosPropsType> {
                             borderBottomColor: STheme.color.gray,
                             borderBottomWidth: 1
                         }}
-                        onPress={() => { }}
+                        onPress={() => {
+                            SharedFunctions.compartir({
+                                url: "https://servisofts.com/",
+                                text: "Mira servisots",
+                                hashtags: "#Servisofts"
+                            });
+                        }}
                     >
                         <SText fontSize={14} >Compartir</SText>
                     </SView>

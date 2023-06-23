@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SNavigation, SPage, SText, SView, STheme, SImage, SInput, SLoad, SButtom, SIcon, SWebView, STable2, SMath, SDate, SList, SList2 } from 'servisofts-component';
+import { SHr, SNavigation, SPage, SText, SView, STheme, SImage, SInput, SLoad, SButtom, SIcon, SWebView, STable2, SMath, SDate, SList, SList2, SForm } from 'servisofts-component';
 import { WebView } from 'react-native';
 import SSocket from 'servisofts-socket';
 import Model from '../../Model';
@@ -22,7 +22,7 @@ class index extends Component {
     componentDidMount() {
         var usuario = {}
         var canti = 0;
-        var mias= {}
+        var mias = {}
         SSocket.sendPromise({
             component: "publicacion",
             type: "getAll",
@@ -34,9 +34,9 @@ class index extends Component {
             mias = Object.values(res.data).filter(obj => obj.key_usuario == usuario.key)
             canti = Object.keys(mias).length;
             this.setState({ publicacionesMias: mias });
-            this.setState({ nroPublicaciones: canti});
+            this.setState({ nroPublicaciones: canti });
             const sumLike = mias.map(item => item.likes).reduce((prev, curr) => prev + curr, 0);
-            this.setState({nroLike: sumLike});
+            this.setState({ nroLike: sumLike });
             // console.log(sumLike + " suma")
         }).catch(err => {
             console.log(err)
@@ -73,13 +73,34 @@ class index extends Component {
                     }} border={STheme.color.card}>
 
                         {/* <SImage src={SSocket.api.root + "usuario/" + usuario?.key + "?date=" + new Date().getTime()} style={{ resizeMode: 'cover'}} /> */}
-                        <SInput ref={r => this.r_image = r} type={"image"} style={{
+                        <SForm
+                            col={"xs-12"}
+                            ref={ref => this.inp_foto = ref}
+                            inputs={{
+                                foto_p: {
+                                    type: "image",
+                                    defaultValue: SSocket.api.root + "usuario/" + usuario?.key + "?date=" + new Date().getTime(),
+                                    style: {
+                                        width: "100%",
+                                        height: 80,
+                                        backgroundColor: "none"
+                                    },
+                                    onChangeText: (evt) => {
+                                        this.inp_foto.uploadFiles(Model.usuario._get_image_upload_path(SSocket.api, usuario?.key), "foto_p");
+                                    }
+                                }
+                            }}
+                        />
+                        {/* <SInput ref={r => this.r_image = r} type={"image"} style={{
                             width: "100%",
                             height: "100%",
                             backgroundColor: "none"
                         }}
                             defaultValue={SSocket.api.root + "usuario/" + usuario?.key + "?date=" + new Date().getTime()}
-                        />
+                            onChangeText={(val) => {
+
+                            }}
+                        /> */}
                     </SView>
                 </SView>
                 <SView width={8} />

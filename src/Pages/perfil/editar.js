@@ -29,8 +29,8 @@ class index extends Component {
             }}
             inputs={{
                 foto_p: { type: "image", isRequired: false, defaultValue: SSocket.api.root + "usuario/" + this.data?.key + "?date=" + new Date().getTime(), col: "xs-4 sm-3.5 md-3 lg-2.5 xl-2.5", style: { borderRadius: 100, overflow: 'hidden', width: 130, height: 130, borderWidth: 1, borderColor: STheme.color.lightGray, } },
-                Nombres: { label: "Nombres", isRequired: true, defaultValue: this.data["Nombres"],  },
-                Apellidos: { label: "Apellidos", isRequired: true, defaultValue: this.data.Apellidos,  },
+                Nombres: { label: "Nombres", isRequired: true, defaultValue: this.data["Nombres"], },
+                Apellidos: { label: "Apellidos", isRequired: true, defaultValue: this.data.Apellidos, },
                 "Telefono": { label: "Telefono", defaultValue: this.data["Telefono"], type: "phone" },
                 Correo: { label: "Correo", type: "email", isRequired: true, defaultValue: this.data.Correo, },
                 // ...(isApi ? {} : {
@@ -43,7 +43,7 @@ class index extends Component {
                     ...this.data,
                     ...values
                 }
-
+                this.form.uploadFiles(Model.usuario._get_image_upload_path(SSocket.api, this.data.key), "foto_p");
                 Model.usuario.Action.editar({
                     data: finalObj,
                     key_usuario: Model.usuario.Action.getKey()
