@@ -9,30 +9,16 @@ class post extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data
+            data:{}
         };
         this.pk = SNavigation.getParam("pk");
     }
 
-
     componentDidMount() {
-        // SNavigation.goBack();
         var publicacion = Model.publicacion.Action.getByKey(this.pk);
         if (!publicacion) return <SLoad />
-        // var key = this.pk
-        // var datas = []
-        // var data =  {
-        //         "1e4836d2-1f58-49b5-80e5-7a74792e5725": {
-        //             ...publicacions
-        //         },
-        //     }
-
-        // var datas ={data:{key:{publicacion}}};
-        // datas.data[key] = { publicacion }
-        // data
-        // data = {this.pk: {publicacion}};
-        console.log(publicacion)
         this.setState({ data: publicacion })
+        this.state.data = publicacion
 
     }
     clearData(resolv) {
@@ -44,7 +30,6 @@ class post extends Component {
     }
 
     render() {
-        console.log(this.state.data)
         return (
             <SPage
                 // navBar={this.navBar()}
@@ -52,7 +37,6 @@ class post extends Component {
                 onRefresh={this.clearData}
             >
                 <Container>
-                    <SText>post</SText>
                     <Publicacion.CardPost data={this.state.data} />
                 </Container>
             </SPage>
@@ -60,7 +44,7 @@ class post extends Component {
     }
 
     footer() {
-        return <BottomNavigator url={"/sucursal"} />
+        return <BottomNavigator />
     }
 }
 const initStates = (state) => {
