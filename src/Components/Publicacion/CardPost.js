@@ -6,16 +6,19 @@ import BoxMenuLat from './BoxMenuLat';
 import BoxMenuLatOtros from './BoxMenuLatOtros';
 import Model from '../../Model';
 import LikeAnimation from './LikeAnimation';
-export type PublicacionPropsType = {
+export type CardPostPropsType = {
     data: any,
     usuario: any,
     onPress?: (obj) => {},
 }
-class index extends Component<PublicacionPropsType> {
+class index extends Component<CardPostPropsType> {
     constructor(props) {
         super(props);
         this.state = {
+            comment: ""
         };
+        this.pk = SNavigation.getParam("pk");
+
     }
 
     handlePress() {
@@ -23,6 +26,22 @@ class index extends Component<PublicacionPropsType> {
 
         this.props.onPress(this.props.data)
         // this.props.onPress(this.props.usuario)
+    }
+
+    componentDidMount() {
+        console.log(this.props)
+        console.log(" aqqq")
+        Model.publicacion_comentario.Action.getAllPromise(this.pk).then(e => {
+            console.log(Object.keys(e.data).length)
+            var number = Object.keys(e.data).length
+            if (Object.keys(e.data).length != 0) {
+                this.setState({ comment: "Ver comentarios" })
+            } else {
+                console.log(Object.keys(e?.data).length)
+                this.setState({ comment: "" })
+            }
+        }).catch(e => {
+        })
     }
 
     renderAuthor() {
@@ -118,10 +137,10 @@ class index extends Component<PublicacionPropsType> {
         const size = 28;
 
         return <SView col={"xs-12"} row height={size} center>
-            <SView width={size} height 
-            onPress={() => {
-                Model.usuario.Action.getKey() ? this.handlePressHeart(this) : SNavigation.navigate("/login")
-            }}
+            <SView width={size} height
+                onPress={() => {
+                    Model.usuario.Action.getKey() ? this.handlePressHeart(this) : SNavigation.navigate("/login")
+                }}
             // onPress={this.handlePressHeart.bind(this)}
             >
                 {this.props.data.mylike ? <SIcon name={'Heart'} height={24} fill={STheme.color.danger} /> : <SIcon name={'Heart'} height={24} stroke={STheme.color.text} />}
@@ -156,8 +175,10 @@ class index extends Component<PublicacionPropsType> {
         </SView>
     }
     renderComments() {
-        return <SView col={"xs-12"}>
-            <SText bold color={STheme.color.lightGray}>{"Ver 1 comentario"}</SText>
+        return <SView col={"xs-12"} onPress={() => {
+            SNavigation.navigate("/publicacion/comments", { pk: this.props.data.key })
+        }}>
+            <SText bold color={STheme.color.lightGray}>{this.state.comment}</SText>
         </SView>
     }
     mostrarFechaAtras(fecha) {
@@ -223,6 +244,7 @@ class index extends Component<PublicacionPropsType> {
             }
         }
     }
+
     renderFecha() {
         return <SText fontSize={10} color={STheme.color.gray}>{this.mostrarFechaAtras(this.props?.data?.fecha_on)}</SText>
     }
@@ -238,11 +260,11 @@ class index extends Component<PublicacionPropsType> {
             {this.renderLikes()}
             <SHr />
             {this.renderTitle()}
-            
-            {/* {this.renderComments()} */}
+            <SHr />
+            {this.renderComments()}
             <SHr height={4} />
             {this.renderFecha()}
-            {/* <SHr /> */}
+            <SHr height={40} />
         </SView >
         );
     }

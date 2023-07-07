@@ -12,7 +12,7 @@ export default class SectionHeader extends Component {
     render() {
         return (
             <SView col={"xs-12"} center >
-                <SView col={"xs-12"} height={130} >
+                <SView col={"xs-12"} height={100} >
                     <SIcon name={"logowhite"} fill={STheme.color.text} />
                 </SView>
                 <SHr height={20} />

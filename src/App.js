@@ -28,6 +28,7 @@ const App = (props) => {
             <StatusBar />
             <SNavigation
                 props={{
+                    prefix: ['app://calisteniaboliva'],
                     navBar: TopBar,
                     title: 'Calistenia Bolivia', pages: Pages
                 }}
@@ -44,7 +45,7 @@ const App = (props) => {
                             token: DeviceKey.getKey(),
                             key_usuario: usuario?.key,
                             descripcion: Platform.select({
-                                "web":`Web ${window.navigator.userAgent}` ,
+                                "web": `Web ${window.navigator.userAgent}`,
                                 "android": `Android ${Platform?.constants?.Version}, ${Platform?.constants?.Manufacturer} ${Platform?.constants?.Brand} ${Platform?.constants?.Model}`,
                                 "ios": `IOS ${Platform?.Version}, ${Platform?.constants?.systemName}`,
                             }),

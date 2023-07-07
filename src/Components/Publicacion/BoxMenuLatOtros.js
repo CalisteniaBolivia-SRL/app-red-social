@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { SDate, SHr, SIcon, SImage, SPage, SText, STheme, SView, SNavigation, SPopup } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
 import Model from '../../Model';
+import SharedFunctions from './SharedFunctions';
 export type BoxMenuLatOtrosPropsType = {
     datas: any,
     onPress?: (obj) => {},
@@ -47,23 +48,22 @@ class index extends Component<BoxMenuLatOtrosPropsType> {
                         <SText fontSize={14} >Copiar enlace</SText>
                     </SView>
                     <SView col={"xs-12"} height={48} center
-                        style={{
-                            borderBottomColor: STheme.color.gray,
-                            borderBottomWidth: 1
+                        onPress={() => {
+                            SharedFunctions.compartir({
+                                url: "https://servisofts.com/",
+                                text: "Mira servisots",
+                                hashtags: "#Servisofts"
+                            });
                         }}
-                        onPress={() => { }}
                     >
                         <SText fontSize={14} >Compartir</SText>
                     </SView>
-                    <SView col={"xs-12"} height={48} center
-                        // style={{
-                        //     borderBottomColor: STheme.color.gray,
-                        //     borderBottomWidth: 1
-                        // }}
+                    {/* <SView col={"xs-12"} height={48} center
+                        
                         onPress={() => { }}
                     >
                         <SText fontSize={14} >Dejar de seguir</SText>
-                    </SView>
+                    </SView> */}
                     <SHr height={15} />
                     {/* <SView col={"xs-12"} style={{ borderBottomWidth: 1, borderColor: STheme.color.lightGray }}></SView> */}
                     {/* <SHr height={18} /> */}
