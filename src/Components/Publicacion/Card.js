@@ -160,6 +160,72 @@ class index extends Component<PublicacionPropsType> {
             <SText bold color={STheme.color.lightGray}>{"Ver 1 comentario"}</SText>
         </SView>
     }
+    mostrarFechaAtras(fecha) {
+        var fechaActual = new Date();
+        var fechaPasada = new Date(fecha);
+
+        // Diferencia en milisegundos entre las dos fechas
+        var diferencia = fechaActual.getTime() - fechaPasada.getTime();
+
+        // Cálculo de las diferencias en segundos, minutos, horas, días, semanas, meses y años
+        var segundos = Math.floor(diferencia / 1000);
+        var minutos = Math.floor(diferencia / (1000 * 60));
+        var horas = Math.floor(diferencia / (1000 * 60 * 60));
+
+        var dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+        var semanas = Math.floor(dias / 7);
+        var meses = Math.floor(dias / 30);
+        var anios = Math.floor(dias / 365);
+
+        // Mostrar la fecha en base a la diferencia calculada
+
+        if (segundos < 60) {
+            return segundos + "Hace instantes";
+
+        } else if (minutos < 60) {
+            if (minutos <= 1) {
+                return "Hace " + minutos + " minuto";
+            } else {
+                return "Hace " + minutos + " minutos";
+            }
+
+        } else if (horas < 24) {
+            if (horas <= 1) {
+                return "Hace " + horas + " hora";
+            } else {
+                return "Hace " + horas + " horas";
+            }
+            
+        } else if (dias < 7) {
+            if (dias <= 1) {
+                return "Hace " + dias + " día";
+            } else {
+                return "Hace " + dias + " días";
+            }
+        } else if (semanas < 4) {
+            if (semanas <= 1) {
+                return "Hace " + semanas + " semana";
+            } else {
+                return "Hace " + semanas + " semanas";
+            }
+            
+        } else if (meses < 12) {
+            if (meses <= 1) {
+                return "Hace " + meses + " mes";
+            } else {
+                return "Hace " + meses + " meses";
+            }
+        } else {
+            if (anios <= 1) {
+                return "Hace " + anios + " año";
+            } else {
+                return "Hace " + anios + " años";
+            }
+        }
+    }
+    renderFecha() {
+        return <SText fontSize={10} color={STheme.color.gray}>{this.mostrarFechaAtras(this.props?.data?.fecha_on)}</SText>
+    }
     render() {
         return (<SView col={"xs-12"} >
             {/* <SText>{JSON.stringify(this.props.data)}</SText> */}
@@ -172,8 +238,10 @@ class index extends Component<PublicacionPropsType> {
             {this.renderLikes()}
             <SHr />
             {this.renderTitle()}
-            <SHr />
+            
             {/* {this.renderComments()} */}
+            <SHr height={4} />
+            {this.renderFecha()}
             {/* <SHr /> */}
         </SView >
         );

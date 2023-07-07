@@ -15,7 +15,10 @@ class index extends Component<CardPostPropsType> {
     constructor(props) {
         super(props);
         this.state = {
+            comment: ""
         };
+        this.pk = SNavigation.getParam("pk");
+
     }
 
     handlePress() {
@@ -23,6 +26,22 @@ class index extends Component<CardPostPropsType> {
 
         this.props.onPress(this.props.data)
         // this.props.onPress(this.props.usuario)
+    }
+
+    componentDidMount() {
+        console.log(this.props)
+        console.log(" aqqq")
+        Model.publicacion_comentario.Action.getAllPromise(this.pk).then(e => {
+            console.log(Object.keys(e.data).length)
+            var number = Object.keys(e.data).length
+            if (Object.keys(e.data).length != 0) {
+                this.setState({ comment: "Ver comentarios" })
+            } else {
+                console.log(Object.keys(e?.data).length)
+                this.setState({ comment: "" })
+            }
+        }).catch(e => {
+        })
     }
 
     renderAuthor() {
@@ -79,7 +98,6 @@ class index extends Component<CardPostPropsType> {
         });
     }
     renderImage() {
-        console.log(this.props)
         return <SView col={"xs-12"} colSquare activeOpacity={1}
             style={{
                 // backgroundColor: "#666"
@@ -99,9 +117,9 @@ class index extends Component<CardPostPropsType> {
                     this.nclick = 0;
                 })
             }}>
-            {/* <SImage src={Model.publicacion._get_image_download_path(SSocket.api, this.props.data.key)} style={{
+            <SImage src={Model.publicacion._get_image_download_path(SSocket.api, this.props.data.key)} style={{
                 resizeMode: "contain"
-            }} /> */}
+            }} />
             {Model.usuario.Action.getKey() ? <LikeAnimation ref={ref => this.likeanim = ref} /> : null}
         </SView>
     }
@@ -119,10 +137,10 @@ class index extends Component<CardPostPropsType> {
         const size = 28;
 
         return <SView col={"xs-12"} row height={size} center>
-            <SView width={size} height 
-            onPress={() => {
-                Model.usuario.Action.getKey() ? this.handlePressHeart(this) : SNavigation.navigate("/login")
-            }}
+            <SView width={size} height
+                onPress={() => {
+                    Model.usuario.Action.getKey() ? this.handlePressHeart(this) : SNavigation.navigate("/login")
+                }}
             // onPress={this.handlePressHeart.bind(this)}
             >
                 {this.props.data.mylike ? <SIcon name={'Heart'} height={24} fill={STheme.color.danger} /> : <SIcon name={'Heart'} height={24} stroke={STheme.color.text} />}
@@ -157,25 +175,96 @@ class index extends Component<CardPostPropsType> {
         </SView>
     }
     renderComments() {
-        return <SView col={"xs-12"}>
-            <SText bold color={STheme.color.lightGray}>{"Ver 1 comentario"}</SText>
+        return <SView col={"xs-12"} onPress={() => {
+            SNavigation.navigate("/publicacion/comments", { pk: this.props.data.key })
+        }}>
+            <SText bold color={STheme.color.lightGray}>{this.state.comment}</SText>
         </SView>
+    }
+    mostrarFechaAtras(fecha) {
+        var fechaActual = new Date();
+        var fechaPasada = new Date(fecha);
+
+        // Diferencia en milisegundos entre las dos fechas
+        var diferencia = fechaActual.getTime() - fechaPasada.getTime();
+
+        // Cálculo de las diferencias en segundos, minutos, horas, días, semanas, meses y años
+        var segundos = Math.floor(diferencia / 1000);
+        var minutos = Math.floor(diferencia / (1000 * 60));
+        var horas = Math.floor(diferencia / (1000 * 60 * 60));
+
+        var dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+        var semanas = Math.floor(dias / 7);
+        var meses = Math.floor(dias / 30);
+        var anios = Math.floor(dias / 365);
+
+        // Mostrar la fecha en base a la diferencia calculada
+
+        if (segundos < 60) {
+            return segundos + "Hace instantes";
+
+        } else if (minutos < 60) {
+            if (minutos <= 1) {
+                return "Hace " + minutos + " minuto";
+            } else {
+                return "Hace " + minutos + " minutos";
+            }
+
+        } else if (horas < 24) {
+            if (horas <= 1) {
+                return "Hace " + horas + " hora";
+            } else {
+                return "Hace " + horas + " horas";
+            }
+            
+        } else if (dias < 7) {
+            if (dias <= 1) {
+                return "Hace " + dias + " día";
+            } else {
+                return "Hace " + dias + " días";
+            }
+        } else if (semanas < 4) {
+            if (semanas <= 1) {
+                return "Hace " + semanas + " semana";
+            } else {
+                return "Hace " + semanas + " semanas";
+            }
+            
+        } else if (meses < 12) {
+            if (meses <= 1) {
+                return "Hace " + meses + " mes";
+            } else {
+                return "Hace " + meses + " meses";
+            }
+        } else {
+            if (anios <= 1) {
+                return "Hace " + anios + " año";
+            } else {
+                return "Hace " + anios + " años";
+            }
+        }
+    }
+
+    renderFecha() {
+        return <SText fontSize={10} color={STheme.color.gray}>{this.mostrarFechaAtras(this.props?.data?.fecha_on)}</SText>
     }
     render() {
         return (<SView col={"xs-12"} >
             {/* <SText>{JSON.stringify(this.props.data)}</SText> */}
-            {/* {this.renderAuthor()} */}
+            {this.renderAuthor()}
             <SHr h={8} />
             {this.renderImage()}
             <SHr h={16} />
-            {/* {this.renderActions()} */}
+            {this.renderActions()}
             <SHr h={16} />
-            {/* {this.renderLikes()} */}
+            {this.renderLikes()}
             <SHr />
-            {/* {this.renderTitle()} */}
+            {this.renderTitle()}
             <SHr />
-            {/* {this.renderComments()} */}
-            {/* <SHr /> */}
+            {this.renderComments()}
+            <SHr height={4} />
+            {this.renderFecha()}
+            <SHr height={40} />
         </SView >
         );
     }

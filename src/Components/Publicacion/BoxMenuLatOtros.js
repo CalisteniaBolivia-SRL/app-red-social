@@ -48,10 +48,6 @@ class index extends Component<BoxMenuLatOtrosPropsType> {
                         <SText fontSize={14} >Copiar enlace</SText>
                     </SView>
                     <SView col={"xs-12"} height={48} center
-                        style={{
-                            borderBottomColor: STheme.color.gray,
-                            borderBottomWidth: 1
-                        }}
                         onPress={() => {
                             SharedFunctions.compartir({
                                 url: "https://servisofts.com/",
@@ -62,15 +58,12 @@ class index extends Component<BoxMenuLatOtrosPropsType> {
                     >
                         <SText fontSize={14} >Compartir</SText>
                     </SView>
-                    <SView col={"xs-12"} height={48} center
-                        // style={{
-                        //     borderBottomColor: STheme.color.gray,
-                        //     borderBottomWidth: 1
-                        // }}
+                    {/* <SView col={"xs-12"} height={48} center
+                        
                         onPress={() => { }}
                     >
                         <SText fontSize={14} >Dejar de seguir</SText>
-                    </SView>
+                    </SView> */}
                     <SHr height={15} />
                     {/* <SView col={"xs-12"} style={{ borderBottomWidth: 1, borderColor: STheme.color.lightGray }}></SView> */}
                     {/* <SHr height={18} /> */}
