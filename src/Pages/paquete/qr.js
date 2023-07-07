@@ -85,7 +85,18 @@ class qr extends Component {
             ...this.params,
         };
 
-
+        return <SPage
+            footer={this.footer()}
+            title={"Pago QR"}
+            center
+        >
+            <Container>
+                <SText fontSize={24} bold>PROXIMAMENTE!!!</SText>
+                <SHr />
+                <SHr />
+                <SText fontSize={14} center>Proximamente podras adquirir tu subscripcion por medio de un QRSimple.</SText>
+            </Container>
+        </SPage>
         return (
             <SPage
                 footer={this.footer()}
@@ -114,7 +125,7 @@ class qr extends Component {
                                         <SView style={{ position: "absolute", width: 40, height: 40, transform: [{ rotate: "180deg" }], right: 20, bottom: 15 }} ><SIcon name={"BarraQr"} fill={STheme.color.black}></SIcon></SView> */}
                                 </SView>
                                 <SHr />
-                                <SText fontSize={10}  color={STheme.color.gray}>{this.state?.dataqr?.qrid}</SText>
+                                <SText fontSize={10} color={STheme.color.gray}>{this.state?.dataqr?.qrid}</SText>
                             </SView>
 
                             <SHr height={16} />
