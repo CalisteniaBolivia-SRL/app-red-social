@@ -85,18 +85,18 @@ class qr extends Component {
             ...this.params,
         };
 
-        return <SPage
-            footer={this.footer()}
-            title={"Pago QR"}
-            center
-        >
-            <Container>
-                <SText fontSize={24} bold>PROXIMAMENTE!!!</SText>
-                <SHr />
-                <SHr />
-                <SText fontSize={14} center>Proximamente podras adquirir tu subscripcion por medio de un QRSimple.</SText>
-            </Container>
-        </SPage>
+        // return <SPage
+        //     footer={this.footer()}
+        //     title={"Pago QR"}
+        //     center
+        // >
+        //     <Container>
+        //         <SText fontSize={24} bold>PROXIMAMENTE!!!</SText>
+        //         <SHr />
+        //         <SHr />
+        //         <SText fontSize={14} center>Proximamente podras adquirir tu subscripcion por medio de un QRSimple.</SText>
+        //     </Container>
+        // </SPage>
         return (
             <SPage
                 footer={this.footer()}
