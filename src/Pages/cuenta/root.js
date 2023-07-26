@@ -99,24 +99,24 @@ class index extends Component {
                                     "dato": values.Ci
                                 }).then((e) => {
                                     if (e.estado != "exito") return;
-                                
+
                                     switch (true) {
                                         case (Object.keys(e.data).length === 0):
                                             SNavigation.navigate("/cuenta/noencontrado", { ...this.params, ci: values.Ci });
                                             break;
                                         case (Object.keys(e.data).length === 1):
-                                            SNavigation.navigate("/cuenta/encontrado", { ...this.params, dataUser: e.data })
+                                            SNavigation.navigate("/cuenta/encontrado", { ...this.params, dataUser: Object.values(e.data)[0] })
                                             break;
                                         case (Object.keys(e.data).length > 1):
                                             SNavigation.navigate("/cuenta/coincidencia", { ...this.params, dataUser: e.data });
                                             break;
                                     }
-                                    
+
                                 }).catch((e) => {
                                     console.error(e)
                                 })
 
-                                
+
                             }}
                         />
                         <BtnSend2

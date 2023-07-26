@@ -67,20 +67,8 @@ class encontrado extends Component {
         // if (!usuario) return <SLoad />
         // if (!sucursal_servicio) return <SLoad />
         // console.log(usuario)
-        var dataUser;
-        
-console.log(this.params.key)
-        return <SList
-            // buscador={"true"}
-            space={14}
-            // filter={obj => obj.key_servicio == this.params.pk}
-            // data={Object.values(sucursales)}
-            data={this.params.dataUser}
-            // order={[{ key: "fecha_on", order: "desc", peso: 1, }]}
-            render={(data) => {
-                return <CardUser datas={data} root={'/paquete/membresia'} />
-            }}
-        />
+        var dataUser = this.params.dataUser
+        return <CardUser datas={dataUser} root={'/paquete/membresia'} />
 
     }
 
