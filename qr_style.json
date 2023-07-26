@@ -1,0 +1,19 @@
+{
+    "errorCorrectionLevel": "L",
+    "type_color": "linear",
+    "colorBackground": "",
+    "colorBody2": "#CB0D18",
+    "body": "Dot",
+    "image_src": "https://rolespermisos.servisofts.com/http//page/cb94e548-f4f8-43fb-9cf7-3a862a4c0869",
+    "content": "asdasd",
+    "colorBody": "#000000",
+    "framework": "Rounded",
+    "content_type": "text",
+    "header": "Rounded",
+    "detail": "Glosa",
+    "detail_data": {
+        "background": "#ffffff",
+        "width": "674",
+        "height": "1000"
+    }
+}

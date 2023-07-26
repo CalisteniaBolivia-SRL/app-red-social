@@ -23,13 +23,18 @@ class qr extends Component {
     }
 
     componentDidMount() {
-        console.log("Enviando")
         this.setState({ loading: true })
+        let key_usuario = "";
+        if (this.params.dataUser) {
+            key_usuario = this.params.dataUser.key
+        } else {
+            key_usuario = Model.usuario.Action.getKey()
+        }
         SSocket.sendPromise({
             component: "paqueteVentaUsuario",
             type: "getQr",
             estado: "cargando",
-            key_usuario: Model.usuario.Action.getKey(),
+            key_usuario: key_usuario,
             key_paquete: this.params.pk,
             key_sucursal: this.params.sucursal
         }, 60 * 2000).then(e => {
