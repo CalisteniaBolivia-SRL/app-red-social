@@ -63,11 +63,10 @@ class qr extends Component {
     }
 
     getQr() {
-        var po = this.state.pay_order;
+        var po = this.state?.dataqr
         if (!po) return null;
-        var obj = po.data;
-        if (!obj) return null;
-        return "data:image/jpeg;base64," + obj?.image_data;
+
+        return "data:image/jpeg;base64," + po?.qrImage;
     }
 
     getQRComponent() {
@@ -78,7 +77,7 @@ class qr extends Component {
                 <BarraCargando col={"xs-11"} />
             </SView>
         }
-        return <SImage src={"data:image/png;base64, " + this.state?.dataqr?.qrImage} width={"100%"} height={"100%"}
+        return <SImage src={this.getQr()} width={"100%"} height={"100%"}
             enablePreview
             style={{
                 // resizeMode: "contain"
@@ -138,12 +137,16 @@ class qr extends Component {
                                 <SView col={"xs-2"} height center>
                                 </SView>
                                 <SView flex center height={60} >
-                                    <SView height={60} colSquare center style={{ backgroundColor: 'white', borderRadius: 8, borderColor: STheme.color.black, borderWidth: 2, padding: 8 }} onPress={() => { SShared.saveB64(this.getQr()) }}>
+                                    <SView height={60} colSquare center style={{ backgroundColor: 'white', borderRadius: 8, borderColor: STheme.color.black, borderWidth: 2, padding: 8 }} onPress={() => {
+                                        SShared.saveB64(this.getQr())
+                                    }}>
                                         <SIcon name={"ImgSave"} fill={STheme.color.black} />
                                     </SView>
                                 </SView>
                                 <SView flex center height={60} >
-                                    <SView height={60} colSquare center style={{ backgroundColor: 'white', borderRadius: 8, borderColor: STheme.color.black, borderWidth: 2, padding: 8 }} onPress={() => { SShared.sharedB64(this.getQr()) }}>
+                                    <SView height={60} colSquare center style={{ backgroundColor: 'white', borderRadius: 8, borderColor: STheme.color.black, borderWidth: 2, padding: 8 }} onPress={() => {
+                                        SShared.sharedB64(this.getQr(), { message: "", titulo: "" })
+                                    }}>
                                         <SIcon name={"ImgShare"} fill={STheme.color.black} />
                                     </SView>
                                 </SView>

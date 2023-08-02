@@ -32,8 +32,9 @@ class index extends Component {
     getListSucursales() {
         if (!this.loadData()) return null;
         return Object.values(this.sucursales).map((obj, index) => {
+            if(!obj.estado) return;
             return <Sucursal.Marker lat={obj.latitude} lng={obj.longitude} data={obj} onPress={() => {
-                SNavigation.navigate("/sucursal", { pk: obj.key });
+                // SNavigation.navigate("/sucursal", { pk: obj.key });
             }} />
         })
     }

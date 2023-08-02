@@ -6,6 +6,7 @@ import BarraCargando from '../BarraCargando';
 export type SucursalCardPropsType = {
     data: any,
     onPress?: (obj) => {},
+    key_servicio?: string,
 }
 class index extends Component<SucursalCardPropsType> {
     constructor(props) {
@@ -33,7 +34,7 @@ class index extends Component<SucursalCardPropsType> {
     render() {
         var { key, descripcion, state, direccion, nombre } = (this.props.datoSucursal) ? this.props.datoSucursal : this.props.datas;
         return (<SView col={"xs-12"} activeOpacity={0.8} onPress={() => {
-            SNavigation.navigate(this.props.root, { pk: key })
+            SNavigation.navigate(this.props.root, { pk: key, key_servicio: this.props.key_servicio })
         }} height={130} backgroundColor={STheme.color.card} style={{ borderRadius: 10, overflow: 'hidden', }}>
             <SView col={"xs-12"} height style={{
                 position: "absolute",
