@@ -33,7 +33,7 @@ class index extends Component {
         if (!this.loadData()) return null;
         return Object.values(this.restaurantes).map((obj, index) => {
             return <Restaurante.Marker lat={obj.latitude} lng={obj.longitude} data={obj} onPress={() => {
-                SNavigation.navigate("/restaurante", { pk: obj.key });
+                // SNavigation.navigate("/restaurante", { pk: obj.key });
             }} />
         })
     }

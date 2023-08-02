@@ -9,6 +9,7 @@ import asistencia from "./asistencia";
 import publicacion_like from "./publicacion_like";
 import publicacion_comentario from "./publicacion_comentario";
 import paquete_venta from "./paquete_venta";
+import paqueteServicio from "./paqueteServicio";
 
 export default {
     sucursal,
@@ -21,7 +22,8 @@ export default {
     asistencia,
     publicacion_like,
     publicacion_comentario,
-    paquete_venta
+    paquete_venta,
+    paqueteServicio
 
    
 }

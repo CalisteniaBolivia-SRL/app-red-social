@@ -18,20 +18,25 @@ class membresia extends Component {
         };
         this.params = SNavigation.getAllParams();
         this.pk = SNavigation.getParam("pk");
+        this.key_servicio = SNavigation.getParam("key_servicio");
     }
 
     render_with_data() {
 
 
-        // var paquete_servicio = Model.paquete_servicio.Action.getAll(); //para más tarde
+        var paquete_servicio = Model.paqueteServicio.Action.getAll(); //para más tarde
         var sucursal_paquete = Model.sucursal_paquete.Action.getAll();
         if (!sucursal_paquete) return <SLoad />
+        if (!paquete_servicio) return <SLoad />
         // var paquete = Model.paquete.Action.getByKey(data.key_paquete);
         var paquetes = Model.paquete.Action.getAll();
         if (!paquetes) return <SLoad />
 
         // Object.values(publicaciones).filter(obj => obj.key_usuario == usuario.key);
-        var sucursal_paquetes = Object.values(sucursal_paquete).filter(sucursal_paquete_ => sucursal_paquete_.key_sucursal == this.pk);
+
+        const paquetes_del_servicio = Object.values(paquete_servicio).filter(o => o.key_servicio == this.key_servicio);
+        const sucursal_paquetes = Object.values(sucursal_paquete).filter(sucursal_paquete_ => sucursal_paquete_.key_sucursal == this.pk && !!paquetes_del_servicio.find(a => a.key_paquete == sucursal_paquete_.key_paquete));
+
         // sucursal_paquete
         // console.log(paquetes)
 
@@ -43,6 +48,7 @@ class membresia extends Component {
         var dataMostrar = [];
         Object.values(paquetes).map((obj) => {
             if (obj.estado == 0) return null
+
             dato = Object.values(sucursal_paquetes).find(obj2 => obj2.key_paquete == obj.key);
             if (!dato) return null
             dataMostrar.push(obj)

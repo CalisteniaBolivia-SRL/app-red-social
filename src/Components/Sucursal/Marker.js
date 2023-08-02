@@ -5,13 +5,13 @@ import SSocket from 'servisofts-socket';
 const Marker = (props) => {
     var obj = props.data;
     var size = 68;
-    if(!obj.latitude || !obj.longitude)return null;
-    const url = SSocket.api.root + "sucursal/"+obj.key;
-    return <SMarker lat={obj.latitude} lng={obj.longitude} {...props}   tracksViewChanges={true} >
-        <SView width={size} height={size} style={{alignItems: 'center',}}
-        onPress={() => { 
-            SNavigation.navigate("/sucursal/detalle", { pk: obj.key });
-        }}
+    if (!obj.latitude || !obj.longitude) return null;
+    const url = SSocket.api.root + "sucursal/" + obj.key;
+    return <SMarker lat={obj.latitude} lng={obj.longitude} {...props} tracksViewChanges={true} onPress={() => {
+        SNavigation.navigate("/sucursal/detalle", { pk: obj.key });
+    }} >
+        <SView width={size} height={size} style={{ alignItems: 'center', }}
+
         >
             <SIcon name={"MarcadorMapac"} width={size} height={size} />
             <SView style={{

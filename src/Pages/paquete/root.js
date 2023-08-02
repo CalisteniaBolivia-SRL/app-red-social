@@ -58,7 +58,7 @@ class index extends Component {
             data={this.state.data}
             render={(data) => {
                 let datoSucursal = Model.sucursal.Action.getByKey(data.key_sucursal);
-                return <Sucursal.Card image={1} datas={data} datoSucursal={datoSucursal} root={'/paquete/membresia'}  />
+                return <Sucursal.Card image={1} datas={data} datoSucursal={datoSucursal} root={'/paquete/membresia'} key_servicio={ this.params.pk}  />
             }}
         />
 
