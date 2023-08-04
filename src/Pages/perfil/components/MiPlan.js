@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SHr, SIcon, SText, STheme, SView, SList2, SLoad } from 'servisofts-component';
+import { SHr, SIcon, SText, STheme, SView, SList2, SLoad, SDate, SNavigation } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
 import Model from '../../../Model';
 
@@ -22,7 +22,7 @@ export default class MiPlan extends Component {
     }
 
     getPaquetes() {
-        let data = Object.values(this.state.dataPaquete).filter(datas => new Date().getTime() >= new Date(datas.fecha_inicio).getTime() && new Date().getTime() <= new Date(datas.fecha_fin).getTime())
+        let data = Object.values(this.state.dataPaquete).filter(datas => (new SDate().equalDay(new SDate(datas.fecha_fin, "yyyy-MM-dd")) || (new Date().getTime() >= new Date(datas.fecha_inicio).getTime() && new Date().getTime() <= new Date(datas.fecha_fin).getTime())))
 
         let paqueteAll;
         let paqueteData;
@@ -31,6 +31,8 @@ export default class MiPlan extends Component {
             padding: 5,
             borderColor: STheme.color.secondary,
             borderRadius: 8
+        }} onPress={() => {
+            SNavigation.navigate("/perfil/paquetes", { key: Model.usuario.Action.getKey() });
         }}>
             <SHr height={5} />
             <SText bold>NO TIENES PAQUETE ACTIVO</SText>
@@ -47,11 +49,14 @@ export default class MiPlan extends Component {
                     <SView col={"xs-6.5"} height row
                         backgroundColor={STheme.color.secondary}
                         style={{ borderRadius: 10, padding: 8 }}
+                        onPress={() => {
+                            SNavigation.navigate("/perfil/paquetes", { key: Model.usuario.Action.getKey() });
+                        }}
                     >
                         <SIcon name='Iplan' width={38} height={38} />
                         <SHr />
                         <SView col={"xs-12"}>
-                        <SText bold fontSize={14} color={STheme.color.white}>Paquete: {paqueteData?.descripcion}</SText>
+                            <SText bold fontSize={14} color={STheme.color.white}>Paquete: {paqueteData?.descripcion}</SText>
                         </SView>
                         <SHr height={5} />
                         <SText fontSize={11} color={STheme.color.white}>Duración: {paqueteData?.dias} días</SText>

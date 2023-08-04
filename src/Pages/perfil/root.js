@@ -126,6 +126,12 @@ class index extends Component {
             }}>
                 <SText bold>Editar perfil</SText>
             </SView>
+            {/* <SView flex />
+            <SView card padding={8} row width={100} center onPress={() => {
+                SNavigation.navigate("/perfil/paquetes", { key: usuario.key });
+            }}>
+                <SText bold>Paquetes</SText>
+            </SView> */}
             <SView flex />
             <SView card padding={8} row width={100} center onPress={() => {
                 SNavigation.navigate("/perfil/asistencia", { key: usuario.key });
