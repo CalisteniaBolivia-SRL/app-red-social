@@ -1,6 +1,6 @@
 {
   "name": "calistenia_rs_app",
-  "version": "2.0.11",
+  "version": "2.0.12",
   "description": "calistenia_rs_app",
   "scripts": {
     "start": "react-native start",
@@ -44,7 +44,7 @@
     "react-native-notifications": "4.2.4",
     "react-native-reanimated": "2.13.0",
     "react-native-safe-area-context": "^3.2.0",
-    "react-native-screens": "^3.4.0",
+    "react-native-screens": "3.11.0",
     "react-native-share": "^7.3.9",
     "react-native-svg": "^12.1.1",
     "react-native-svg-transformer": "^0.14.3",
