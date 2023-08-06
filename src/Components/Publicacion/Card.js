@@ -20,22 +20,16 @@ class index extends Component<PublicacionPropsType> {
 
     handlePress() {
         if (!this.props.onPress) return null;
-
         this.props.onPress(this.props.data)
         // this.props.onPress(this.props.usuario)
     }
 
     renderAuthor() {
-        // var key_usuario = Model.usuario.Action.getKey() ?? null;
         var key_usuario = Model.usuario.Action.getKey();
         let user = Model.usuario.Action.getByKey(this.props.data?.key_usuario);
-        // if (!user) return null
-        // let user = this.props.usuario;
-        // let user = {
-        //     Nombres: "Name",
-        //     Apellidos: "Last Name"
-        // }
-        return <SView col={"xs-12"} row height={50} center>
+        return <SView col={"xs-12"} row height={50} center onPress={() => {
+            SNavigation.navigate("/perfil", { pk: this.props.data?.key_usuario })
+        }}>
             <SView width={50} height style={{
                 justifyContent: "center"
             }} >
@@ -49,7 +43,7 @@ class index extends Component<PublicacionPropsType> {
             </SView>
             <SView flex height style={{
                 justifyContent: "center"
-            }}>
+            }} >
                 <SText bold>{user?.Nombres} {user?.Apellidos}</SText>
             </SView>
             <SView width={30} center onPress={() => {
@@ -81,7 +75,7 @@ class index extends Component<PublicacionPropsType> {
     renderImage() {
         return <SView col={"xs-12"} colSquare activeOpacity={1}
             style={{
-                // backgroundColor: "#666"
+                backgroundColor: "#66666622"
             }}
             center
             onPress={() => {
@@ -118,11 +112,10 @@ class index extends Component<PublicacionPropsType> {
         const size = 28;
 
         return <SView col={"xs-12"} row height={size} center>
-            <SView width={size} height 
-            onPress={() => {
-                Model.usuario.Action.getKey() ? this.handlePressHeart(this) : SNavigation.navigate("/login")
-            }}
-            // onPress={this.handlePressHeart.bind(this)}
+            <SView width={size} height
+                onPress={() => {
+                    Model.usuario.Action.getKey() ? this.handlePressHeart(this) : SNavigation.navigate("/login")
+                }}
             >
                 {this.props.data.mylike ? <SIcon name={'Heart'} height={24} fill={STheme.color.danger} /> : <SIcon name={'Heart'} height={24} stroke={STheme.color.text} />}
             </SView>
@@ -195,7 +188,7 @@ class index extends Component<PublicacionPropsType> {
             } else {
                 return "Hace " + horas + " horas";
             }
-            
+
         } else if (dias < 7) {
             if (dias <= 1) {
                 return "Hace " + dias + " día";
@@ -208,7 +201,7 @@ class index extends Component<PublicacionPropsType> {
             } else {
                 return "Hace " + semanas + " semanas";
             }
-            
+
         } else if (meses < 12) {
             if (meses <= 1) {
                 return "Hace " + meses + " mes";
@@ -238,8 +231,6 @@ class index extends Component<PublicacionPropsType> {
             {this.renderLikes()}
             <SHr />
             {this.renderTitle()}
-            
-            {/* {this.renderComments()} */}
             <SHr height={4} />
             {this.renderFecha()}
             {/* <SHr /> */}
@@ -247,7 +238,8 @@ class index extends Component<PublicacionPropsType> {
         );
     }
 }
-const initStates = (state) => {
-    return { state }
-};
-export default connect(initStates)(index);
+// const initStates = (state) => {
+//     return { state }
+// };
+// export default connect(initStates)(index);
+export default index;

@@ -26,9 +26,11 @@ export default class Card extends Component {
                 center
                 onPress={() => { SNavigation.navigate('/paquete', { servicio: this.pk, pk: key }) }}
             >
-                <SView width={30} height={40} center style={{ borderRadius: 10, overflow: 'hidden' }}>
-                    {/* <SImage src={SSocket.api.root + "/paquete/" + key} /> */}
-                    <SIcon name={"Lista1"} height={16} fill={"transparent"}></SIcon>
+                <SView width={40} height={40} center style={{ borderRadius: 14, overflow: 'hidden' }}>
+                    <SImage src={SSocket.api.root + "/servicio/" + key} style={{
+                        resizeMode: "cover"
+                    }} />
+                    {/* <SIcon name={"Lista1"} height={16} fill={"transparent"}></SIcon> */}
                 </SView>
                 <SView width={8} />
                 <SView flex center>
@@ -38,9 +40,9 @@ export default class Card extends Component {
                         {/* <SText style={{ alignItems: "flex-end" }} fontSize={12} color={"#666666"}>Bs. {precio}</SText> */}
                         <SView style={{ alignItems: "flex-end" }}>
                             <SIcon name={"Lista2"} height={16} width={16} fill={STheme.color.text}></SIcon>
-                           
+
                         </SView>
- <SView width={8}  />
+                        <SView width={8} />
                     </SView>
 
                 </SView>

@@ -39,7 +39,7 @@ class index extends Component {
             space={15}
             initSpace={15}
             data={Object.values(servicio)}
-            filter={(a) => a.estado != 0}
+            filter={(a) => a.estado != 0 && !!a.estado_app}
             // order={[{ key: "fecha_on", order: "desc", peso: 1, }]}
             render={(data) => {
                 return <Card datas={data} pkSucursal={this.params.pk} />
@@ -61,12 +61,12 @@ class index extends Component {
                 footer={this.footer()}
                 title={"Comprar"}
                 hidden
+                onRefresh={(resolve)=>{
+                    Model.servicio.Action.CLEAR();
+                    if(resolve) resolve();
+                }}
             >
-                {/* <SHr height={50} /> */}
                 <Container>
-                    {/* <SView col={"xs-12"} >
-                        <SText fontSize={26} color={STheme.color.white}>Comprar</SText>
-                    </SView> */}
                     {this.render_with_data()}
                     <SHr height={20} />
                 </Container>

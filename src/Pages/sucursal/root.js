@@ -15,6 +15,7 @@ class index extends Component {
 
     clearData(resolv) {
         Model.sucursal.Action.CLEAR();
+        if (resolv) resolv();
     }
     render_with_data() {
         var sucursales = Model.sucursal.Action.getAll();
@@ -26,6 +27,7 @@ class index extends Component {
 
             space={14}
             data={sucursales}
+            filter={obj => !!obj.estado_app}
             // order={[{ key: "fecha_on", order: "desc", peso: 1, }]}
             render={(data) => {
                 // return <SText>Hola</SText>

@@ -93,14 +93,16 @@ class detalle extends Component {
                 horizontal
                 render={(obj, key) => {
                     // console.log(SSocket.api.root + "usuario/" + obj.usuario?.key)
-                    return <SView width={130} center >
+                    return <SView width={130} center onPress={() => {
+                        SNavigation.navigate("/perfil", { pk: obj.key_usuario })
+                    }}>
                         <SView card height={127} width={127} center style={{ borderRadius: 15, overflow: "hidden" }}>
                             {/* <SIcon name='Iusuario' width={80} height={80} fill={STheme.color.text} style={{ position: "absolute" }} /> */}
-                            <SImage src={SSocket.api.root + "usuario/" + obj.usuario?.key + "?date=" + new Date().getTime()} style={{ resizeMode: 'cover' }} />
+                            <SImage src={SSocket.api.root + "usuario/" + obj.key_usuario + "?date=" + new Date().getTime()} style={{ resizeMode: 'cover' }} />
                         </SView>
                         <SView col={"xs-12"} height={52} style={{ overflow: 'hidden' }}>
                             <SHr height={16} />
-                            <SText fontSize={14} center style={{ textTransform: 'uppercase' }}>
+                            <SText fontSize={14} center bold style={{ textTransform: 'uppercase' }}>
                                 {obj.usuario?.Nombres} {obj.usuario?.Apellidos}
                             </SText>
                         </SView>
@@ -131,7 +133,7 @@ class detalle extends Component {
                         />
                     </SView>
                 </SView> */}
-                
+
                 <Container>
                     <Sucursal.Tituto icon='TitEntrenador' titulo={'ENTRENADORES'} />
                     <SHr height={20} />
@@ -149,9 +151,9 @@ class detalle extends Component {
                     <Sucursal.Tituto icon='TitComprar' titulo={'COMPRAS'} />
                     <SHr height={20} />
                     <SView col={"xs-12"} center row
-                    onPress={()=>{
-                        SNavigation.navigate("/paquete/membresia",{ pk: this.pk})
-                    }}
+                        onPress={() => {
+                            SNavigation.navigate("/paquete/membresia", { pk: this.pk })
+                        }}
                     >
                         {/* <SView width={200} center
                             style={{
@@ -164,7 +166,7 @@ class detalle extends Component {
                             <SText fontSize={18} bold>COMPRAR</SText>
                             <SHr height={10} />
                         </SView> */}
-                        <SIcon name='Adquiere' height={45}  />
+                        <SIcon name='Adquiere' height={45} />
                     </SView>
                 </Container>
                 <SHr height={50} />

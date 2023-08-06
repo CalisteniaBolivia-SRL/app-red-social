@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SButtom, SHr, SIcon, SImage, SList, SLoad, SMapView2,SMapView, SMarker, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
+import { SButtom, SHr, SIcon, SImage, SList, SLoad, SMapView2, SMapView, SMarker, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
 import { BottomNavigator, Container, Restaurante, TopBar, Sucursal } from '../../Components';
 import Model from '../../Model';
 
@@ -31,8 +31,8 @@ class index extends Component {
 
     getListSucursales() {
         if (!this.loadData()) return null;
-        return Object.values(this.sucursales).map((obj, index) => {
-            if(!obj.estado) return;
+        return Object.values(this.sucursales).filter(a => a.estado_app > 0).map((obj, index) => {
+            if (!obj.estado) return;
             return <Sucursal.Marker lat={obj.latitude} lng={obj.longitude} data={obj} onPress={() => {
                 // SNavigation.navigate("/sucursal", { pk: obj.key });
             }} />
@@ -51,8 +51,8 @@ class index extends Component {
                     longitude: this.state.region.longitude,
                     latitudeDelta: 0.09,
                     longitudeDelta: 0.09
-                }} 
-                
+                }}
+
                 preventCenter>
                 {this.getListSucursales()}
                 {/* <SMarker lat={usuario?.latitude} lng={usuario?.longitude} >
@@ -64,15 +64,15 @@ class index extends Component {
     header() {
         return <SView col={"xs-12"}>
             {/* <Container> */}
-                {/* <Restaurante.BarraFiltros /> */}
-                <Sucursal.MapaListaButtoms url={"/sucursal/mapa"} />
+            {/* <Restaurante.BarraFiltros /> */}
+            <Sucursal.MapaListaButtoms url={"/sucursal/mapa"} />
             {/* </Container> */}
         </SView>
     }
     render() {
         return (
             <SPage
-            hidden
+                hidden
                 // navBar={this.navBar()}
                 header={this.header()}
                 footer={this.footer()}
