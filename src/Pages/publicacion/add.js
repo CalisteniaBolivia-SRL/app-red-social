@@ -13,6 +13,7 @@ class index extends Component {
     }
 
     handlePress = () => {
+        if (this.state.loading) return null;
         let image = this.r_image.getValue();
         let descripcion = this.r_descripcion.getValue();
         if (!image) {
@@ -27,16 +28,20 @@ class index extends Component {
             descripcion,
             observacion: ""
         }
+        this.setState({ loading: true })
         Model.publicacion.Action.registro({
             data: data,
             key_usuario: Model.usuario.Action.getKey()
         }).then(resp => {
             Upload.sendPromise(image[0], SSocket.api.root + "upload/publicacion/" + resp.data.key).then(resp2 => {
+                this.setState({ loading: false })
                 SNavigation.reset("/");
             }).catch(e => {
+                this.setState({ loading: false })
                 SNavigation.reset("/");
             })
         }).catch(e => {
+            this.setState({ loading: false })
             console.error(e);
         })
     }
@@ -51,9 +56,9 @@ class index extends Component {
                 footer={<SView col={"xs-12"} center>
                     <PButtom loading={this.state.loading} center
                         onPress={this.handlePress.bind(this)}>
-                        CONFIRMAR
+                        {!this.state.loading ? "CONFIRMAR" : <SLoad />}
                     </PButtom>
-                    <SHr height={15}/>
+                    <SHr height={15} />
                 </SView>}>
                 < Container >
                     <SView col={"xs-12"} colSquare style={{ backgroundColor: STheme.color.card, borderRadius: 8, overflow: "hidden" }} center>
@@ -62,7 +67,7 @@ class index extends Component {
                             height: "100%",
                             zIndex: 99
                         }} />
-                       
+
                         <SIcon name='Icam' width={60} height={60} fill={STheme.color.text} style={{ position: "absolute", zIndex: 98 }} />
                     </SView>
                     <SHr />

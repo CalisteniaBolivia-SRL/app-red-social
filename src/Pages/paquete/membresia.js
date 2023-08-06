@@ -53,8 +53,6 @@ class membresia extends Component {
             if (!dato) return null
             dataMostrar.push(obj)
         })
-        console.log(dataMostrar)
-
         return <SList
             buscador={"true"}
             space={15}

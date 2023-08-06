@@ -4,12 +4,14 @@ import membresia from './membresia';
 import detalle from './detalle';
 import confirmar from './confirmar';
 import qr from './qr';
+import compra_exitosa from './compra_exitosa';
 export const Parent = {
     name: "paquete",
     path: `/paquete`,
 }
 export default SPage.combinePages(Parent.name, {
     "": root,
+    "compra_exitosa": compra_exitosa,
     "membresia": membresia,
     "membresia/detalle": detalle,
     "membresia/confirmar": confirmar,

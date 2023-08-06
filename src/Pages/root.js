@@ -1,25 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { SButtom, SHr, SIcon, SImage, SList, SLoad, SNavigation, SPage, SScrollView2, SText, STheme, SView } from 'servisofts-component';
+import { SButtom, SDate, SHr, SIcon, SImage, SList, SLoad, SNavigation, SPage, SScrollView2, SText, STheme, SView } from 'servisofts-component';
 import { BottomNavigator, Container, NavBar, Pedido, Restaurante, TopBar, Sucursal, Publicacion } from '../Components';
 import Model from '../Model';
 import SSocket from 'servisofts-socket'
+import { FlatList } from 'react-native';
 class index extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            refreshing: false
         };
     }
 
 
     componentDidMount() {
-        Model.usuario.Action.getAll({ force: true })
+
+        // Model.usuario.Action.getAll({ force: true })
 
     }
     clearData(resolv) {
         Model.sucursal.Action.CLEAR();
         Model.publicacion.Action.CLEAR();
+        // Model.usuario.Action.CLEAR();
         this.componentDidMount();
 
     }
@@ -32,9 +36,9 @@ class index extends Component {
             center
             space={14}
             data={sucursales}
+            limit={5}
             // order={[{ key: "fecha_on", order: "desc", peso: 1, }]}
             render={(data) => {
-                // return <SText>Hola</SText>
                 return <Sucursal.Card image={1} datas={data} root={'/sucursal/detalle'} />
             }}
         />
@@ -75,16 +79,15 @@ class index extends Component {
 
     renderPublicidad() {
         return <>
-            <SView col={"xs-12"} card height={100} center
+            <SView col={"xs-12"} card height={60} center
                 style={{ borderWidth: 2, borderColor: STheme.color.secondary, borderRadius: 20, overflow: "hidden" }}
                 onPress={() => {
                     SNavigation.navigate("/servicio")
                 }}
             >
                 <SImage src={require('../Assets/img/fpublicidad.png')} style={{ resizeMode: 'cover', position: 'absolute' }} />
-                <SText font="Oswald-Bold" fontSize={20}>¡DESAFÍA TUS LÍMITES!</SText>
                 <SHr height={5} />
-                <SIcon name='Btnpaquete' fill={STheme.color.text} height={30} />
+                <SIcon name='Btnpaquete' fill={STheme.color.text} height={25} />
                 <SHr height={5} />
                 <SText font="Oswald-Regular" fontSize={11}> &lt; PAGA SIMPLE Y RÁPIDO CON QR &gt; </SText>
             </SView>
@@ -92,23 +95,31 @@ class index extends Component {
     }
 
     renderPublicaciones() {
-        const propsParentItem = {
-            col: "xs-12",
-            height: 100,
-            card: true
-        }
         let publicaciones = Model.publicacion.Action.getAll({
             key_usuario: Model.usuario.Action.getKey()
         });
         if (!publicaciones) return <SLoad />
+        const arr = Object.values(publicaciones).sort((a, b) => new SDate(a.fecha_on).isBefore(new SDate(b.fecha_on)) ? 1 : -1)
+
+        const handleRefresh = async () => {
+            this.clearData();
+        };
+        return <FlatList
+            onRefresh={handleRefresh}
+            refreshing={this.state.refreshing}
+            data={arr}
+            style={{
+                width: "100%",
+            }}
+            keyExtractor={item => item.key.toString()}
+            ItemSeparatorComponent={() => <SHr h={100} />}
+            renderItem={itm => <Publicacion.Card data={itm.item} />}
+        />
         return <SList
             data={publicaciones}
             order={[{ key: "fecha_on", order: "desc" }]}
             space={50}
             render={(a) => {
-                // let user = Model.usuario.Action.getByKey(a.key_usuario);
-                // if (!user) return <SLoad/>
-                // console.log(user);
                 return <Publicacion.Card data={a} />
             }}
         />
@@ -119,16 +130,19 @@ class index extends Component {
             <SPage
                 navBar={this.navBar()}
                 footer={this.footer()}
-                onRefresh={this.clearData.bind(this)}
+                disableScroll
             >
-                <Container>
-                    <SHr height={15} />
+                <Container flex>
+                    {/* <SHr height={20} /> */}
+                    {/* <SHr height={15} /> */}
                     {this.renderPublicidad()}
-                    <SHr height={15} />
-                    {this.renderPublicaciones()}
+                    {/* <SHr height={15} /> */}
+                    <SView col={"xs-12"} flex>
+                        {this.renderPublicaciones()}
+                    </SView>
                     {/* {this.render_with_data()} */}
                     {/* {this.banner()} */}
-                    <SHr height={35} />
+
                 </Container>
             </SPage>
         );

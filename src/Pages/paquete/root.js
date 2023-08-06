@@ -11,7 +11,7 @@ class index extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data : {},
+            data: {},
         };
         this.params = SNavigation.getAllParams();
 
@@ -24,10 +24,10 @@ class index extends Component {
             "key_servicio": this.params.pk
 
 
-        }).then((e)=>{
+        }).then((e) => {
             if (e.estado != "exito") return;
             this.setState({ data: e.data })
-        }).catch((e)=>{
+        }).catch((e) => {
 
         })
     }
@@ -42,11 +42,11 @@ class index extends Component {
         Model.favorito.Action.CLEAR();
         Model.publicacion.Action.CLEAR();
     }
-   
-    render_with_data() { 
+
+    render_with_data() {
         console.log(this.params.pk)
         console.log(this.state.data)
-       
+
         var sucursal_servicio = {}
         var sucursales = {}
         if (!sucursales) return <SLoad />
@@ -56,9 +56,10 @@ class index extends Component {
             buscador={"true"}
             space={14}
             data={this.state.data}
+            filter={(a => a.estado_app > 0)}
             render={(data) => {
                 let datoSucursal = Model.sucursal.Action.getByKey(data.key_sucursal);
-                return <Sucursal.Card image={1} datas={data} datoSucursal={datoSucursal} root={'/paquete/membresia'} key_servicio={ this.params.pk}  />
+                return <Sucursal.Card image={1} datas={data} datoSucursal={datoSucursal} root={'/paquete/membresia'} key_servicio={this.params.pk} />
             }}
         />
 
@@ -68,7 +69,7 @@ class index extends Component {
     }
 
     render() {
-       
+
         return (
             <SPage
                 // navBar={this.navBar()}
@@ -78,7 +79,6 @@ class index extends Component {
             >
                 <SHr height={50} />
                 <Container>
-                    <SHr height={15} />
                     {this.render_with_data()}
                     <SHr height={25} />
                 </Container>

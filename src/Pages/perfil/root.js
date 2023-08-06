@@ -17,6 +17,7 @@ class index extends Component {
             publicaciones: [],
             publicacionesMias: []
         };
+        this.key_usuario = SNavigation.getParam("pk", Model.usuario.Action.getKey())
     }
 
     componentDidMount() {
@@ -28,10 +29,8 @@ class index extends Component {
             type: "getAll",
             estado: "cargando",
         }).then(res => {
-            usuario = Model.usuario.Action.getUsuarioLog();
             if (!this.state.publicaciones) return <SLoad />
-            if (!usuario) return <SLoad />
-            mias = Object.values(res.data).filter(obj => obj.key_usuario == usuario.key)
+            mias = Object.values(res.data).filter(obj => obj.key_usuario == this.key_usuario)
             canti = Object.keys(mias).length;
             this.setState({ publicacionesMias: mias });
             this.setState({ nroPublicaciones: canti });
@@ -44,22 +43,22 @@ class index extends Component {
     }
 
     renderDataHeaderItem({ val, label }) {
-        return <SView center col={"xs-4"}>
+        return <SView center col={"xs-5"}>
             <SText bold fontSize={16}>{val}</SText>
             <SText>{label}</SText>
         </SView>
     }
     renderDataHeader = () => {
         return <SView col={"xs-12"} row>
-            {this.renderDataHeaderItem({ val: this.state.nroPublicaciones, label: "Publicaci..." })}
-            {this.renderDataHeaderItem({ val: 0, label: "Seguidores" })}
+            {this.renderDataHeaderItem({ val: this.state.nroPublicaciones, label: "Publicaciones" })}
+            {/* {this.renderDataHeaderItem({ val: 0, label: "Seguidores" })} */}
+            <SView flex />
             {this.renderDataHeaderItem({ val: this.state.nroLike, label: "Me gusta" })}
         </SView>
     }
 
     getPerfil() {
-        var usuario = Model.usuario.Action.getUsuarioLog();
-        if (!usuario) return <SLoad />
+        var usuario = Model.usuario.Action.getByKey(this.key_usuario) ?? {};
         return (<SView col={"xs-12"}>
             <SView col={"xs-12"} row center>
                 <SView style={{
@@ -79,28 +78,18 @@ class index extends Component {
                             inputs={{
                                 foto_p: {
                                     type: "image",
-                                    defaultValue: SSocket.api.root + "usuario/" + usuario?.key + "?date=" + new Date().getTime(),
+                                    defaultValue: SSocket.api.root + "usuario/" + this.key_usuario + "?date=" + new Date().getTime(),
                                     style: {
                                         width: "100%",
                                         height: 80,
                                         backgroundColor: "none"
                                     },
                                     onChangeText: (evt) => {
-                                        this.inp_foto.uploadFiles(Model.usuario._get_image_upload_path(SSocket.api, usuario?.key), "foto_p");
+                                        this.inp_foto.uploadFiles(Model.usuario._get_image_upload_path(SSocket.api, this.key_usuario), "foto_p");
                                     }
                                 }
                             }}
                         />
-                        {/* <SInput ref={r => this.r_image = r} type={"image"} style={{
-                            width: "100%",
-                            height: "100%",
-                            backgroundColor: "none"
-                        }}
-                            defaultValue={SSocket.api.root + "usuario/" + usuario?.key + "?date=" + new Date().getTime()}
-                            onChangeText={(val) => {
-
-                            }}
-                        /> */}
                     </SView>
                 </SView>
                 <SView width={8} />
@@ -118,11 +107,13 @@ class index extends Component {
         )
     }
     renderMenu() {
-        var usuario = Model.usuario.Action.getUsuarioLog();
-        if (!usuario) return <SLoad />
+        if (Model.usuario.Action.getKey() != this.key_usuario) return null;
+        // var usuario = Model.usuario.Action.getByKey(this.key_usuario);
+        // var usuario_log = Model.usuario.Action.getUsuarioLog();
+        // if (!usuario) return <SLoad />
         return <SView col={"xs-12"} row>
             <SView card padding={8} row width={115} center onPress={() => {
-                SNavigation.navigate("/perfil/datos", { key: usuario.key });
+                SNavigation.navigate("/perfil/datos", { key: this.key_usuario });
             }}>
                 <SText bold>Editar perfil</SText>
             </SView>
@@ -134,7 +125,7 @@ class index extends Component {
             </SView> */}
             <SView flex />
             <SView card padding={8} row width={100} center onPress={() => {
-                SNavigation.navigate("/perfil/asistencia", { key: usuario.key });
+                SNavigation.navigate("/perfil/asistencia", { key: this.key_usuario });
             }}>
                 <SText bold>Asistencia</SText>
             </SView>
@@ -143,7 +134,7 @@ class index extends Component {
                 Model.usuario.Action.unlogin(Model);
                 // SNavigation.navigate("/perfil/editar", { key: this.data.key });
             }}>
-                <SText bold>Cerrar sesión</SText>
+                <SText bold color={STheme.color.danger}>Cerrar sesión</SText>
             </SView>
         </SView>
     }
@@ -175,7 +166,7 @@ class index extends Component {
         />
     }
     render() {
-        return (<SPage onRefresh={() => {
+        return (<SPage preventBack onRefresh={() => {
             // Model.usuario.Action.CLEAR();
 
         }}

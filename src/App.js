@@ -28,7 +28,7 @@ const App = (props) => {
             <StatusBar />
             <SNavigation
                 props={{
-                    prefix: ['app://calisteniaboliva'],
+                    prefix: ['calisteniaboliva://'],
                     navBar: TopBar,
                     title: 'Calistenia Bolivia', pages: Pages
                 }}

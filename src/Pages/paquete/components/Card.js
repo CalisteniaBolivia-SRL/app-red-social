@@ -28,8 +28,7 @@ export default class Card extends Component {
             >
                 <SView width={8} />
                 <SView width={40} height={40} card style={{ borderRadius: 5, overflow: 'hidden' }}>
-
-                    <SImage src={SSocket.api.root + "paquete/" + key} />
+                    <SImage src={SSocket.api.root + "paquete/" + key + "?time=" + new Date().getTime()} />
                 </SView>
                 <SView width={8} />
                 <SView flex center>

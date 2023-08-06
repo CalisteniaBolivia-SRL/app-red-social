@@ -64,14 +64,14 @@ class detalle extends Component {
 
     render_with_data() {
         // var usuario = Model.usuario.Action.getUsuarioLog();
-		// if (!usuario) return <SLoad />
+        // if (!usuario) return <SLoad />
         var paquete = Model.paquete.Action.getByKey(this.params.pk);
         if (!paquete) return <SLoad />
         // console.log(JSON.stringify(usuario) + " aaaa");
-        var { key, descripcion, dias, precio, participantes } = paquete;
+        var { key, descripcion, observacion, dias, precio, participantes } = paquete;
 
         return <SView col={"xs-12"} center>
-            
+
             <SView
                 // height={125}
                 col={"xs-12"}
@@ -91,18 +91,19 @@ class detalle extends Component {
                         borderRadius: 15,
                         overflow: "hidden"
                     }}>
-                        <SImage enablePreview src={SSocket.api.root + "paquete/" + key} width={"100%"} height={"100%"}
+                        <SImage enablePreview src={SSocket.api.root + "paquete/" + key + "?time=" + new Date().getTime()} width={"100%"} height={"100%"}
                             style={{
                                 resizeMode: 'cover',
                             }}
                         />
                     </SView>
                 </SView>
-                <SView col={"xs-9"} >
+                <SView col={"xs-9"} height>
                     <SText color={STheme.color.text} fontSize={18} style={{ textTransform: "uppercase" }}>{descripcion}</SText>
-                    <SText color={STheme.color.text} fontSize={12} >
-                        Busca brindar un apoyo integral al cliente para que pueda mejorar sus habilidades y alcanzar sus metas de entrenamiento.
-                    </SText>
+                    <SHr h={4}/>
+                    <SView col={"xs-12"} flex>
+                        <SText color={STheme.color.text} fontSize={12} >{observacion}</SText>
+                    </SView>
                 </SView>
             </SView>
             <SHr height={16} />
@@ -157,12 +158,12 @@ class detalle extends Component {
             <SHr height={26} />
             <BtnSend
                 onPress={() => {
-                     {/* USUARIO */}
+                    {/* USUARIO */ }
                     var usuario = Model.usuario.Action.getUsuarioLog();
                     // if (!usuario) return SPopup.open({ key: "confirmar", content: this.popupMensajeLogin() });
-                     if (!usuario) return SNavigation.navigate("/cuenta", {  ...this.params});
+                    if (!usuario) return SNavigation.navigate("/cuenta", { ...this.params });
 
-                    SNavigation.navigate("/paquete/membresia/confirmar", {  ...this.params});
+                    SNavigation.navigate("/paquete/membresia/confirmar", { ...this.params });
                 }}
             >Adquirir paquete</BtnSend>
         </SView>
