@@ -8,7 +8,6 @@ export default class Card extends Component {
         super(props);
         this.state = {
         };
-        this.pk = SNavigation.getParam("pk");
     }
 
     render() {
@@ -24,7 +23,16 @@ export default class Card extends Component {
                 }}
                 row
                 center
-                onPress={() => { SNavigation.navigate('/paquete', { servicio: this.pk, pk: key }) }}
+                onPress={() => {
+
+                    if (this.props.key_sucursal) {
+                        SNavigation.navigate('/paquete/membresia', { key_sucursal: this.props.key_sucursal, key_servicio: key })
+                    } else {
+                        SNavigation.navigate('/paquete', { key_sucursal: this.props.key_sucursal, key_servicio: key })
+                    }
+
+
+                }}
             >
                 <SView width={40} height={40} center style={{ borderRadius: 14, overflow: 'hidden' }}>
                     <SImage src={SSocket.api.root + "/servicio/" + key} style={{

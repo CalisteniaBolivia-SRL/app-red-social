@@ -1,6 +1,6 @@
 {
   "name": "calistenia_rs_app",
-  "version": "2.0.13",
+  "version": "2.0.14",
   "description": "calistenia_rs_app",
   "scripts": {
     "start": "react-native start",
@@ -12,12 +12,13 @@
   "license": "ISC",
   "dependencies": {
     "@invertase/react-native-apple-authentication": "^2.2.2",
+    "@react-native-async-storage/async-storage": "^1.19.1",
     "@react-native-community/cameraroll": "4.1.2",
     "@react-native-community/geolocation": "^2.0.2",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-firebase/app": "^14.8.0",
     "@react-native-firebase/messaging": "^14.8.0",
-    "@react-native-google-signin/google-signin": "^7.0.1",
+    "@react-native-google-signin/google-signin": "7.2.2",
     "@react-navigation/native": "^5.9.6",
     "@react-navigation/stack": "^5.14.7",
     "crypto-js": "^4.1.1",
@@ -58,7 +59,7 @@
     "servisofts-rn-chat": "1.0.6",
     "servisofts-rn-geolocation": "1.0.3",
     "servisofts-rn-roles_permisos": "1.0.4",
-    "servisofts-rn-usuario": "1.1.0",
+    "servisofts-rn-usuario": "1.1.1",
     "servisofts-socket": "3.0.7",
     "typescript": "^4.4.3",
     "xlsx": "0.18.5",

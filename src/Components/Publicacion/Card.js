@@ -18,6 +18,21 @@ class index extends Component<PublicacionPropsType> {
         };
     }
 
+    componentDidMount() {
+
+        SSocket.sendPromise({
+            ...Model.usuario.info,
+            "component": "usuario",
+            "type": "getAllKeys",
+            "estado": "cargando",
+            "keys": [this.props.data?.key_usuario]
+        }).then((e) => {
+            if (e.estado != "exito") return;
+            this.setState({ usuario: e.data[this.props.data?.key_usuario]?.usuario })
+        }).catch((e) => {
+            console.error(e)
+        })
+    }
     handlePress() {
         if (!this.props.onPress) return null;
         this.props.onPress(this.props.data)
@@ -26,9 +41,11 @@ class index extends Component<PublicacionPropsType> {
 
     renderAuthor() {
         var key_usuario = Model.usuario.Action.getKey();
-        let user = Model.usuario.Action.getByKey(this.props.data?.key_usuario);
+        // let user = Model.usuario.Action.getByKey(this.props.data?.key_usuario);
+
+        let user = this.state.usuario ?? {};
         return <SView col={"xs-12"} row height={50} center onPress={() => {
-            SNavigation.navigate("/perfil", { pk: this.props.data?.key_usuario })
+            SNavigation.navigate("/perfil/client", { pk: this.props.data?.key_usuario })
         }}>
             <SView width={50} height style={{
                 justifyContent: "center"

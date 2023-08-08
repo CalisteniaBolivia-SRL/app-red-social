@@ -137,8 +137,8 @@ android {
         applicationId "com.calistenia_rs_app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 20013
-        versionName "2.0.13"
+        versionCode 20014
+        versionName "2.0.14"
     }
     splits {
         abi {

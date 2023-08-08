@@ -19,6 +19,7 @@ class index extends Component {
             envio: 0
         };
         this.params = SNavigation.getAllParams();
+        this.key_sucursal = SNavigation.getParam("key_sucursal")
     }
 
    
@@ -42,7 +43,7 @@ class index extends Component {
             filter={(a) => a.estado != 0 && !!a.estado_app}
             // order={[{ key: "fecha_on", order: "desc", peso: 1, }]}
             render={(data) => {
-                return <Card datas={data} pkSucursal={this.params.pk} />
+                return <Card datas={data} key_sucursal={this.key_sucursal} />
             }}
         />
     }
@@ -57,10 +58,10 @@ class index extends Component {
 
         return (
             <SPage
-                navBar={this.navBar()}
+                // navBar={this.navBar()}
                 footer={this.footer()}
-                title={"Comprar"}
-                hidden
+                // title={"Comprar"}
+                // hidden
                 onRefresh={(resolve)=>{
                     Model.servicio.Action.CLEAR();
                     if(resolve) resolve();

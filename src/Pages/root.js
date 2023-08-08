@@ -5,6 +5,7 @@ import { SButtom, SDate, SHr, SIcon, SImage, SList, SLoad, SNavigation, SPage, S
 import { BottomNavigator, Container, NavBar, Pedido, Restaurante, TopBar, Sucursal, Publicacion } from '../Components';
 import Model from '../Model';
 import SSocket from 'servisofts-socket'
+
 import { FlatList } from 'react-native';
 class index extends Component {
     constructor(props) {
@@ -23,6 +24,7 @@ class index extends Component {
     clearData(resolv) {
         Model.sucursal.Action.CLEAR();
         Model.publicacion.Action.CLEAR();
+        // Model.usuario.Action.getAll({ force: true, fecha_edit: "1989-01-01T00:00:01" });
         // Model.usuario.Action.CLEAR();
         this.componentDidMount();
 
@@ -133,6 +135,7 @@ class index extends Component {
                 disableScroll
             >
                 <Container flex>
+               
                     {/* <SHr height={20} /> */}
                     {/* <SHr height={15} /> */}
                     {this.renderPublicidad()}

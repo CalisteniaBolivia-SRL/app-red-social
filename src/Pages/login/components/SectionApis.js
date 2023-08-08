@@ -23,7 +23,6 @@ export default class SectionApis extends Component {
             SNavigation.reset("/");
         }).catch(e => {
             if (e?.error == "error_usuario") {
-
                 SNavigation.navigate("/registro", {
                     type: type,
                     Nombres: user.name,

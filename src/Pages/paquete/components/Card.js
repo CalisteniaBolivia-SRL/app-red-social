@@ -8,7 +8,6 @@ export default class Card extends Component {
         super(props);
         this.state = {
         };
-        this.pk = SNavigation.getParam("pk");
     }
 
     render() {
@@ -24,7 +23,7 @@ export default class Card extends Component {
                 }}
                 row
                 center
-                onPress={() => { SNavigation.navigate('/paquete/membresia/detalle', { sucursal: this.pk, pk: key }) }}
+                onPress={() => { SNavigation.navigate('/paquete/membresia/detalle', { sucursal: this.props.key_sucursal, pk: key }) }}
             >
                 <SView width={8} />
                 <SView width={40} height={40} card style={{ borderRadius: 5, overflow: 'hidden' }}>

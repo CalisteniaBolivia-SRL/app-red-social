@@ -8,7 +8,7 @@ const Marker = (props) => {
     if (!obj.latitude || !obj.longitude) return null;
     const url = SSocket.api.root + "sucursal/" + obj.key;
     return <SMarker lat={obj.latitude} lng={obj.longitude} {...props} tracksViewChanges={true} onPress={() => {
-        SNavigation.navigate("/sucursal/detalle", { pk: obj.key });
+        SNavigation.navigate("/sucursal/detalle", { key_sucursal: obj.key });
     }} >
         <SView width={size} height={size} style={{ alignItems: 'center', }}
 

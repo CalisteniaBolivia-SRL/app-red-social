@@ -21,7 +21,7 @@ class index extends Component {
         SSocket.sendPromise({
             "component": "sucursal",
             "type": "getByKeyServicio",
-            "key_servicio": this.params.pk
+            "key_servicio": this.params.key_servicio
 
 
         }).then((e) => {
@@ -44,8 +44,6 @@ class index extends Component {
     }
 
     render_with_data() {
-        console.log(this.params.pk)
-        console.log(this.state.data)
 
         var sucursal_servicio = {}
         var sucursales = {}
@@ -58,8 +56,10 @@ class index extends Component {
             data={this.state.data}
             filter={(a => a.estado_app > 0)}
             render={(data) => {
-                let datoSucursal = Model.sucursal.Action.getByKey(data.key_sucursal);
-                return <Sucursal.Card image={1} datas={data} datoSucursal={datoSucursal} root={'/paquete/membresia'} key_servicio={this.params.pk} />
+                return <Sucursal.Card image={1} data={data}  root={'/paquete/membresia'}
+                    key_servicio={this.params.key_servicio}
+                    key_sucursal={data.key}
+                />
             }}
         />
 

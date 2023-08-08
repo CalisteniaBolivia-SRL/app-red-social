@@ -45,8 +45,8 @@ class login extends Component {
                             this._sectionForm.submit();
                         }} />
                         <SHr height={35} />
-                        <SectionApis />
-                        <SHr height={35} />
+                        {/* <SectionApis /> */}
+                        {/* <SHr height={35} /> */}
                         <SectionRegister />
                         <SHr height={50} />
                     </Container>

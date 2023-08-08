@@ -32,9 +32,9 @@ class index extends Component<SucursalCardPropsType> {
     }
 
     render() {
-        var { key, descripcion, state, direccion, nombre } = (this.props.datoSucursal) ? this.props.datoSucursal : this.props.datas;
+        var { key, descripcion, state, direccion, nombre } = this.props.data;
         return (<SView col={"xs-12"} activeOpacity={0.8} onPress={() => {
-            SNavigation.navigate(this.props.root, { pk: key, key_servicio: this.props.key_servicio })
+            SNavigation.navigate(this.props.root, { key_sucursal: this.props.key_sucursal, key_servicio: this.props.key_servicio })
         }} height={130} backgroundColor={STheme.color.card} style={{ borderRadius: 10, overflow: 'hidden', }}>
             <SView col={"xs-12"} height style={{
                 position: "absolute",

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { SDate, SHr, SIcon, SImage, SPage, SText, STheme, SView, SNavigation, SPopup } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
 import Model from '../../Model';
+import SharedFunctions from './SharedFunctions';
 export type BoxMenuLatPropsType = {
     datas: any,
     onPress?: (obj) => {},
@@ -109,16 +110,23 @@ class index extends Component<BoxMenuLatPropsType> {
                             borderBottomColor: STheme.color.gray,
                             borderBottomWidth: 1
                         }}
-                        onPress={() => { }}
+                        onPress={() => {
+                            console.log(this.props.datas)
+                            SharedFunctions.compartir({
+                                url: SSocket.api.root + "publicacion/" + this.props.datas.key,
+                                text: "Mira servisots",
+                                hashtags: "#Servisofts"
+                            });
+                        }}
                     >
-                        <SText fontSize={14} >Desactivar comentarios</SText>
+                        <SText fontSize={14} >Compartir</SText>
                     </SView>
                     <SView col={"xs-12"} height={48} center
                         style={{
                             borderBottomColor: STheme.color.gray,
                             borderBottomWidth: 1
                         }}
-                        onPress={() => { 
+                        onPress={() => {
                             SNavigation.navigate("/publicacion/edit", { pk: this.props.datas.key });
                             SPopup.close("menuLat")
                         }}
@@ -146,6 +154,7 @@ class index extends Component<BoxMenuLatPropsType> {
                         <SText fontSize={14} >Eliminar</SText>
                     </SView>
                     <SHr height={15} />
+
                     {/* <SView col={"xs-12"} style={{ borderBottomWidth: 1, borderColor: STheme.color.lightGray }}></SView> */}
                     {/* <SHr height={18} /> */}
                 </SView>

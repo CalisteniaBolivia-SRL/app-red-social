@@ -15,6 +15,9 @@ export default class MiPlan extends Component {
 
         Model.paquete_venta.Action.getAllByUsuario().then(resp => {
             this.setState({ dataPaquete: resp.data })
+            if (this.props.onLoad) {
+                this.props.onLoad(resp.data);
+            }
         }).catch(e => {
 
         })
@@ -38,6 +41,9 @@ export default class MiPlan extends Component {
             <SText bold>NO TIENES PAQUETE ACTIVO</SText>
             <SHr height={5} />
         </SView>;
+
+
+
         return <SList2
             data={data}
             order={[{ key: "fecha_inicio", order: "desc", peso: 1 }]}
