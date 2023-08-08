@@ -24,6 +24,20 @@ class index extends Component {
         var usuario = {}
         var canti = 0;
         var mias = {}
+
+        SSocket.sendPromise({
+            ...Model.usuario.info,
+            "component": "usuario",
+            "type": "getAllKeys",
+            "estado": "cargando",
+            "keys": [this.key_usuario]
+        }).then((e) => {
+            if (e.estado != "exito") return;
+            this.setState({ usuario: e.data[this.key_usuario]?.usuario })
+        }).catch((e) => {
+            console.error(e)
+        })
+
         SSocket.sendPromise({
             component: "publicacion",
             type: "getAll",
@@ -58,7 +72,8 @@ class index extends Component {
     }
 
     getPerfil() {
-        var usuario = Model.usuario.Action.getByKey(this.key_usuario) ?? {};
+        // var usuario = Model.usuario.Action.getByKey(this.key_usuario) ?? {};
+        var usuario = this.state.usuario ?? {};
         return (<SView col={"xs-12"}>
             <SView col={"xs-12"} row center>
                 <SView style={{
@@ -70,26 +85,26 @@ class index extends Component {
                     <SView style={{
                         width: "100%", height: "100%", backgroundColor: STheme.color.card, borderRadius: 100, overflow: "hidden",
                     }} border={STheme.color.card}>
-
-                        {/* <SImage src={SSocket.api.root + "usuario/" + usuario?.key + "?date=" + new Date().getTime()} style={{ resizeMode: 'cover'}} /> */}
-                        <SForm
-                            col={"xs-12"}
-                            ref={ref => this.inp_foto = ref}
-                            inputs={{
-                                foto_p: {
-                                    type: "image",
-                                    defaultValue: SSocket.api.root + "usuario/" + this.key_usuario + "?date=" + new Date().getTime(),
-                                    style: {
-                                        width: "100%",
-                                        height: 80,
-                                        backgroundColor: "none"
-                                    },
-                                    onChangeText: (evt) => {
-                                        this.inp_foto.uploadFiles(Model.usuario._get_image_upload_path(SSocket.api, this.key_usuario), "foto_p");
+                        {(Model.usuario.Action.getKey() != this.key_usuario) ? <SImage src={SSocket.api.root + "usuario/" + usuario?.key} enablePreview style={{ resizeMode: 'cover' }} /> :
+                            <SForm
+                                col={"xs-12"}
+                                ref={ref => this.inp_foto = ref}
+                                inputs={{
+                                    foto_p: {
+                                        type: "image",
+                                        defaultValue: SSocket.api.root + "usuario/" + this.key_usuario + "?date=" + new Date().getTime(),
+                                        style: {
+                                            width: "100%",
+                                            height: 80,
+                                            backgroundColor: "none"
+                                        },
+                                        onChangeText: (evt) => {
+                                            this.inp_foto.uploadFiles(Model.usuario._get_image_upload_path(SSocket.api, this.key_usuario), "foto_p");
+                                        }
                                     }
-                                }
-                            }}
-                        />
+                                }}
+                            />
+                        }
                     </SView>
                 </SView>
                 <SView width={8} />
@@ -100,7 +115,7 @@ class index extends Component {
             </SView>
             <SHr h={4} />
             <SView col={"xs-12"}>
-                <SText bold fontSize={16}>{usuario["Nombres"] + " " + usuario["Apellidos"]}</SText>
+                <SText bold fontSize={16}>{usuario["Nombres"]} {usuario["Apellidos"]}</SText>
                 <SText fontSize={14}>{usuario["CI"]}</SText>
             </SView>
         </SView>
@@ -166,7 +181,7 @@ class index extends Component {
         />
     }
     render() {
-        return (<SPage preventBack onRefresh={() => {
+        return (<SPage onRefresh={() => {
             // Model.usuario.Action.CLEAR();
 
         }}

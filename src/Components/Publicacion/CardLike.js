@@ -52,7 +52,7 @@ class CardLike extends Component<PublicacionLikePropsType> {
                     borderRadius: 60,
                     overflow: "hidden"
                 }}>
-                    <SImage enablePreview src={SSocket.api.root + "usuario/" + key_usuario + "?date=" + new Date().getTime()} width={"100%"} height={"100%"}
+                    <SImage enablePreview src={SSocket.api.root + "usuario/" + key_usuario } width={"100%"} height={"100%"}
                         style={{
                             resizeMode: 'cover',
                         }}

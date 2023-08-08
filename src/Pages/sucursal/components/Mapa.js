@@ -25,10 +25,10 @@ class Mapa extends Component<MapaPropsType> {
     }
 
     render() {
-        var { latitude, longitude } = this.props?.data;
+        var { latitude, longitude } = this.props?.data ?? {};
 
-        if (latitude == null) latitude = -17.768507
-        if (longitude == null) longitude = -63.183698
+        if (!latitude) latitude = -17.768507
+        if (!longitude) longitude = -63.183698
         return (
             <SView col={"xs-12"} row center>
                 <SView col={"xs-12 sm-10 md-8 lg-6 xl-4 xxl-4"} {...this.props} center>

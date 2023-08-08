@@ -31,7 +31,7 @@ class index extends Component {
             // order={[{ key: "fecha_on", order: "desc", peso: 1, }]}
             render={(data) => {
                 // return <SText>Hola</SText>
-                return <Sucursal.Card image={1} datas={data} root={'/sucursal/detalle'} />
+                return <Sucursal.Card image={1} data={data} key_sucursal={data.key} root={'/sucursal/detalle'} />
             }}
         />
     }

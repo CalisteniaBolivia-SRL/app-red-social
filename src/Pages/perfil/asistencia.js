@@ -36,18 +36,27 @@ class asistencia extends Component {
         let hoy = new SDate(this.state.curDay).getDayOfWeek()
         let isSelect = false
         let color = isSelect ? STheme.color.white : STheme.color.text
-        console.log(data.asistiendo)
+        // console.log(data.asistiendo)
         let datosArray = data?.dataAsis
         return <>
             <SView col={"xs-1.7"} height={90} style={{
                 borderWidth: 1, borderColor: STheme.color.gray,
                 // backgroundColor:  data.asistiendo ? "#D93444": STheme.color.card
                 backgroundColor: STheme.color.card
-            }} center onPress={() => {
-                //this.setState({ curDay: fecha })
-            }}>
+            }} center >
+                {data.isPaquete ? <SView style={{
+                    position: "absolute",
+                    bottom: 0,
+                    width: "100%",
+                    height: 10,
+                    backgroundColor: "#D70201"
+                }}></SView> : null}
                 {data?.paquete ?
-                    <SView col={"xs-12"} flex style={{ alignItems: "flex-end" }}>
+                    <SView col={"xs-12"} flex style={{
+                        alignItems: "flex-end",
+                        position: "absolute",
+                        top: 0
+                    }}>
                         <SView width={20} height={20} card style={{ borderRadius: 45, overflow: 'hidden', }}>
                             <SImage src={SSocket.api.root + "paquete/" + data.paquete.key_paquete} />
                         </SView>
@@ -71,6 +80,7 @@ class asistencia extends Component {
                         : null}
                 </SView>
                 <SHr />
+
             </SView>
         </>
     }
@@ -90,6 +100,7 @@ class asistencia extends Component {
     }
 
     getCalendario(mes, ano) {
+        if (!this.state?.paquetes) return <SLoad />
         let primerDiaSemana = new Date(ano, mes, 1).getDay();
         let fechaFin = new Date(ano, mes + 1, 1);
         fechaFin = fechaFin.setDate(fechaFin.getDate() - 1);
@@ -119,6 +130,7 @@ class asistencia extends Component {
                         let fechaActual = new Date(ano, mes, diaMes)
                         let asistido;
                         // let asistio = Object.values(dataAsistencia).find(obj2 => obj2.fecha_on == fechaActual);
+                        let sdActual = new SDate(fechaActual);
                         Object.values(dataAsistencia).map((obj) => {
                             // dato = Object.values(obj).find(obj2 => new SDate(obj2.fecha_on).toString("yyyy-MM-dd") == new SDate(fechaActual).toString("yyyy-MM-dd"));
                             // if (!dato) return null
@@ -126,7 +138,7 @@ class asistencia extends Component {
                             // let formatFecha = new Date(obj.fecha_on)
 
                             // asistido = Object.values(obj).filter((a) => new SDate(a.fecha_on).toString("yyyy-MM-dd") == new SDate(fechaActual).toString("yyyy-MM-dd"))
-                            if (new SDate(obj.fecha_on).toString("yyyy-MM-dd") == new SDate(fechaActual).toString("yyyy-MM-dd")) {
+                            if (new SDate(obj.fecha_on).toString("yyyy-MM-dd") == sdActual.toString("yyyy-MM-dd")) {
                                 console.log("yes")
                                 asisti = true
                                 data = obj;
@@ -135,9 +147,20 @@ class asistencia extends Component {
                             }
                         })
 
-                        console.log(dataMostrar)
+                        let isPaquete = false;
+                        Object.values(this.state.paquetes).map((obj) => {
+                            if ((new SDate(obj.fecha_inicio, "yyyy-MM-dd").equalDay(sdActual) || new SDate(obj.fecha_fin, "yyyy-MM-dd").equalDay(sdActual)) || (
+                                sdActual.isAfter(new SDate(obj.fecha_inicio, "yyyy-MM-dd")) && sdActual.isBefore(new SDate(obj.fecha_fin, "yyyy-MM-dd"))
+                            )) {
+                                isPaquete = true;
+                                // asisti = true
+                                // data = obj;
+                                // dataMostrar.push(obj)
+                            }
+                        })
 
-                        calendario.push({ diaMes, index, dia_semana: j, semana: i, fecha: "", asistiendo: asisti, dataAsis: dataMostrar, paquete: dataMostrar[0] })
+
+                        calendario.push({ isPaquete: isPaquete, diaMes, index, dia_semana: j, semana: i, fecha: "", asistiendo: asisti, dataAsis: dataMostrar, paquete: dataMostrar[0] })
                         asisti = false
                         data = null;
                         dataMostrar = []
@@ -191,6 +214,7 @@ class asistencia extends Component {
     }
     getBody() {
         var usuario = Model.usuario.Action.getUsuarioLog();
+
         if (!usuario) return <SLoad />
         //asistencia
         //getByKeyUsuario
@@ -199,7 +223,9 @@ class asistencia extends Component {
                 Hola, {usuario.Nombres}
             </SText>
             <SHr height={15} />
-            <MiPlan data={usuario} />
+            <MiPlan data={usuario} onLoad={(data) => {
+                this.setState({ paquetes: data })
+            }} />
             <SHr height={15} />
             {this.getCalendario(this.state.curDay.getMonth() - 1, this.state.curDay.getYear())}
         </SView>
@@ -215,7 +241,7 @@ class asistencia extends Component {
             <Container>
                 {this.getBody()}
             </Container>
-            <SHr height={40}/>
+            <SHr height={40} />
         </SPage>
         );
     }

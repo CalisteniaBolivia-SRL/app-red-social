@@ -462,14 +462,16 @@ PODS:
     - React-RCTText
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNScreens (3.19.0):
+  - RNScreens (3.11.0):
     - React-Core
     - React-RCTImage
   - RNShare (7.9.1):
     - React-Core
   - RNSVG (12.5.1):
     - React-Core
-  - servisofts-socket (3.0.4):
+  - servisofts-component (2.11.19):
+    - React-Core
+  - servisofts-socket (3.0.7):
     - CocoaAsyncSocket
     - React-Core
   - Yoga (1.14.0)
@@ -532,6 +534,7 @@ DEPENDENCIES:
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNShare (from `../node_modules/react-native-share`)
   - RNSVG (from `../node_modules/react-native-svg`)
+  - servisofts-component (from `../../../servisofts-component/dist`)
   - servisofts-socket (from `../node_modules/servisofts-socket`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -665,6 +668,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-share"
   RNSVG:
     :path: "../node_modules/react-native-svg"
+  servisofts-component:
+    :path: "../../../servisofts-component/dist"
   servisofts-socket:
     :path: "../node_modules/servisofts-socket"
   Yoga:
@@ -742,10 +747,11 @@ SPEC CHECKSUMS:
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNGoogleSignin: 7580e6618798be9d090524bb31538378f92ce746
   RNReanimated: e164e3683722a8fd34f116d30ea8ba010660d3f0
-  RNScreens: ea4cd3a853063cda19a4e3c28d2e52180c80f4eb
+  RNScreens: fd535547baa4ef8aeaee1a8b1e3ffd17b8df44a4
   RNShare: a5dc3b9c53ddc73e155b8cd9a94c70c91913c43c
   RNSVG: d7d7bc8229af3842c9cfc3a723c815a52cdd1105
-  servisofts-socket: 5997e69ddd8c542bbe14d8a2eb42eb2900ea474d
+  servisofts-component: 6aca36411c15514a4dcdd5393dc3890cf3c39cdb
+  servisofts-socket: df7182b7e71443310ab4ddd8274811a6a0a32384
   Yoga: d1fc3575b8b68891ff5ef3c276daa855e841eb32
 
 PODFILE CHECKSUM: 72150c5bedecf2edaa319b5540a58779080419c8

@@ -40,6 +40,9 @@
 		D2D7B2DEE361444A923E6599 /* LondonTwo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C6F04CF755A47D0A0253172 /* LondonTwo.ttf */; };
 		D3143BFF59CB45A7BE55224F /* hello_baby.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ECDA71A955BD4520A05570BA /* hello_baby.ttf */; };
 		E6D9A166BE9740F08FE7613B /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6157C34A110C4BFD87A73BB4 /* OpenSans-ExtraBold.ttf */; };
+		ECC1DA20C3284B93964A57C7 /* SF-Mono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 691B2ACD0F0940A0A31B9BAB /* SF-Mono-Regular.ttf */; };
+		EA5FBFAD028B4849BCD04C93 /* SF-Mono-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 162237662C834F2C90E6A14C /* SF-Mono-Semibold.ttf */; };
+		C7C266919CA84F3D9AF5C8F5 /* SF-Mono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64E5DC696DD648BE8B94918D /* SF-Mono.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -106,6 +109,9 @@
 		F437B8965BDC4A4683DC2338 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../node_modules/servisofts-component/font/Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		FF0C62F06920E6A65EB02428 /* libPods-ImageNotification.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImageNotification.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFD9EEA3C88247169E73E4F9 /* Athelas.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Athelas.ttf; path = "../node_modules/servisofts-component/font/Athelas.ttf"; sourceTree = "<group>"; };
+		691B2ACD0F0940A0A31B9BAB /* SF-Mono-Regular.ttf */ = {isa = PBXFileReference; name = "SF-Mono-Regular.ttf"; path = "../node_modules/servisofts-component/font/SF-Mono-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		162237662C834F2C90E6A14C /* SF-Mono-Semibold.ttf */ = {isa = PBXFileReference; name = "SF-Mono-Semibold.ttf"; path = "../node_modules/servisofts-component/font/SF-Mono-Semibold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		64E5DC696DD648BE8B94918D /* SF-Mono.ttf */ = {isa = PBXFileReference; name = "SF-Mono.ttf"; path = "../node_modules/servisofts-component/font/SF-Mono.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +237,9 @@
 				1343D00589354BD9B8119AE5 /* Oswald-Medium.ttf */,
 				31FA7544685A413696C3A23E /* Oswald-Regular.ttf */,
 				E54CD0CB4A6644368C924F88 /* Oswald-SemiBold.ttf */,
+				691B2ACD0F0940A0A31B9BAB /* SF-Mono-Regular.ttf */,
+				162237662C834F2C90E6A14C /* SF-Mono-Semibold.ttf */,
+				64E5DC696DD648BE8B94918D /* SF-Mono.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -370,6 +379,9 @@
 				197C9FE9B9784E829C6C10D5 /* Oswald-Medium.ttf in Resources */,
 				83B577ED509E4F0CA1525286 /* Oswald-Regular.ttf in Resources */,
 				77C7B69D793B40B3A60309AD /* Oswald-SemiBold.ttf in Resources */,
+				ECC1DA20C3284B93964A57C7 /* SF-Mono-Regular.ttf in Resources */,
+				EA5FBFAD028B4849BCD04C93 /* SF-Mono-Semibold.ttf in Resources */,
+				C7C266919CA84F3D9AF5C8F5 /* SF-Mono.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,7 +508,7 @@
 				CODE_SIGN_ENTITLEMENTS = calistenia_rs_app/calistenia_rs_appDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20013;
+				CURRENT_PROJECT_VERSION = 20014;
 				DEVELOPMENT_TEAM = 36S3T8GU7Y;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -507,7 +519,7 @@
 				);
 				INFOPLIST_FILE = calistenia_rs_app/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.0.13;
+				MARKETING_VERSION = 2.0.14;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -533,7 +545,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20013;
+				CURRENT_PROJECT_VERSION = 20014;
 				DEVELOPMENT_TEAM = 36S3T8GU7Y;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -543,7 +555,7 @@
 				);
 				INFOPLIST_FILE = calistenia_rs_app/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.0.13;
+				MARKETING_VERSION = 2.0.14;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

@@ -18,8 +18,7 @@ class detalle extends Component {
             envio: 0,
             dataEntredores: {}
         };
-        this.params = SNavigation.getAllParams();
-        this.pk = SNavigation.getParam("pk");
+        this.key_sucursal = SNavigation.getParam("key_sucursal")
     }
 
     componentDidMount = async () => {
@@ -41,7 +40,7 @@ class detalle extends Component {
             "component": "sucursal_usuario",
             "type": "getAll",
             "estado": "cargando",
-            "key_sucursal": this.pk
+            "key_sucursal": this.key_sucursal
         }).then((e) => {
             if (e.estado != "exito") return;
             return e.data;
@@ -81,7 +80,7 @@ class detalle extends Component {
     }
 
     loadData() {
-        this.sucursal = Model.sucursal.Action.getByKey(this.pk);
+        this.sucursal = Model.sucursal.Action.getByKey(this.key_sucursal);
         if (!this.sucursal) return null;
         return true;
     }
@@ -94,11 +93,11 @@ class detalle extends Component {
                 render={(obj, key) => {
                     // console.log(SSocket.api.root + "usuario/" + obj.usuario?.key)
                     return <SView width={130} center onPress={() => {
-                        SNavigation.navigate("/perfil", { pk: obj.key_usuario })
+                        SNavigation.navigate("/perfil/client", { pk: obj.key })
                     }}>
                         <SView card height={127} width={127} center style={{ borderRadius: 15, overflow: "hidden" }}>
                             {/* <SIcon name='Iusuario' width={80} height={80} fill={STheme.color.text} style={{ position: "absolute" }} /> */}
-                            <SImage src={SSocket.api.root + "usuario/" + obj.key_usuario + "?date=" + new Date().getTime()} style={{ resizeMode: 'cover' }} />
+                            <SImage src={SSocket.api.root + "usuario/" + obj.key} style={{ resizeMode: 'cover' }} />
                         </SView>
                         <SView col={"xs-12"} height={52} style={{ overflow: 'hidden' }}>
                             <SHr height={16} />
@@ -117,9 +116,7 @@ class detalle extends Component {
     }
 
     render() {
-        var defaultData = {
-            ...this.params,
-        };
+
         this.loadData();
         return (
             <SPage hidden footer={<BackButtom />}>
@@ -152,20 +149,9 @@ class detalle extends Component {
                     <SHr height={20} />
                     <SView col={"xs-12"} center row
                         onPress={() => {
-                            SNavigation.navigate("/paquete/membresia", { pk: this.pk })
+                            SNavigation.navigate("/servicio", { key_sucursal: this.key_sucursal })
                         }}
                     >
-                        {/* <SView width={200} center
-                            style={{
-                                borderColor: STheme.color.secondary,
-                                borderWidth: 1,
-                                borderRadius: 8
-                            }}
-                        >
-                            <SHr height={10} />
-                            <SText fontSize={18} bold>COMPRAR</SText>
-                            <SHr height={10} />
-                        </SView> */}
                         <SIcon name='Adquiere' height={45} />
                     </SView>
                 </Container>
