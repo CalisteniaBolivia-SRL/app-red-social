@@ -103,6 +103,11 @@ class index extends Component {
         if (!publicaciones) return <SLoad />
         const arr = Object.values(publicaciones).sort((a, b) => new SDate(a.fecha_on).isBefore(new SDate(b.fecha_on)) ? 1 : -1)
 
+
+        // let userKeys = arr.map(val => val.key_usuario);
+        // const uniqueArr = [...new Set(userKeys)];
+        // console.log(uniqueArr);
+        
         const handleRefresh = async () => {
             this.clearData();
         };
@@ -135,7 +140,7 @@ class index extends Component {
                 disableScroll
             >
                 <Container flex>
-               
+
                     {/* <SHr height={20} /> */}
                     {/* <SHr height={15} /> */}
                     {this.renderPublicidad()}

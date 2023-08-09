@@ -198,6 +198,10 @@ class index extends Component {
 
                 </SView>
             </Container>
+
+            <SText onPress={() => {
+                SNavigation.navigate("/paquete/compra_exitosa")
+            }}>IR A LAS PRUEBAS</SText>
             <SView col={"xs-12"} center>
                 <SView col={"xs-12 sm-10 md-8 lg-6 xl-4 xxl-3"} style={{ alignItems: "center" }} center >
                     {this.renderPublicaciones()}
