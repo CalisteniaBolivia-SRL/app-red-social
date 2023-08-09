@@ -8,6 +8,7 @@ import { AccentBar, BottomNavigator, Container, PButtom, Publicacion } from '../
 import usuario_dato from '../../Model/tapeke/usuario_dato';
 import Dia from './components/Dia';
 import MiPlan from './components/MiPlan';
+import Publicidad from '../../Components/Publicidad';
 
 class paquetes extends Component {
     constructor(props) {
@@ -84,6 +85,8 @@ class paquetes extends Component {
             footer={this.footer()}
         >
             <Container>
+                <Publicidad/>
+                <SHr height={10} />
                 {this.getBody()}
             </Container>
             <SHr height={40} />

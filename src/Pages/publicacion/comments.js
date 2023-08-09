@@ -8,6 +8,7 @@ class comments extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            usuarios: {}
         };
         this.pk = SNavigation.getParam("pk");
     }
@@ -19,6 +20,23 @@ class comments extends Component {
         this.setState({ loading: true });
         Model.publicacion_comentario.Action.getAllPromise(this.pk).then(e => {
             this.setState({ loading: false, data: e.data });
+
+            const arr = Object.values(e.data)
+            let userKeys = arr.map(val => val.key_usuario);
+            const uniqueArr = [...new Set(userKeys)];
+            SSocket.sendPromise({
+                ...Model.usuario.info,
+                "component": "usuario",
+                "type": "getAllKeys",
+                "estado": "cargando",
+                "keys": uniqueArr
+            }).then((e) => {
+                if (e.estado != "exito") return;
+                this.setState({ usuarios: e.data })
+            }).catch((e) => {
+                console.error(e)
+            })
+
         }).catch(e => {
             this.setState({ loading: false, error: e });
         })
@@ -58,7 +76,8 @@ class comments extends Component {
                         <SList data={this.state.data}
                             space={32}
                             render={(obj) => {
-                                let user = Model.usuario.Action.getByKey(obj.key_usuario)
+                                // let user = Model.usuario.Action.getByKey(obj.key_usuario)
+                                let user = this.state?.usuarios[obj.key_usuario]?.usuario;
                                 return <SView col={"xs-12"}>
 
                                     <SHr />

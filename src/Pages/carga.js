@@ -6,7 +6,7 @@ import LogoAnimado from '../Components/LogoAnimado';
 import LogoAnimado2 from '../Components/LogoAnimado2';
 import Model from '../Model';
 
-const DURATION_ANIM = 3000;
+const DURATION_ANIM = 1000;
 class index extends Component {
     constructor(props) {
         super(props);
@@ -15,15 +15,20 @@ class index extends Component {
     }
 
     componentDidMount() {
-        new SThread(DURATION_ANIM / 2, "carga_hilo", false).start(() => {
+        this.run = true;
+        new SThread(DURATION_ANIM, "carga_hilo", false).start(() => {
             // Model.usuario.Action.getAll({})
-            new SThread(DURATION_ANIM / 2, "carga_after_user", false).start(() => {
-                SNavigation.replace("/root")
-            })
+            // new SThread(DURATION_ANIM / 2, "carga_after_user", false).start(() => {
+            if (!this.run) return;
+            SNavigation.replace("/root")
+            // })
         })
         // Model.restaurante.Action.getAll();
         // Model.horario.Action.getAll();
         // Model.pack.Action.getAll();
+    }
+    componentWillUnmount() {
+        this.run = false;
     }
 
     renderFooter() {

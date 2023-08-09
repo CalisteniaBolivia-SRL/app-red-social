@@ -19,7 +19,7 @@ class CardLike extends Component<PublicacionLikePropsType> {
     }
 
     componentDidMount() {
-        Model.usuario.Action.getAll({ force: true })
+        // Model.usuario.Action.getAll({ force: true })
     }
     handlePress() {
         if (!this.props.onPress) return null;
@@ -30,8 +30,7 @@ class CardLike extends Component<PublicacionLikePropsType> {
     render() {
         // if (!this.state.datas) return <SLoad />
         var { key_usuario, nombre } = this.props.data;
-        let user = Model.usuario.Action.getByKey(key_usuario);
-        console.log(this.props.data)
+        let user = this.props.usuario ?? {}
         return (<SView
             col={"xs-12"}
             style={{
@@ -52,7 +51,7 @@ class CardLike extends Component<PublicacionLikePropsType> {
                     borderRadius: 60,
                     overflow: "hidden"
                 }}>
-                    <SImage enablePreview src={SSocket.api.root + "usuario/" + key_usuario } width={"100%"} height={"100%"}
+                    <SImage enablePreview src={SSocket.api.root + "usuario/" + key_usuario} width={"100%"} height={"100%"}
                         style={{
                             resizeMode: 'cover',
                         }}

@@ -9,20 +9,50 @@ class post extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data:{}
+            data: {}
         };
         this.pk = SNavigation.getParam("pk");
     }
 
     componentDidMount() {
-        var publicacion = Model.publicacion.Action.getByKey(this.pk);
-        if (!publicacion) return <SLoad />
-        this.setState({ data: publicacion })
-        this.state.data = publicacion
+        SSocket.sendPromise({
+            "component": "publicacion",
+            "type": "getByKey",
+            "estado": "cargando",
+            key_usuario: Model.usuario.Action.getKey(),
+            "key": this.pk
+        }).then((e) => {
+            console.log(e);
+            if (e.estado != "exito") return;
+            const data = e.data[this.pk];
+            this.setState({ data: data })
+
+            SSocket.sendPromise({
+                ...Model.usuario.info,
+                "component": "usuario",
+                "type": "getAllKeys",
+                "estado": "cargando",
+                "keys": [data?.key_usuario]
+            }).then((e) => {
+                if (e.estado != "exito") return;
+                this.setState({ usuario: e.data[data.key_usuario]?.usuario })
+            }).catch((e) => {
+                console.error(e)
+            })
+            // this.setState({ usuario: e.data[this.props.data?.key_usuario]?.usuario })
+        }).catch((e) => {
+            console.error(e)
+        })
+
+
+        // var publicacion = Model.publicacion.Action.getByKey(this.pk);
+        // if (!publicacion) return <SLoad />
+        // this.setState({ data: publicacion })
+        // this.state.data = publicacion
 
     }
     clearData(resolv) {
-        Model.sucursal.Action.CLEAR();
+        this.componentDidMount();
     }
 
     navBar() {
@@ -34,10 +64,21 @@ class post extends Component {
             <SPage
                 // navBar={this.navBar()}
                 footer={this.footer()}
-                onRefresh={this.clearData}
+                onRefresh={this.clearData.bind(this)}
             >
                 <Container>
-                    <Publicacion.CardPost data={this.state.data} />
+                    <Publicacion.Card data={this.state.data} usuario={this.state.usuario}
+                        onLike={(e) => {
+                            this.state.data.mylike = 1;
+                            this.state.data.likes += 1;
+                            this.setState({ ...this.state })
+                        }}
+                        disLike={(e) => {
+                            this.state.data.mylike = 0;
+                            this.state.data.likes -= 1;
+                            this.setState({ ...this.state })
+                        }}
+                    />
                 </Container>
             </SPage>
         );

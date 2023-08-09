@@ -36,7 +36,7 @@ export default class index extends Component {
         let user = Model.usuario.Action.getUsuarioLog();
         return <SView col={"xs-2.4"} onPress={() => {
             if (user) {
-                SNavigation.replace("/perfil", { pk: user.key });
+                SNavigation.navigate("/perfil", { pk: user.key });
             } else {
                 SNavigation.navigate("/login")
             }

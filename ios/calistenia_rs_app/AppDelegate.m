@@ -4,6 +4,7 @@
 #import <React/RCTDevLoadingView.h>
 #endif
 
+#import <React/RCTLinkingManager.h>
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
@@ -64,16 +65,23 @@ static void InitializeFlipper(UIApplication *application) {
   return YES;
 }
 
+//- (BOOL)application:(UIApplication *)application
+//openURL:(NSURL *)url
+//options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+//BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
+//openURL:url
+//sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+//annotation:options[UIApplicationOpenURLOptionsAnnotationKey]
+//];
+//// Add any custom logic here.
+//return handled;
+//}
+
 - (BOOL)application:(UIApplication *)application
-openURL:(NSURL *)url
-options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
-BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
-openURL:url
-sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
-annotation:options[UIApplicationOpenURLOptionsAnnotationKey]
-];
-// Add any custom logic here.
-return handled;
+   openURL:(NSURL *)url
+   options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+  return [RCTLinkingManager application:application openURL:url options:options];
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
@@ -84,6 +92,8 @@ return handled;
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
 }
+
+
 
 
 @end

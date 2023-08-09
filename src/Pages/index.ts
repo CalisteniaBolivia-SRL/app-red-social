@@ -23,7 +23,7 @@ import novedades from './novedades';
 import compras from './compras';
 import perfil from './perfil';
 import tarjeta from './tarjeta';
-import notificaciones from './notificaciones';
+import notifications from './notifications';
 import chat from './chat';
 import ajustes from './ajustes';
 import ayuda from './ayuda';
@@ -49,7 +49,7 @@ export default SPage.combinePages("/", {
   "contacto": contacto,
   "novedades": novedades,
   "compras": compras,
-  notificaciones,
+  ...notifications,
   explorar,
   favoritos,
   //mapa,
