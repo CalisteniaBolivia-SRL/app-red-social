@@ -67,10 +67,12 @@ class index extends Component {
             {this.renderDataHeaderItem({ val: this.state.nroPublicaciones, label: "Publicaciones" })}
 
             {/* {this.renderDataHeaderItem({ val: 0, label: "Seguidores" })} */}
-            <SView flex />
+            {/* <SView flex /> */}
 
             {this.renderDataHeaderItem({ val: this.state.nroLike, label: "Me gusta" })}
-            {/* {this.renderDataHeaderItem({ val: "Nombre", label: "Paquete" })} */}
+            <SView width={40} height={40} center card>
+                <SIcon name='Iajustes' height={23} fill={STheme.color.text} />
+            </SView>
 
         </SView>
     }
