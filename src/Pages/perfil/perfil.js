@@ -338,8 +338,8 @@ class perfil extends Component {
                     <PButtom fontSize={20} onPress={() => {
                         SNavigation.navigate("/perfil/editar", { key: this.data.key });
                     }}>EDITAR</PButtom>
-                      <SHr height={10} />
-                     <PButtom fontSize={20} onPress={() => {
+                    <SHr height={10} />
+                    <PButtom fontSize={20} onPress={() => {
                         SNavigation.navigate("/notifications");
                     }}>NOTIFICACIONES</PButtom>
                     <SHr height={10} />
