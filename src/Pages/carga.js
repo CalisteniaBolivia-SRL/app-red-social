@@ -6,7 +6,7 @@ import LogoAnimado from '../Components/LogoAnimado';
 import LogoAnimado2 from '../Components/LogoAnimado2';
 import Model from '../Model';
 
-const DURATION_ANIM = 3000;
+const DURATION_ANIM = 1000;
 class index extends Component {
     constructor(props) {
         super(props);
@@ -20,10 +20,6 @@ class index extends Component {
             // Model.usuario.Action.getAll({})
             // new SThread(DURATION_ANIM / 2, "carga_after_user", false).start(() => {
             if (!this.run) return;
-            if (SNavigation?.lastRoute?.route?.name != "/") {
-                return;
-            }
-            console.log("Redirexcion en la carga", SNavigation.lastRoute);
             SNavigation.replace("/root")
             // })
         })
