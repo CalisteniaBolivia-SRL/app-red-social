@@ -47,6 +47,8 @@ import TitComprar, { ReactComponent as TitComprarW } from './titComprar.svg';
 import Adquiere, { ReactComponent as AdquiereW } from './adquiere.svg';
 import BackTit1, { ReactComponent as BackTit1W } from './backTit1.svg';
 import BackTit2, { ReactComponent as BackTit2W } from './backTit2.svg';
+import Good, { ReactComponent as GoodW } from './good.svg';
+import Iajustes, { ReactComponent as IajustesW } from './iajustes.svg';
 
 
 
@@ -98,6 +100,8 @@ const Assets = {
 	"Adquiere": { Native: Adquiere, Web: AdquiereW },
 	"BackTit1": { Native: BackTit1, Web: BackTit1W },
 	"BackTit2": { Native: BackTit2, Web: BackTit2W },
+	"Good": { Native: Good, Web: GoodW },
+	"Iajustes": { Native: Iajustes, Web: IajustesW },
 	
 
 }

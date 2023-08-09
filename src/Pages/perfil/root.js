@@ -6,7 +6,7 @@ import SSocket from 'servisofts-socket';
 import Model from '../../Model';
 import { AccentBar, BottomNavigator, Container, PButtom, Publicacion } from '../../Components';
 import usuario_dato from '../../Model/tapeke/usuario_dato';
-
+import MiPaquete from './components/MiPaqueteActivo';
 
 class index extends Component {
     constructor(props) {
@@ -65,9 +65,15 @@ class index extends Component {
     renderDataHeader = () => {
         return <SView col={"xs-12"} row>
             {this.renderDataHeaderItem({ val: this.state.nroPublicaciones, label: "Publicaciones" })}
+
             {/* {this.renderDataHeaderItem({ val: 0, label: "Seguidores" })} */}
-            <SView flex />
+            {/* <SView flex /> */}
+
             {this.renderDataHeaderItem({ val: this.state.nroLike, label: "Me gusta" })}
+            <SView width={40} height={40} center card>
+                <SIcon name='Iajustes' height={23} fill={STheme.color.text} />
+            </SView>
+
         </SView>
     }
 
@@ -180,7 +186,9 @@ class index extends Component {
             }}
         />
     }
+
     render() {
+        var usuario = Model.usuario.Action.getByKey(this.key_usuario) ?? {};
         return (<SPage onRefresh={() => {
             // Model.usuario.Action.CLEAR();
 
@@ -195,7 +203,11 @@ class index extends Component {
                     {this.renderMenu()}
                     <SHr />
                     <SHr />
-
+                    <MiPaquete data={usuario} onLoad={(data) => {
+                        this.setState({ paquetes: data })
+                    }} />
+                    <SHr />
+                    <SHr />
                 </SView>
             </Container>
 
@@ -205,6 +217,7 @@ class index extends Component {
             <SText onPress={() => {
                 SNavigation.navigate("/notifications")
             }}>IR A LAS NOTIFICACIONES</SText>
+
             <SView col={"xs-12"} center>
                 <SView col={"xs-12 sm-10 md-8 lg-6 xl-4 xxl-3"} style={{ alignItems: "center" }} center >
                     {this.renderPublicaciones()}
