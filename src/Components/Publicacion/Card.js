@@ -20,18 +20,18 @@ class index extends Component<PublicacionPropsType> {
 
     componentDidMount() {
 
-        SSocket.sendPromise({
-            ...Model.usuario.info,
-            "component": "usuario",
-            "type": "getAllKeys",
-            "estado": "cargando",
-            "keys": [this.props.data?.key_usuario]
-        }).then((e) => {
-            if (e.estado != "exito") return;
-            this.setState({ usuario: e.data[this.props.data?.key_usuario]?.usuario })
-        }).catch((e) => {
-            console.error(e)
-        })
+        // SSocket.sendPromise({
+        //     ...Model.usuario.info,
+        //     "component": "usuario",
+        //     "type": "getAllKeys",
+        //     "estado": "cargando",
+        //     "keys": [this.props.data?.key_usuario]
+        // }).then((e) => {
+        //     if (e.estado != "exito") return;
+        //     this.setState({ usuario: e.data[this.props.data?.key_usuario]?.usuario })
+        // }).catch((e) => {
+        //     console.error(e)
+        // })
     }
     handlePress() {
         if (!this.props.onPress) return null;
@@ -53,7 +53,7 @@ class index extends Component<PublicacionPropsType> {
                 <SView style={{
                     backgroundColor: STheme.color.card, borderRadius: 100, width: 40, height: 40, overflow: "hidden"
                 }}>
-                    <SImage src={Model.usuario._get_image_download_path(SSocket.api, this.props.data.key_usuario)} style={{
+                    <SImage src={SSocket.api.root + "usuario/" + this.props.data.key_usuario} style={{
                         resizeMode: "cover"
                     }} />
                 </SView>

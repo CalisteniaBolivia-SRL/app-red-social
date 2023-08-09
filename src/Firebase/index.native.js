@@ -33,6 +33,7 @@ class Firebase {
             // await messaging().setAutoInitEnabled(true);
             messaging().getToken().then(fcmToken => {
                 if (fcmToken) {
+                    console.log(fcmToken)
                     DeviceKey.setKey(fcmToken);
                 }
             }).catch(err => {

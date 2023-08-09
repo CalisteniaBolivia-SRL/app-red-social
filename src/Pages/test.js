@@ -10,23 +10,22 @@ class formulario extends Component {
         super(props);
         this.state = {
         };
+        this.params = SNavigation.getAllParams();
 
-    }
-    componentDidMount() {
-        Model.usuario.Action.getAll({ force: true });
     }
 
     render() {
 
-        let usuarios = Model.usuario.Action.getAll();
-        let ricky = Model.usuario.Action.getByKey("c4310023-4413-42dd-9676-e9ed1bd862dc");
-        let ruddy = Model.usuario.Action.getByKey("a34002d9-c8bc-4e58-b98c-ace4aa15f915");
-        return <SPage title={"test"} onRefresh={()=>{
-            this.componentDidMount();
+        // let usuarios = Model.usuario.Action.getAll();
+        // let ricky = Model.usuario.Action.getByKey("c4310023-4413-42dd-9676-e9ed1bd862dc");
+        // let ruddy = Model.usuario.Action.getByKey("a34002d9-c8bc-4e58-b98c-ace4aa15f915");
+        return <SPage title={"test"} onRefresh={() => {
         }}>
-            <SText>{Object.keys(usuarios ?? {}).length}</SText>
-            <SText>{JSON.stringify(ricky ?? {}, "\n", "\t")}</SText>
-            <SText>{JSON.stringify(ruddy ?? {}, "\n", "\t")}</SText>
+            <SText fontSize={20}>Esta pagina solo puedo llegar con un deep link</SText>
+            <SText>{JSON.stringify(this.params)}</SText>
+            {/* <SText>{Object.keys(usuarios ?? {}).length}</SText> */}
+            {/* <SText>{JSON.stringify(ricky ?? {}, "\n", "\t")}</SText> */}
+            {/* <SText>{JSON.stringify(ruddy ?? {}, "\n", "\t")}</SText> */}
         </SPage>
     }
 }

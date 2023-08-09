@@ -15,15 +15,20 @@ class index extends Component {
     }
 
     componentDidMount() {
+        this.run = true;
         new SThread(DURATION_ANIM / 2, "carga_hilo", false).start(() => {
             // Model.usuario.Action.getAll({})
             new SThread(DURATION_ANIM / 2, "carga_after_user", false).start(() => {
+                if (!this.run) return;
                 SNavigation.replace("/root")
             })
         })
         // Model.restaurante.Action.getAll();
         // Model.horario.Action.getAll();
         // Model.pack.Action.getAll();
+    }
+    componentWillUnmount() {
+        this.run = false;
     }
 
     renderFooter() {
