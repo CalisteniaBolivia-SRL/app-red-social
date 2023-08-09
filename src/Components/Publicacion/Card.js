@@ -6,10 +6,13 @@ import BoxMenuLat from './BoxMenuLat';
 import BoxMenuLatOtros from './BoxMenuLatOtros';
 import Model from '../../Model';
 import LikeAnimation from './LikeAnimation';
+import ImagePub from './ImagePub';
 export type PublicacionPropsType = {
     data: any,
     usuario: any,
     onPress?: (obj) => {},
+    onLike?: (obj) => any,
+    disLike?: (obj) => any,
 }
 class index extends Component<PublicacionPropsType> {
     constructor(props) {
@@ -40,10 +43,10 @@ class index extends Component<PublicacionPropsType> {
     }
 
     renderAuthor() {
-        var key_usuario = Model.usuario.Action.getKey();
+        // var key_usuario = Model.usuario.Action.getKey();
         // let user = Model.usuario.Action.getByKey(this.props.data?.key_usuario);
 
-        let user = this.state.usuario ?? {};
+        let user = this.props.usuario ?? {}
         return <SView col={"xs-12"} row height={50} center onPress={() => {
             SNavigation.navigate("/perfil/client", { pk: this.props.data?.key_usuario })
         }}>
@@ -78,6 +81,9 @@ class index extends Component<PublicacionPropsType> {
             key_usuario: Model.usuario.Action.getKey(),
             key_publicacion: this.props.data.key,
         }).then((e) => {
+            if (this.props.onLike) {
+                this.props.onLike(this.props.data)
+            }
             Model.publicacion.Action._dispatch({
                 component: "publicacion",
                 type: "onLike",
@@ -90,6 +96,7 @@ class index extends Component<PublicacionPropsType> {
         });
     }
     renderImage() {
+
         return <SView col={"xs-12"} colSquare activeOpacity={1}
             style={{
                 backgroundColor: "#66666622"
@@ -109,6 +116,7 @@ class index extends Component<PublicacionPropsType> {
                     this.nclick = 0;
                 })
             }}>
+            {/* <ImagePub src={Model.publicacion._get_image_download_path(SSocket.api, this.props.data.key)} /> */}
             <SImage src={Model.publicacion._get_image_download_path(SSocket.api, this.props.data.key)} style={{
                 resizeMode: "contain"
             }} />
@@ -120,7 +128,7 @@ class index extends Component<PublicacionPropsType> {
             Model.publicacion_like.Action.dislike({
                 key_usuario: Model.usuario.Action.getKey(),
                 key_publicacion: this.props.data.key,
-            })
+            },this.props.disLike)
         } else {
             this.handleLike()
         }

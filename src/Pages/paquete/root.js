@@ -35,12 +35,12 @@ class index extends Component {
 
     clearData() {
         // this.componentDidMount()
-        Model.pedido.Action.CLEAR();
-        Model.horario.Action.CLEAR();
-        Model.pack.Action.CLEAR();
-        Model.restaurante.Action.CLEAR();
-        Model.favorito.Action.CLEAR();
-        Model.publicacion.Action.CLEAR();
+        // Model.pedido.Action.CLEAR();
+        // Model.horario.Action.CLEAR();
+        // Model.pack.Action.CLEAR();
+        // Model.restaurante.Action.CLEAR();
+        // Model.favorito.Action.CLEAR();
+        // Model.publicacion.Action.CLEAR();
     }
 
     render_with_data() {

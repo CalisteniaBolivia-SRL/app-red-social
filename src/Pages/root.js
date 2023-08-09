@@ -11,73 +11,51 @@ class index extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            refreshing: false
+            refreshing: false,
+            usuarios: {}
         };
     }
 
 
     componentDidMount() {
 
+        SSocket.sendPromise({
+            component: "publicacion",
+            type: "getAll",
+            key_usuario: Model.usuario.Action.getKey(),
+        }).then((e) => {
+            Model.publicacion.Action._dispatch(e);
+            const arr = Object.values(e.data).sort((a, b) => new SDate(a.fecha_on).getTime() >= new SDate(b.fecha_on).getTime() ? -1 : 1)
+            // this.setState({ data: arr })
+
+            let userKeys = arr.map(val => val.key_usuario);
+            const uniqueArr = [...new Set(userKeys)];
+            SSocket.sendPromise({
+                ...Model.usuario.info,
+                "component": "usuario",
+                "type": "getAllKeys",
+                "estado": "cargando",
+                "keys": uniqueArr
+            }).then((e) => {
+                this.setState({ usuarios: e.data })
+            }).catch((e) => {
+                console.error(e)
+            })
+        })
         // Model.usuario.Action.getAll({ force: true })
 
     }
     clearData(resolv) {
-        Model.sucursal.Action.CLEAR();
-        Model.publicacion.Action.CLEAR();
+        // Model.sucursal.Action.CLEAR();
+        // Model.publicacion.Action.CLEAR();
         // Model.usuario.Action.getAll({ force: true, fecha_edit: "1989-01-01T00:00:01" });
         // Model.usuario.Action.CLEAR();
         this.componentDidMount();
 
     }
-    render_with_data() {
-        var sucursales = Model.sucursal.Action.getAll();
-        if (!sucursales) return <SLoad />
-
-        return <SList
-            // buscador={"true"}
-            center
-            space={14}
-            data={sucursales}
-            limit={5}
-            // order={[{ key: "fecha_on", order: "desc", peso: 1, }]}
-            render={(data) => {
-                return <Sucursal.Card image={1} datas={data} root={'/sucursal/detalle'} />
-            }}
-        />
-
-    }
-    banner() {
-        return <>
-            <SView col={"xs-12 sm-10 md-8 lg-8 xl-11 xxl-11"}
-                backgroundColor={STheme.color.primary}
-            >
-                <SView col={"xs-12"} height={470}>
-                    <SImage src={require('../Assets/img/banner1.png')} style={{ resizeMode: 'cover' }} />
-                </SView>
-                <SHr height={20} />
-                <SView col={"xs-12"} height={470}>
-                    <SImage src={require('../Assets/img/banner2.png')} style={{ resizeMode: 'cover' }} />
-                </SView>
-
-            </SView>
-        </>
-    }
-    navBar() {
-        return <TopBar type={"home"} />
-    }
 
 
-    renderLogo() {
-        return <>
-            <SHr height={15} />
-            <SView col={"xs-12"} height={100} center style={{ borderWidth: 2, borderColor: STheme.color.secondary, borderRadius: 21 }}>
-                <SHr height={10} />
-                <SIcon name='logowhite' fill={STheme.color.text} width={200} />
-                <SHr height={10} />
-            </SView>
-            <SHr height={15} />
-        </>
-    }
+
 
     renderPublicidad() {
         return <>
@@ -97,60 +75,46 @@ class index extends Component {
     }
 
     renderPublicaciones() {
-        let publicaciones = Model.publicacion.Action.getAll({
-            key_usuario: Model.usuario.Action.getKey()
-        });
-        if (!publicaciones) return <SLoad />
-        const arr = Object.values(publicaciones).sort((a, b) => new SDate(a.fecha_on).isBefore(new SDate(b.fecha_on)) ? 1 : -1)
+        // let publicaciones = Model.publicacion.Action.getAll({
+        //     key_usuario: Model.usuario.Action.getKey()
+        // // });
+        // const arr = Object.values(publicaciones).sort((a, b) => new SDate(a.fecha_on).isBefore(new SDate(b.fecha_on)) ? 1 : -1)
 
 
-        // let userKeys = arr.map(val => val.key_usuario);
-        // const uniqueArr = [...new Set(userKeys)];
-        // console.log(uniqueArr);
-        
+
         const handleRefresh = async () => {
             this.clearData();
         };
+        let data = Model.publicacion.Action._getReducer()?.data ?? {};
+        // if (!this.state.data) return <SLoad />
+
         return <FlatList
             onRefresh={handleRefresh}
             refreshing={this.state.refreshing}
-            data={arr}
+            // scrollEnabled={false}
+            data={Object.values(data)}
             style={{
                 width: "100%",
             }}
             keyExtractor={item => item.key.toString()}
             ItemSeparatorComponent={() => <SHr h={100} />}
-            renderItem={itm => <Publicacion.Card data={itm.item} />}
-        />
-        return <SList
-            data={publicaciones}
-            order={[{ key: "fecha_on", order: "desc" }]}
-            space={50}
-            render={(a) => {
-                return <Publicacion.Card data={a} />
-            }}
+            renderItem={itm => <Publicacion.Card data={itm.item} usuario={this.state?.usuarios[itm?.item?.key_usuario]?.usuario} />}
         />
     }
+
     render() {
 
         return (
             <SPage
-                navBar={this.navBar()}
+                navBar={<TopBar type={"home"} />}
                 footer={this.footer()}
                 disableScroll
             >
                 <Container flex>
-
-                    {/* <SHr height={20} /> */}
-                    {/* <SHr height={15} /> */}
                     {this.renderPublicidad()}
-                    {/* <SHr height={15} /> */}
                     <SView col={"xs-12"} flex>
                         {this.renderPublicaciones()}
                     </SView>
-                    {/* {this.render_with_data()} */}
-                    {/* {this.banner()} */}
-
                 </Container>
             </SPage>
         );

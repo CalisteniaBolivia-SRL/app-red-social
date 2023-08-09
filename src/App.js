@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Linking, Platform } from 'react-native';
 import { SComponentContainer, SNavigation } from 'servisofts-component';
 import SSocket, { setProps } from 'servisofts-socket';
 import Redux, { store } from './Redux';
@@ -11,7 +11,6 @@ import DeviceKey from "./Firebase/DeviceKey"
 import { NavBar, TopBar } from './Components';
 import StatusBar from './Components/StatusBar';
 // import NavBar from './Components/NavBar';
-
 
 setProps(Config.socket);
 Firebase.init();
@@ -27,8 +26,13 @@ const App = (props) => {
         >
             <StatusBar />
             <SNavigation
+                linking={{
+                    prefixes: ["https://calisteniabolivia.com/", "http://calisteniabolivia.com/", 'calisteniabolivia://app/'],
+                    getInitialURL: () => {
+                        Firebase.getInitialURL();
+                    }
+                }}
                 props={{
-                    prefix: ['calisteniaboliva://'],
                     navBar: TopBar,
                     title: 'Calistenia Bolivia', pages: Pages
                 }}

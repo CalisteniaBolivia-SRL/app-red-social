@@ -9,6 +9,7 @@ class likes extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            usuarios: {}
         };
         this.pk = SNavigation.getParam("pk");
     }
@@ -17,6 +18,22 @@ class likes extends Component {
         this.setState({ loading: true });
         Model.publicacion_like.Action.getAllPromise(this.pk).then(e => {
             this.setState({ loading: false, data: e.data });
+
+            const arr = Object.values(e.data)
+            let userKeys = arr.map(val => val.key_usuario);
+            const uniqueArr = [...new Set(userKeys)];
+            SSocket.sendPromise({
+                ...Model.usuario.info,
+                "component": "usuario",
+                "type": "getAllKeys",
+                "estado": "cargando",
+                "keys": uniqueArr
+            }).then((e) => {
+                if (e.estado != "exito") return;
+                this.setState({ usuarios: e.data })
+            }).catch((e) => {
+                console.error(e)
+            })
         }).catch(e => {
             this.setState({ loading: false, error: e });
         })
@@ -29,7 +46,7 @@ class likes extends Component {
             space={10}
             data={this.state.data}
             render={(data) => {
-                return <Publicacion.CardLike data={data} />
+                return <Publicacion.CardLike data={data} usuario={this.state?.usuarios[data?.key_usuario]?.usuario} />
             }}
         />
     }
