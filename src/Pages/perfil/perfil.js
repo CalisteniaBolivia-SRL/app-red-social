@@ -163,6 +163,161 @@ class perfil extends Component {
             <SView flex />
         </SView>
     }
+    opcion({ url, titulo, icon }) {
+        if (url == 'admin') {
+            var roles = Roles_permisos.components.rol.Actions.getAll(this.props);
+            var ru = Roles_permisos.components.usuarioRol.Actions.getAll(
+                this.props.state.usuarioReducer?.usuarioLog?.key,
+                null,
+                this.props
+            );
+            if (!roles) return;
+            if (!ru) return;
+            if (Object.keys(ru).length === 0) return;
+        }
+        return (
+            <>
+                <SView
+                    row
+                    col={'xs-11'}
+                    style={{
+                        borderBottomWidth: 1,
+                        borderBottomColor: STheme.color.card
+                        // borderBottomColor: STheme.color.darkGray
+                    }}
+                    onPress={() => {
+                        if (url == 'salir') {
+                            this.props.dispatch({ type: 'USUARIO_LOGOUT' });
+                            carrito.Actions.removeAll(this.props); //Elimina todos los eventos del carrito
+                            SNavigation.replace('login');
+                        } else {
+                            SNavigation.navigate(url);
+                        }
+                    }}>
+                    <SView row col={'xs-1'}>
+                        <SIcon
+                            name={icon}
+                            width={20}
+                            height={20}
+                            fill={url == 'salir' ? '#ff4132' : STheme.color.primary}></SIcon>
+                    </SView>
+                    <SView row col={'xs-9'}>
+                        <SText color={url == 'salir' ? '#ff4132' : STheme.color.primary} font={"Roboto"}>
+                            {titulo}
+                        </SText>
+                    </SView>
+                    <SView flex col={'xs-2'} style={{ alignItems: 'flex-end' }}>
+                        <SIcon
+                            name={'MenuPerfil'}
+                            width={9}
+                            fill={url == 'salir' ? '#ff4132' : STheme.color.primary}></SIcon>
+                    </SView>
+                    <SHr height={20} />
+                </SView>
+                <SHr height={20} />
+            </>
+        );
+    }
+    getOpciones() {
+        return (
+            <SView col={'xs-12'} center>
+                <SView
+                    backgroundColor={STheme.color.card}
+                    col={'xs-12'}
+                    style={{
+                        borderTopLeftRadius: 20,
+                        borderTopRightRadius: 20,
+                        borderBottomLeftRadius: 4,
+                        borderBottomRightRadius: 4,
+                        borderTopWidth: 1,
+                        borderTopColor: STheme.color.card
+                    }}>
+                    <SHr />
+                    <SView row col={'xs-12'} center>
+                        <SHr height={10} />
+                        <SView row col={'xs-10'} center>
+                            <SText color={STheme.color.text} font={"Roboto"} fontSize={16}>OPCIONES</SText>
+                        </SView>
+                        <SHr height={10} />
+                        <SView
+                            row
+                            col={'xs-8'}
+                            center
+                            style={{
+                                borderBottomWidth: 1,
+                                borderBottomColor: STheme.color.card
+                            }}></SView>
+                    </SView>
+                    <SView row col={'xs-12'} center>
+                        <SHr height={50} />
+                        <SView
+                            row
+                            col={'xs-11'}
+                            style={{
+                                borderBottomWidth: 1,
+                                borderBottomColor: STheme.color.card
+                            }}
+                            onPress={() => {
+                                // SNavigation.navigate(url);
+                            }}>
+                            <SView row col={'xs-1'}>
+                                <SIcon
+                                    name={STheme.getTheme() == 'dark' ? "Dark" : "Sun"}
+                                    width={20}
+                                    height={20}
+                                    fill={STheme.color.primary}></SIcon>
+                            </SView>
+                            <SView row col={'xs-9'}>
+                                <SText font={"Roboto"}>Modo {STheme.getTheme() == 'dark' ? "oscuro" : "claro"}</SText>
+                            </SView>
+                            <SView flex col={'xs-2'} style={{ alignItems: 'flex-end' }}>
+                                {/* <SIcon
+                      name={'Modo'}
+                      width={35}
+                      fill={STheme.color.primary}></SIcon> */}
+
+                                <SwitchTheme
+                                    width={35}
+                                    height={20}
+                                    callback={(resp) => {
+                                        console.log('viendo que', resp);
+                                    }}
+                                />
+                            </SView>
+                            <SHr height={20} />
+                        </SView>
+                        <SHr height={20} />
+                        {this.opcion({
+                            url: 'editar',
+                            titulo: 'Editar perfil',
+                            icon: 'Editar'
+                        })}
+                        {this.opcion({
+                            url: 'perfil',
+                            titulo: 'Notificaciones',
+                            icon: 'Notificacion'
+                        })}
+                        {this.opcion({
+                            url: 'admin',
+                            titulo: 'Administración',
+                            icon: 'Admin'
+                        })}
+                        {this.opcion({
+                            url: 'terminos',
+                            titulo: 'Términos y Condiciones',
+                            icon: 'IconCheckedOk'
+                        })}
+                        {this.opcion({
+                            url: 'salir',
+                            titulo: 'Salir',
+                            icon: 'SalirPerfil'
+                        })}
+                    </SView>
+                    <SHr height={30} />
+                </SView>
+            </SView>
+        );
+    }
 
     render() {
         return (<SPage onRefresh={() => {
@@ -176,11 +331,17 @@ class perfil extends Component {
                     {this.getPerfil()}
                     <SView height={10}></SView>
                     {this.getDatos()}
-                    <SView height={50}></SView>
+                    <SView height={20}></SView>
+                    {/* {this.getOpciones()} */}
+
 
                     <PButtom fontSize={20} onPress={() => {
                         SNavigation.navigate("/perfil/editar", { key: this.data.key });
                     }}>EDITAR</PButtom>
+                      <SHr height={10} />
+                     <PButtom fontSize={20} onPress={() => {
+                        SNavigation.navigate("/notifications");
+                    }}>NOTIFICACIONES</PButtom>
                     <SHr height={10} />
                     <PButtom fontSize={20} onPress={() => {
                         // SPopup.confirm({
