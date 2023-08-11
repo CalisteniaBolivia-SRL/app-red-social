@@ -5,8 +5,33 @@ import { Container } from '../Components';
 import LogoAnimado from '../Components/LogoAnimado';
 import LogoAnimado2 from '../Components/LogoAnimado2';
 import Model from '../Model';
+import SSocket from 'servisofts-socket'
+import { version } from "../../package.json"
+const DURATION_ANIM = 2000;
 
-const DURATION_ANIM = 1000;
+
+const versionToNumber = (v) => {
+    const array = v.split("\.");
+    const vl = 100;
+    let vn = 0;
+    for (let i = 0; i < array.length; i++) {
+        const element = array[array.length - i - 1];
+        const vp = Math.pow(vl, i);
+        vn += (vp * element)
+    }
+    console.log(vn)
+    return vn;
+    // for (let i = arrVR.length-1; i >= 0; i--) {
+    //     console.log(i);
+    // }
+    // const s1 = v[0] * (vl * vl);
+    // const s2 = v[1] * (vl);
+    // const s3 = v[2]
+
+
+
+
+}
 class index extends Component {
     constructor(props) {
         super(props);
@@ -22,6 +47,18 @@ class index extends Component {
             if (!this.run) return;
             SNavigation.replace("/root")
             // })
+        })
+
+        SSocket.sendPromise({
+            component: "enviroments",
+            type: "getVersion",
+        }).then(e => {
+            const versionRequired = e.data
+            if (versionToNumber(versionRequired) > versionToNumber(version)) {
+                SNavigation.replace("/version_required")
+            }
+        }).catch(e => {
+            console.error(e)
         })
         // Model.restaurante.Action.getAll();
         // Model.horario.Action.getAll();
