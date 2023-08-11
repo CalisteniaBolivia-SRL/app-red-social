@@ -132,17 +132,19 @@ class index extends Component {
         if (Model.usuario.Action.getKey() != this.key_usuario) return null;
 
         return <SView  flex style={{ alignItems: "flex-end" }} >
-            <SView flex row style={{ alignItems: "flex-end" }} >
-                <SView card padding={8} row width={100} center onPress={() => {
+            <SView center row style={{ alignItems: "flex-end" }} col={"xs-12"} >
+                <SView  padding={8} row col={"xs-5.8"} center onPress={() => {
                     SNavigation.navigate("/perfil/asistencia", { key: this.key_usuario });
-                }}>
+                }} 
+                backgroundColor={STheme.color.card}>
                     <SText bold>Asistencia</SText>
                 </SView>
                 {/* <SHr/> */}
-                <SView width={5} />
-                <SView card padding={8} row width={100} center onPress={() => {
+                <SView col={"xs-0.2"} />
+                <SView  padding={8} row col={"xs-5.8"} center onPress={() => {
                     SNavigation.navigate("/perfil/paquetes", { key: this.key_usuario });
-                }}>
+                }}
+                backgroundColor={STheme.color.card}>
                     <SText bold>Paquetes</SText>
                 </SView>
             </SView>
