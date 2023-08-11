@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {SLoad, SText, STheme, SView} from 'servisofts-component';
+import React, { Component } from 'react';
+import { SIcon, SLoad, SText, STheme, SView } from 'servisofts-component';
 
-import {Animated} from 'react-native';
+import { Animated } from 'react-native';
 // import SBLocation from '../../SBLocation';
 
 type _SwitchRastreoProps = {
@@ -23,7 +23,7 @@ export default class SwitchTheme extends Component<_SwitchRastreoProps> {
     this.state = {
       active: STheme.getTheme() == 'dark' ? 1 : 0,
       colors: {
-        active: this.props.colors?.active ?? '#2FC25F',
+        active: this.props.colors?.active ?? STheme.color.secondary,
         inactive: this.props.colors?.inactive ?? '#B7B7B7',
         acent: this.props.colors?.acent ?? '#fff'
       }
@@ -32,7 +32,7 @@ export default class SwitchTheme extends Component<_SwitchRastreoProps> {
   }
 
   componentDidMount() {
-    this.animValue.addListener(({value}) => {
+    this.animValue.addListener(({ value }) => {
       if (value == 1) {
         STheme.select('default');
       } else {
@@ -59,10 +59,11 @@ export default class SwitchTheme extends Component<_SwitchRastreoProps> {
   render() {
     return (
       <SView
+        center
         animated
         style={{
-          width: this.props.width ?? 100,
-          height: this.props.height ?? 40,
+          width: 25,
+          height: 25,
           borderRadius: 18,
           justifyContent: 'center',
           backgroundColor: this.animValue.interpolate({
@@ -76,26 +77,30 @@ export default class SwitchTheme extends Component<_SwitchRastreoProps> {
         onPress={() => {
           this.fadeIn();
           STheme.change();
-          this.props.callback({ConductorOnline:  this.state.active?"oscuro":"claro"});
+          this.props.callback({ ConductorOnline: this.state.active ? "oscuro" : "claro" });
         }}>
-        <SView
+        {/* <SView
           animated
           center
           style={{
             width: 70,
             height: 33,
             position: 'absolute',
-
             right: this.animValue.interpolate({
               inputRange: [0, 1],
               outputRange: [16, (this.props.width ?? 100) - 70 - 16]
             })
-          }}>
-          {/* <SText>{this.state.active ? 'default' : 'dark'}</SText> */}
-        </SView>
+          }}
+          >
+        </SView> */}
+        <SIcon
+          name={STheme.getTheme() == 'dark' ? "MDark" : "MSun"}
+          width={15}
+          height={15}
+          fill={STheme.color.text}></SIcon>
 
         {/* tamaño a la bolita */}
-        <SView
+        {/* <SView
           animated
           style={{
             width: 16,
@@ -107,7 +112,7 @@ export default class SwitchTheme extends Component<_SwitchRastreoProps> {
               outputRange: [4, (this.props.width ?? 100) - 16 - 4]
             })
           }}
-          backgroundColor={this.state.colors['acent']}></SView>
+          backgroundColor={this.state.colors['acent']}></SView> */}
       </SView>
     );
   }

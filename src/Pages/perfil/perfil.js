@@ -46,7 +46,7 @@ class perfil extends Component {
         // }}></SView>
         return (
             <SView center col={"xs-12"}  >
-<SHr height={150} />
+                <SHr height={150} />
                 <SView style={{
                     width: 140,
                     height: 140,
@@ -84,9 +84,11 @@ class perfil extends Component {
                     </SView>
                     <SHr />
                 </SView>
-                <SView style={{position:"absolute"}} height={200} col={"xs-12"}>
-                    <SImage src={require('../../Assets/img/fpublicidad.png')} style={{width: "100%",
-                            height: "100%", resizeMode: 'cover' }} />
+                <SView style={{ position: "absolute" }} height={200} col={"xs-12"}>
+                    <SImage src={require('../../Assets/img/fpublicidad.png')} style={{
+                        width: "100%",
+                        height: "100%", resizeMode: 'cover'
+                    }} />
                 </SView>
             </SView>
         )
@@ -192,11 +194,15 @@ class perfil extends Component {
                     onPress={() => {
                         switch (url) {
                             case "salir":
-                                this.props.dispatch({ type: 'USUARIO_LOGOUT' });
-                                carrito.Actions.removeAll(this.props); //Elimina todos los eventos del carrito
+                                // this.props.dispatch({ type: 'USUARIO_LOGOUT' });
+                                Model.usuario.Action.unlogin();
+                                // carrito.Actions.removeAll(this.props); //Elimina todos los eventos del carrito
                                 SNavigation.replace('login');
                                 break;
                             case "editar":
+                                SNavigation.navigate(url, { key: key });
+                                break;
+                            case "asistencia":
                                 SNavigation.navigate(url, { key: key });
                                 break;
                             case "eliminar":
@@ -213,7 +219,7 @@ class perfil extends Component {
                             {titulo}
                         </SText>
                     </SView>
-                    <SView flex col={'xs-2'} style={{ alignItems: 'flex-end' }}>
+                    <SView flex center col={'xs-2'} style={{ alignItems: 'flex-end' }}>
                         <SIcon
                             name={icon}
                             width={20}
@@ -258,20 +264,12 @@ class perfil extends Component {
                         }}>
                         <SHr height={15} />
                         <SView row col={'xs-0.5'}>
-                            <SIcon
-                                name={STheme.getTheme() == 'dark' ? "Dark" : "Sun"}
-                                width={20}
-                                height={20}
-                                fill={STheme.color.primary}></SIcon>
+                           
                         </SView>
                         <SView row col={'xs-8'}>
                             <SText font={"Roboto"}>Modo {STheme.getTheme() == 'dark' ? "oscuro" : "claro"}</SText>
                         </SView>
                         <SView flex col={'xs-2'} style={{ alignItems: 'flex-end' }}>
-                            {/* <SIcon
-                      name={'Modo'}
-                      width={35}
-                      fill={STheme.color.primary}></SIcon> */}
                             <SwitchTheme
                                 width={35}
                                 height={20}
@@ -279,6 +277,11 @@ class perfil extends Component {
                                     console.log('viendo que', resp);
                                 }}
                             />
+                             {/* <SIcon
+                                name={STheme.getTheme() == 'dark' ? "MDark" : "MSun"}
+                                width={20}
+                                height={20}
+                                fill={STheme.color.text}></SIcon> */}
                         </SView>
                         <SView col={'xs-0.5'}></SView>
                         <SHr height={15} />
@@ -296,6 +299,12 @@ class perfil extends Component {
                         icon: 'MEliminar'
                     })}
                     {this.opcion({
+                        url: '/perfil/asistencia',
+                        key: this.data.key,
+                        titulo: 'Asistencia',
+                        icon: 'MAsistencia'
+                    })}
+                    {this.opcion({
                         url: '/notifications',
                         titulo: 'Notificaciones',
                         icon: 'MNotify'
@@ -306,7 +315,7 @@ class perfil extends Component {
                             icon: 'Admin'
                         })} */}
                     {this.opcion({
-                        url: 'terminos',
+                        url: '/terminos',
                         titulo: 'Términos y Condiciones',
                         icon: 'MChek'
                     })}
@@ -336,8 +345,10 @@ class perfil extends Component {
                     <SView height={10}></SView>
                     {/* {this.getDatos()}
                     <SView height={20}></SView> */}
+
                     {this.getOpciones()}
                     <SHr height={10} />
+
                     {/* <PButtom fontSize={20} onPress={() => {
                         SNavigation.navigate("/perfil/editar", { key: this.data.key });
                     }}>EDITAR</PButtom>

@@ -54,6 +54,9 @@ import MEdit, { ReactComponent as MEditW } from './mEdit.svg';
 import MSalir, { ReactComponent as MSalirW } from './mSalir.svg';
 import MNotify, { ReactComponent as MNotifyW } from './mNotify.svg';
 import MChek, { ReactComponent as MChekW } from './mChek.svg';
+import MAsistencia, { ReactComponent as MAsistenciaW } from './mAsistencia.svg';
+import MDark, { ReactComponent as MDarkW } from './mDark.svg';
+import MSun, { ReactComponent as MSunW } from './mSun.svg';
 
 
 
@@ -112,6 +115,9 @@ const Assets = {
 	"MSalir": { Native: MSalir, Web: MSalirW },
 	"MNotify": { Native: MNotify, Web: MNotifyW },
 	"MChek": { Native: MChek, Web: MChekW },
+	"MAsistencia": { Native: MAsistencia, Web: MAsistenciaW },
+	"MDark": { Native: MDark, Web: MDarkW },
+	"MSun": { Native: MSun, Web: MSunW },
 	
 }
 
