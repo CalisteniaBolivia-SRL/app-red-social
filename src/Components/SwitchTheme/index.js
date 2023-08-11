@@ -95,8 +95,8 @@ export default class SwitchTheme extends Component<_SwitchRastreoProps> {
         </SView> */}
         <SIcon
           name={STheme.getTheme() == 'dark' ? "MDark" : "MSun"}
-          width={20}
-          height={20}
+          width={15}
+          height={15}
           fill={STheme.color.text}></SIcon>
 
         {/* tamaño a la bolita */}
