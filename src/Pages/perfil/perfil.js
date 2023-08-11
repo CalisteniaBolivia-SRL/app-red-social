@@ -46,7 +46,7 @@ class perfil extends Component {
         // }}></SView>
         return (
             <SView center col={"xs-12"}  >
-<SHr height={150} />
+                <SHr height={150} />
                 <SView style={{
                     width: 140,
                     height: 140,
@@ -84,9 +84,11 @@ class perfil extends Component {
                     </SView>
                     <SHr />
                 </SView>
-                <SView style={{position:"absolute"}} height={200} col={"xs-12"}>
-                    <SImage src={require('../../Assets/img/fpublicidad.png')} style={{width: "100%",
-                            height: "100%", resizeMode: 'cover' }} />
+                <SView style={{ position: "absolute" }} height={200} col={"xs-12"}>
+                    <SImage src={require('../../Assets/img/fpublicidad.png')} style={{
+                        width: "100%",
+                        height: "100%", resizeMode: 'cover'
+                    }} />
                 </SView>
             </SView>
         )
@@ -192,11 +194,15 @@ class perfil extends Component {
                     onPress={() => {
                         switch (url) {
                             case "salir":
-                                this.props.dispatch({ type: 'USUARIO_LOGOUT' });
-                                carrito.Actions.removeAll(this.props); //Elimina todos los eventos del carrito
+                                // this.props.dispatch({ type: 'USUARIO_LOGOUT' });
+                                Model.usuario.Action.unlogin();
+                                // carrito.Actions.removeAll(this.props); //Elimina todos los eventos del carrito
                                 SNavigation.replace('login');
                                 break;
                             case "editar":
+                                SNavigation.navigate(url, { key: key });
+                                break;
+                            case "asistencia":
                                 SNavigation.navigate(url, { key: key });
                                 break;
                             case "eliminar":
@@ -293,6 +299,12 @@ class perfil extends Component {
                     {this.opcion({
                         url: 'eliminar',
                         titulo: 'Eliminar cuenta',
+                        icon: 'MEliminar'
+                    })}
+                    {this.opcion({
+                        url: '/perfil/asistencia',
+                        key: this.data.key,
+                        titulo: 'Asistencia',
                         icon: 'MEliminar'
                     })}
                     {this.opcion({

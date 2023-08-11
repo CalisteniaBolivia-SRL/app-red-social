@@ -65,15 +65,16 @@ class index extends Component {
     renderDataHeader = () => {
         return <SView col={"xs-12"} row>
             {this.renderDataHeaderItem({ val: this.state.nroPublicaciones, label: "Publicaciones" })}
-
-            {/* {this.renderDataHeaderItem({ val: 0, label: "Seguidores" })} */}
-            {/* <SView flex /> */}
+            <SView flex />
 
             {this.renderDataHeaderItem({ val: this.state.nroLike, label: "Me gusta" })}
-            <SView width={40} height={40} center card>
+            {(Model.usuario.Action.getUsuarioLog()?.key == this.key_usuario) ? <SView width={40} height={40} center card
+                onPress={() => {
+                    SNavigation.navigate("/perfil/datos", { key: this.key_usuario })
+                }}
+            >
                 <SIcon name='Iajustes' height={23} fill={STheme.color.text} />
-            </SView>
-
+            </SView> : null}
         </SView>
     }
 
@@ -129,21 +130,13 @@ class index extends Component {
     }
     renderMenu() {
         if (Model.usuario.Action.getKey() != this.key_usuario) return null;
-        // var usuario = Model.usuario.Action.getByKey(this.key_usuario);
-        // var usuario_log = Model.usuario.Action.getUsuarioLog();
-        // if (!usuario) return <SLoad />
+       
         return <SView col={"xs-12"} row>
             <SView card padding={8} row width={115} center onPress={() => {
                 SNavigation.navigate("/perfil/datos", { key: this.key_usuario });
             }}>
                 <SText bold>Editar perfil</SText>
             </SView>
-            {/* <SView flex />
-            <SView card padding={8} row width={100} center onPress={() => {
-                SNavigation.navigate("/perfil/paquetes", { key: usuario.key });
-            }}>
-                <SText bold>Paquetes</SText>
-            </SView> */}
             <SView flex />
             <SView card padding={8} row width={100} center onPress={() => {
                 SNavigation.navigate("/perfil/asistencia", { key: this.key_usuario });
@@ -160,28 +153,12 @@ class index extends Component {
         </SView>
     }
     renderPublicaciones() {
-        // let publicaciones = Model.publicacion.Action.getAll();
-
-        // let usuario = Model.usuario.Action.getUsuarioLog();
-        // if (!this.state.publicaciones) return <SLoad />
-        // if (!usuario) return <SLoad />
-        // let publicacionesMias = Object.values(this.state.publicaciones).filter(obj => obj.key_usuario == usuario.key);
-        // if (!publicacionesMias) return <SLoad />
-        // this.state.nroPublicaciones = Object.keys(publicacionesMias).length;
-
-
-        // console.log(publicacionesMias)
-        //console.log(Object.keys(publicacionesMias).length)
-
         return <SList2
             horizontal
             data={this.state.publicacionesMias}
             order={[{ key: "fecha_on", order: "desc" }]}
             space={0}
             render={(a) => {
-                // let user = Model.usuario.Action.getByKey(a.key_usuario);
-                // if (!user) return <SLoad/>
-                // console.log(user);
                 return <Publicacion.CardPerfil data={a} col={"xs-4"} row center />
             }}
         />
@@ -200,14 +177,14 @@ class index extends Component {
                     {this.getPerfil()}
                     <SHr />
                     <SHr />
-                    {this.renderMenu()}
+                    {/* {this.renderMenu()}
                     <SHr />
                     <SHr />
                     <MiPaquete data={usuario} onLoad={(data) => {
                         this.setState({ paquetes: data })
                     }} />
                     <SHr />
-                    <SHr />
+                    <SHr /> */}
                 </SView>
             </Container>
 
