@@ -315,7 +315,7 @@ class perfil extends Component {
                             icon: 'Admin'
                         })} */}
                     {this.opcion({
-                        url: 'terminos',
+                        url: '/terminos',
                         titulo: 'Términos y Condiciones',
                         icon: 'MChek'
                     })}
