@@ -115,6 +115,7 @@ class index extends Component {
                     <SView col={"xs-12"} flex>
                         {this.renderPublicaciones()}
                     </SView>
+                    <SHr height={40}/>
                 </Container>
             </SPage>
         );
