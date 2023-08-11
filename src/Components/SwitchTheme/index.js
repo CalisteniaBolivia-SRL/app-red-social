@@ -23,7 +23,7 @@ export default class SwitchTheme extends Component<_SwitchRastreoProps> {
     this.state = {
       active: STheme.getTheme() == 'dark' ? 1 : 0,
       colors: {
-        active: this.props.colors?.active ?? '#2FC25F',
+        active: this.props.colors?.active ?? STheme.color.secondary,
         inactive: this.props.colors?.inactive ?? '#B7B7B7',
         acent: this.props.colors?.acent ?? '#fff'
       }
