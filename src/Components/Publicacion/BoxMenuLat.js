@@ -113,9 +113,8 @@ class index extends Component<BoxMenuLatPropsType> {
                         onPress={() => {
                             console.log(this.props.datas)
                             SharedFunctions.compartir({
-                                url: SSocket.api.root + "publicacion/" + this.props.datas.key,
-                                text: "Mira servisots",
-                                hashtags: "#Servisofts"
+                                text: `${this.props.datas?.descripcion}`,
+                                url: `${"https://calisteniabolivia.com/app/publicacion/post?pk=" + this.props.datas?.key}`,
                             });
                         }}
                     >

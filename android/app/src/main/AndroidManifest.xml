@@ -16,9 +16,15 @@
 				<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
-				<data android:scheme="http" android:host="calisteniabolivia.com" />
-				<data android:scheme="https" android:host="calisteniabolivia.com" />
-				<data android:scheme="calisteniabolivia" android:host="app" />
+				<!-- <data android:scheme="http" android:host="calisteniabolivia.com" /> -->
+				<data android:scheme="http" />
+				<data android:host="calisteniabolivia.com" />
+				<!-- <data android:scheme="https" android:host="calisteniabolivia.com" /> -->
+				<data android:scheme="https" />
+				<data android:host="calisteniabolivia.com" />
+				<!-- <data android:scheme="calisteniabolivia" android:host="app" /> -->
+				<data android:scheme="calisteniabolivia" />
+				<data android:host="app" />
 			</intent-filter>
 		</activity>
 		<activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />

@@ -1,20 +1,22 @@
-import { Text, View, Share , Linking} from 'react-native'
+import { Text, View, Share, Linking } from 'react-native'
 import React, { Component } from 'react'
 
 export default class SharedFunctions {
-    static compartir({ url, text, hashtags }) {
+    static compartir({ url, text, title }) {
 
         // const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-        const facebookUrl = `https://www.facebook.com/dialog/share?href=${url}&hashtag=${hashtags}`;
+        // const facebookUrl = `https://www.facebook.com/dialog/share?href=${url}&hashtag=${hashtags}`;
         // const twitterUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}&hashtags=${hashtags}`;
         // const linkedInUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${text}`;
 
-        Linking.openURL(facebookUrl)
+        // Linking.openURL(facebookUrl)
         // window.open(facebookUrl, "Shared", "height=612,width=900")
         // window.open(twitterUrl, "Shared", "height=612,width=900")
-        // Share.share({
-        //     message: "mira este increible articulo"
-        // })
+        Share.share({
+            message: text + " " + url,
+            url: url,
+            title: "HOLA MUNDO",
+        })
     }
 }
 
