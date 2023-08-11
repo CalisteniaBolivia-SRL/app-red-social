@@ -130,26 +130,30 @@ class index extends Component {
     }
     renderMenu() {
         if (Model.usuario.Action.getKey() != this.key_usuario) return null;
-       
-        return <SView col={"xs-12"} row>
-            <SView card padding={8} row width={115} center onPress={() => {
-                SNavigation.navigate("/perfil/datos", { key: this.key_usuario });
-            }}>
-                <SText bold>Editar perfil</SText>
+
+        return <SView  flex style={{ alignItems: "flex-end" }} >
+            <SView flex row style={{ alignItems: "flex-end" }} >
+                <SView card padding={8} row width={100} center onPress={() => {
+                    SNavigation.navigate("/perfil/asistencia", { key: this.key_usuario });
+                }}>
+                    <SText bold>Asistencia</SText>
+                </SView>
+                {/* <SHr/> */}
+                <SView width={5} />
+                <SView card padding={8} row width={100} center onPress={() => {
+                    SNavigation.navigate("/perfil/paquetes", { key: this.key_usuario });
+                }}>
+                    <SText bold>Paquetes</SText>
+                </SView>
             </SView>
             <SView flex />
-            <SView card padding={8} row width={100} center onPress={() => {
-                SNavigation.navigate("/perfil/asistencia", { key: this.key_usuario });
-            }}>
-                <SText bold>Asistencia</SText>
-            </SView>
-            <SView flex />
-            <SView card padding={8} row width={115} center onPress={() => {
+            <SHr height={15} />
+            {/* <SView flex /> */}
+            {/* <SView card padding={8} row width={115} center onPress={() => {
                 Model.usuario.Action.unlogin(Model);
-                // SNavigation.navigate("/perfil/editar", { key: this.data.key });
             }}>
                 <SText bold color={STheme.color.danger}>Cerrar sesión</SText>
-            </SView>
+            </SView> */}
         </SView>
     }
     renderPublicaciones() {
@@ -176,6 +180,7 @@ class index extends Component {
                     {this.getPerfil()}
                     <SHr />
                     <SHr />
+                    {this.renderMenu()}
                     {/* {this.renderMenu()}
                     <SHr />
                     <SHr />

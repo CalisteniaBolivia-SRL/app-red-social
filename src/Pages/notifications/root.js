@@ -2,7 +2,7 @@ import { FlatList, Linking, Text, View } from 'react-native'
 import React, { Component } from 'react'
 import SSocket from "servisofts-socket"
 import Model from '../../Model'
-import { SDate, SImage, SLoad, SPage, SText, STheme, SView } from 'servisofts-component'
+import { SDate, SHr, SImage, SLoad, SPage, SText, STheme, SView } from 'servisofts-component'
 import { StyleSheet } from 'react-native'
 import { Container } from '../../Components'
 export default class root extends Component {
@@ -30,7 +30,15 @@ export default class root extends Component {
                 {!this.state.data ? <SLoad /> :
                     <FlatList
                         refreshing={this.state.loading}
-                        ItemSeparatorComponent={() => <SView height={50} />}
+                        ItemSeparatorComponent={() => <>
+                            <SHr style={{
+                                borderBottomWidth: 1,
+                                borderColor: STheme.color.white,
+                                height:2
+                            }} />
+                            <SView height={10} />
+                        </>
+                        }
                         onRefresh={() => {
                             this.componentDidMount();
                         }}

@@ -7,6 +7,8 @@ import Model from '../../Model';
 import { AccentBar, BottomNavigator, Container, PButtom, Publicacion } from '../../Components';
 import usuario_dato from '../../Model/tapeke/usuario_dato';
 import SwitchTheme from '../../Components/SwitchTheme';
+import { version as APPversion } from "../../../package.json";
+
 
 
 class perfil extends Component {
@@ -46,7 +48,7 @@ class perfil extends Component {
         // }}></SView>
         return (
             <SView center col={"xs-12"}  >
-                <SHr height={150} />
+                <SHr height={10} />
                 <SView style={{
                     width: 140,
                     height: 140,
@@ -264,7 +266,7 @@ class perfil extends Component {
                         }}>
                         <SHr height={15} />
                         <SView row col={'xs-0.5'}>
-                           
+
                         </SView>
                         <SView row col={'xs-8'}>
                             <SText font={"Roboto"}>Modo {STheme.getTheme() == 'dark' ? "oscuro" : "claro"}</SText>
@@ -277,7 +279,7 @@ class perfil extends Component {
                                     console.log('viendo que', resp);
                                 }}
                             />
-                             {/* <SIcon
+                            {/* <SIcon
                                 name={STheme.getTheme() == 'dark' ? "MDark" : "MSun"}
                                 width={20}
                                 height={20}
@@ -302,6 +304,12 @@ class perfil extends Component {
                         url: '/perfil/asistencia',
                         key: this.data.key,
                         titulo: 'Asistencia',
+                        icon: 'MAsistencia'
+                    })}
+                     {this.opcion({
+                        url: '/perfil/paquetes',
+                        key: this.data.key,
+                        titulo: 'Mis paquetes',
                         icon: 'MAsistencia'
                     })}
                     {this.opcion({
@@ -335,7 +343,7 @@ class perfil extends Component {
             // Model.usuario.Action.CLEAR();
 
         }}
-            center
+            
 
             footer={this.footer()}
         >
@@ -348,6 +356,14 @@ class perfil extends Component {
 
                     {this.getOpciones()}
                     <SHr height={10} />
+                    <SView col={"xs-9.5 md-5.8 xl-3.8"} center style={{ bottom: 0, }}>
+                        <SIcon name={"logowhite"} height={70} fill={STheme.color.text} />
+                    </SView>
+                    <SView row >
+                        <SText style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonMM"}>Version {APPversion}</SText>
+                    </SView>
+                    <SHr height={10} />
+
 
                     {/* <PButtom fontSize={20} onPress={() => {
                         SNavigation.navigate("/perfil/editar", { key: this.data.key });
@@ -360,7 +376,7 @@ class perfil extends Component {
                     <PButtom fontSize={20} onPress={() => {
                         SPopup.open({ key: "eliminar", content: this.popupEliminar() });
                     }}>ELIMINAR CUENTA</PButtom> */}
-                    {/* <SView height={30}></SView> */}
+                    <SView height={30}></SView>
                 </SView>
             </Container>
 
