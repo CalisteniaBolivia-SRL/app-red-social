@@ -165,7 +165,6 @@ class index extends Component {
     }
 
     render() {
-        var usuario = Model.usuario.Action.getByKey(this.key_usuario) ?? {};
         return (<SPage onRefresh={() => {
             // Model.usuario.Action.CLEAR();
 

@@ -13,7 +13,9 @@ export default class SharedFunctions {
         // window.open(facebookUrl, "Shared", "height=612,width=900")
         // window.open(twitterUrl, "Shared", "height=612,width=900")
         Share.share({
-            message: text,
+            message: text + " " + url,
+            url: url,
+            title: "HOLA MUNDO",
         })
     }
 }

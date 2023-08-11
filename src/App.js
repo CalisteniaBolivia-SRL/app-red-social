@@ -27,7 +27,7 @@ const App = (props) => {
             <StatusBar />
             <SNavigation
                 linking={{
-                    prefixes: ["https://calisteniabolivia.com/", "http://calisteniabolivia.com/", 'calisteniabolivia://app/'],
+                    prefixes: ["https://calisteniabolivia.com/app/", "http://calisteniabolivia.com/app/", 'calisteniabolivia://app/'],
                     getInitialURL: () => {
                         Firebase.getInitialURL();
                     }
