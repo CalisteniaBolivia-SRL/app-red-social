@@ -49,6 +49,15 @@ import BackTit1, { ReactComponent as BackTit1W } from './backTit1.svg';
 import BackTit2, { ReactComponent as BackTit2W } from './backTit2.svg';
 import Good, { ReactComponent as GoodW } from './good.svg';
 import Iajustes, { ReactComponent as IajustesW } from './iajustes.svg';
+import MEliminar, { ReactComponent as MEliminarW } from './mEliminar.svg';
+import MEdit, { ReactComponent as MEditW } from './mEdit.svg';
+import MSalir, { ReactComponent as MSalirW } from './mSalir.svg';
+import MNotify, { ReactComponent as MNotifyW } from './mNotify.svg';
+import MChek, { ReactComponent as MChekW } from './mChek.svg';
+import MAsistencia, { ReactComponent as MAsistenciaW } from './mAsistencia.svg';
+import MDark, { ReactComponent as MDarkW } from './mDark.svg';
+import MSun, { ReactComponent as MSunW } from './mSun.svg';
+import MPaquete, { ReactComponent as MPaqueteW } from './mPaquete.svg';
 
 
 
@@ -102,8 +111,16 @@ const Assets = {
 	"BackTit2": { Native: BackTit2, Web: BackTit2W },
 	"Good": { Native: Good, Web: GoodW },
 	"Iajustes": { Native: Iajustes, Web: IajustesW },
+	"MEliminar": { Native: MEliminar, Web: MEliminarW },
+	"MEdit": { Native: MEdit, Web: MEditW },
+	"MSalir": { Native: MSalir, Web: MSalirW },
+	"MNotify": { Native: MNotify, Web: MNotifyW },
+	"MChek": { Native: MChek, Web: MChekW },
+	"MAsistencia": { Native: MAsistencia, Web: MAsistenciaW },
+	"MDark": { Native: MDark, Web: MDarkW },
+	"MSun": { Native: MSun, Web: MSunW },
+	"MPaquete": { Native: MPaquete, Web: MPaqueteW },
 	
-
 }
 
 export default Assets;

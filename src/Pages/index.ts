@@ -32,6 +32,7 @@ import cupones from './cupones';
 import test from './test';
 import publicacion from './publicacion';
 import servicio from './servicio';
+import version_required from './version_required';
 export default SPage.combinePages("/", {
   // "":test,
   "": carga,
@@ -49,6 +50,7 @@ export default SPage.combinePages("/", {
   "contacto": contacto,
   "novedades": novedades,
   "compras": compras,
+  version_required,
   ...notifications,
   explorar,
   favoritos,

@@ -80,6 +80,7 @@ class post extends Component {
                         }}
                     />
                 </Container>
+                <SHr height={40} />
             </SPage>
         );
     }

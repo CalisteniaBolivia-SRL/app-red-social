@@ -25,7 +25,7 @@ class index extends Component {
             key_usuario: Model.usuario.Action.getKey(),
         }).then((e) => {
             Model.publicacion.Action._dispatch(e);
-            const arr = Object.values(e.data).sort((a, b) => new SDate(a.fecha_on).getTime() >= new SDate(b.fecha_on).getTime() ? -1 : 1)
+            const arr = Object.values(e.data)
             // this.setState({ data: arr })
 
             let userKeys = arr.map(val => val.key_usuario);
@@ -92,7 +92,7 @@ class index extends Component {
             onRefresh={handleRefresh}
             refreshing={this.state.refreshing}
             // scrollEnabled={false}
-            data={Object.values(data)}
+            data={Object.values(data).sort((a, b) => new SDate(a.fecha_on, "yyyy-MM-ddThh:mm:ss").getTime() >= new SDate(b.fecha_on, "yyyy-MM-ddThh:mm:ss").getTime() ? -1 : 1)}
             style={{
                 width: "100%",
             }}
@@ -115,6 +115,7 @@ class index extends Component {
                     <SView col={"xs-12"} flex>
                         {this.renderPublicaciones()}
                     </SView>
+                    <SHr height={40}/>
                 </Container>
             </SPage>
         );
