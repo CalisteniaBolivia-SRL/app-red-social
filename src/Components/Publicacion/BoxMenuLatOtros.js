@@ -49,11 +49,8 @@ class index extends Component<BoxMenuLatOtrosPropsType> {
                     </SView>
                     <SView col={"xs-12"} height={48} center
                         onPress={() => {
-                            console.log(this.props.datas)
                             SharedFunctions.compartir({
-                                url: SSocket.api.root + "publicacion/"+this.props.datas.key,
-                                text: "Mira servisots",
-                                hashtags: "#Servisofts"
+                                text: `${SSocket.api.root + "publicacion/" + this.props.datas?.key}  ${this.props.datas?.descripcion}`,
                             });
                         }}
                     >

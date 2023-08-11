@@ -43,7 +43,7 @@ class index extends Component<PublicacionPropsType> {
     }
 
     renderAuthor() {
-        // var key_usuario = Model.usuario.Action.getKey();
+        var key_usuario = Model.usuario.Action.getKey();
         // let user = Model.usuario.Action.getByKey(this.props.data?.key_usuario);
 
         let user = this.props.usuario ?? {}
@@ -56,7 +56,7 @@ class index extends Component<PublicacionPropsType> {
                 <SView style={{
                     backgroundColor: STheme.color.card, borderRadius: 100, width: 40, height: 40, overflow: "hidden"
                 }}>
-                    <SImage src={SSocket.api.root + "usuario/" + this.props.data.key_usuario} style={{
+                    <SImage src={SSocket.api.root + "usuario/" + this.props.data?.key_usuario} style={{
                         resizeMode: "cover"
                     }} />
                 </SView>
@@ -67,7 +67,7 @@ class index extends Component<PublicacionPropsType> {
                 <SText bold>{user?.Nombres} {user?.Apellidos}</SText>
             </SView>
             <SView width={30} center onPress={() => {
-                SPopup.open({ key: "menuLat", content: (key_usuario == this.props.data.key_usuario) ? <BoxMenuLat datas={this.props.data} /> : <BoxMenuLatOtros datas={this.props.data} /> });
+                SPopup.open({ key: "menuLat", content: (key_usuario == this.props?.data?.key_usuario) ? <BoxMenuLat datas={this.props?.data} /> : <BoxMenuLatOtros datas={this.props.data} /> });
             }} >
                 <SIcon name={"MenuLat"} fill={STheme.color.text} width={24} height={24} />
                 <SView width={5} />
