@@ -57,6 +57,7 @@ import MChek, { ReactComponent as MChekW } from './mChek.svg';
 import MAsistencia, { ReactComponent as MAsistenciaW } from './mAsistencia.svg';
 import MDark, { ReactComponent as MDarkW } from './mDark.svg';
 import MSun, { ReactComponent as MSunW } from './mSun.svg';
+import MPaquete, { ReactComponent as MPaqueteW } from './mPaquete.svg';
 
 
 
@@ -118,6 +119,7 @@ const Assets = {
 	"MAsistencia": { Native: MAsistencia, Web: MAsistenciaW },
 	"MDark": { Native: MDark, Web: MDarkW },
 	"MSun": { Native: MSun, Web: MSunW },
+	"MPaquete": { Native: MPaquete, Web: MPaqueteW },
 	
 }
 

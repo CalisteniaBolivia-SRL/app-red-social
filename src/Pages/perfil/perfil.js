@@ -310,7 +310,7 @@ class perfil extends Component {
                         url: '/perfil/paquetes',
                         key: this.data.key,
                         titulo: 'Mis paquetes',
-                        icon: 'MAsistencia'
+                        icon: 'MPaquete'
                     })}
                     {this.opcion({
                         url: '/notifications',
