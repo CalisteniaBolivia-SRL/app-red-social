@@ -7,6 +7,7 @@ import BoxMenuLatOtros from './BoxMenuLatOtros';
 import Model from '../../Model';
 import LikeAnimation from './LikeAnimation';
 import ImagePub from './ImagePub';
+import TextWithLink from '../TextWithLink';
 export type PublicacionPropsType = {
     data: any,
     usuario: any,
@@ -96,7 +97,7 @@ class index extends Component<PublicacionPropsType> {
         });
     }
     renderImage() {
-
+        const image_src = Model.publicacion._get_image_download_path(SSocket.api, this.props.data.key ?? "");
         return <SView col={"xs-12"} colSquare activeOpacity={1}
             style={{
                 backgroundColor: "#66666622"
@@ -117,7 +118,7 @@ class index extends Component<PublicacionPropsType> {
                 })
             }}>
             {/* <ImagePub src={Model.publicacion._get_image_download_path(SSocket.api, this.props.data.key)} /> */}
-            <SImage src={Model.publicacion._get_image_download_path(SSocket.api, this.props.data.key)} style={{
+            <SImage src={image_src} style={{
                 resizeMode: "contain"
             }} />
             {Model.usuario.Action.getKey() ? <LikeAnimation ref={ref => this.likeanim = ref} /> : null}
@@ -128,7 +129,7 @@ class index extends Component<PublicacionPropsType> {
             Model.publicacion_like.Action.dislike({
                 key_usuario: Model.usuario.Action.getKey(),
                 key_publicacion: this.props.data.key,
-            },this.props.disLike)
+            }, this.props.disLike)
         } else {
             this.handleLike()
         }
@@ -163,7 +164,7 @@ class index extends Component<PublicacionPropsType> {
     }
     renderTitle() {
         return <SView col={"xs-12"}>
-            <SText>{this.props.data.descripcion}</SText>
+            <TextWithLink>{this.props.data.descripcion}</TextWithLink>
         </SView>
     }
     renderLikes() {

@@ -30,6 +30,13 @@ class asistencia extends Component {
 
         })
 
+        Model.paquete_venta.Action.getAllByUsuario().then(resp => {
+            this.setState({ paquetes: resp.data })
+        }).catch(e => {
+
+        })
+
+
     }
 
     renderDias(data, i) {
@@ -223,9 +230,9 @@ class asistencia extends Component {
                 Hola, {usuario.Nombres}
             </SText>
             <SHr height={15} />
-            <MiPlan data={usuario} onLoad={(data) => {
+            {/* <MiPlan data={usuario} onLoad={(data) => {
                 this.setState({ paquetes: data })
-            }} />
+            }} /> */}
             <SHr height={15} />
             {this.getCalendario(this.state.curDay.getMonth() - 1, this.state.curDay.getYear())}
         </SView>

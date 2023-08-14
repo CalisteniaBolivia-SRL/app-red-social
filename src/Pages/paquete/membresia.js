@@ -57,7 +57,7 @@ class membresia extends Component {
             initSpace={15}
             data={dataMostrar}
             filter={(a) => a.estado != 0}
-            // order={[{ key: "fecha_on", order: "desc", peso: 1, }]}
+            order={[{ key: "precio", order: "asc", peso: 1, }]}
             render={(data) => {
                 return <Card datas={data} dataPaquete={paquetes} key_sucursal={this.key_sucursal} />
             }}

@@ -7,6 +7,7 @@ import Model from '../../Model';
 import { AccentBar, BottomNavigator, Container, PButtom, Publicacion } from '../../Components';
 import usuario_dato from '../../Model/tapeke/usuario_dato';
 import MiPaquete from './components/MiPaqueteActivo';
+import TextWithLink from '../../Components/TextWithLink';
 
 class index extends Component {
     constructor(props) {
@@ -123,7 +124,7 @@ class index extends Component {
             <SHr h={4} />
             <SView col={"xs-12"}>
                 <SText bold fontSize={16}>{usuario["Nombres"]} {usuario["Apellidos"]}</SText>
-                <SText fontSize={14}>{usuario["CI"]}</SText>
+                <TextWithLink fontSize={14}>{usuario["detalle_app"]}</TextWithLink>
             </SView>
         </SView>
         )
@@ -131,20 +132,20 @@ class index extends Component {
     renderMenu() {
         if (Model.usuario.Action.getKey() != this.key_usuario) return null;
 
-        return <SView  flex style={{ alignItems: "flex-end" }} >
+        return <SView flex style={{ alignItems: "flex-end" }} >
             <SView center row style={{ alignItems: "flex-end" }} col={"xs-12"} >
-                <SView  padding={8} row col={"xs-5.8"} center onPress={() => {
+                <SView padding={8} row col={"xs-5.8"} center onPress={() => {
                     SNavigation.navigate("/perfil/asistencia", { key: this.key_usuario });
-                }} 
-                backgroundColor={STheme.color.card}>
+                }}
+                    backgroundColor={STheme.color.card}>
                     <SText bold>Asistencia</SText>
                 </SView>
                 {/* <SHr/> */}
                 <SView col={"xs-0.2"} />
-                <SView  padding={8} row col={"xs-5.8"} center onPress={() => {
+                <SView padding={8} row col={"xs-5.8"} center onPress={() => {
                     SNavigation.navigate("/perfil/paquetes", { key: this.key_usuario });
                 }}
-                backgroundColor={STheme.color.card}>
+                    backgroundColor={STheme.color.card}>
                     <SText bold>Paquetes</SText>
                 </SView>
             </SView>

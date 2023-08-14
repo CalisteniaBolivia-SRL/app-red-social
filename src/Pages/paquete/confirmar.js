@@ -46,7 +46,12 @@ class confirmar extends Component {
                 <SView row col={"xs-11"}>
                     {this.btn({ title: "No, cancelar", onPress: () => { SPopup.close("confirmar"); }, active: false })}
                     <SView col={"xs-1"} />
-                    {this.btn({ title: "Sí, Confirmar", onPress: () => { SPopup.close("confirmar"); SNavigation.navigate("/paquete/membresia/qr", { ...this.params, }); }, active: true })}
+                    {this.btn({
+                        title: "Sí, Confirmar", onPress: () => {
+                            SPopup.close("confirmar");
+                            SNavigation.navigate("/paquete/membresia/qr", { ...this.params, });
+                        }, active: true
+                    })}
                 </SView>
             </SView>
             <SView flex />
@@ -61,10 +66,10 @@ class confirmar extends Component {
     fechas(data_paquete, data_sucursal, data_usuario) {
         return <>
             <SView col={"xs-12"} flex style={{ alignItems: "flex-start" }}>
-                <SText >Registre la fecha de inicio de su membresía.</SText>
+                {/* <SText >Registre la fecha de inicio de su membresía.</SText> */}
             </SView>
             <SHr height={5} />
-            <SForm
+            {/* <SForm
                 ref={(ref) => { this.form = ref; }}
                 style={{
                     alignItems: "center",
@@ -94,40 +99,10 @@ class confirmar extends Component {
 
                     if (!values["Fecha_inicio"]) return;
                     SPopup.open({ key: "confirmar", content: this.popupConfirmacion() });
-                    // var fecha_fin = new SDate(values["Fecha_inicio"]).addDay(data_paquete?.dias)
-                    // console.log("fecha_inicio: " + values["Fecha_inicio"] + " fecha_fin: " + fecha_fin + " dias add: " + data_paquete?.dias)
-
-                    // Model.paquete_venta.Action.registrar({
-                    //     key_paquete: this.params.pk
-                    // }).then((resp) => {
-                    //     Model.paquete_venta.Action.CLEAR(); //Limpiar caché
-                    //     SNavigation.goBack();
-                    // }).catch((e) => {
-                    //     SPopup.alert("Error en los datos");
-                    // })
-
-                    // Model.paquete_venta_usuario.Action.registrar({
-                    //     fecha_inicio: values["Fecha_inicio"],
-                    //     fecha_fin: values["Fecha_fin"],
-                    //     key_usuario: Model.usuario.Action.getKey()
-                    // }).then((resp) => {
-                    //     Model.paquete_venta_usuario.Action.CLEAR(); //Limpiar caché
-                    //     SNavigation.goBack();
-                    // }).catch((e) => {
-                    //     SPopup.alert("Error en los datos");
-                    // })
-
-                    // SPopup.close("confirmar");
-                    console.log(JSON.stringify(values) + " kkk")
                 }}
-            />
+            /> */}
             <SHr height={26} />
-            <BtnSend
-                onPress={() => {
-                    this.form.submit()
-                    // SNavigation.navigate("/restaurante", { pk: obj.key });
-                }}
-            >Confirmar</BtnSend>
+
         </>
     }
 
@@ -141,8 +116,8 @@ class confirmar extends Component {
         // if (!usuario) return <SLoad />
         if (!sucursal) return <SLoad />
         if (!paquete) return <SLoad />
-        console.log(JSON.stringify(sucursal) + " PPPP");
-        var { key, descripcion, dias, precio, participantes } = paquete;
+        // console.log(JSON.stringify(sucursal) + " PPPP");
+        // var { key, descripcion, dias, precio, participantes } = paquete;
 
         return <SView col={"xs-12"} center>
             <SView
@@ -222,9 +197,9 @@ class confirmar extends Component {
                     <SText>{paquete.precio}</SText>
                 </SView>
             </SView>
-            <SHr height={26} />
+            {/* <SHr height={26} />
             {this.fechas(paquete, sucursal, usuario)}
-            <SHr height={16} />
+            <SHr height={16} /> */}
         </SView>
 
     }
@@ -245,6 +220,15 @@ class confirmar extends Component {
                     <SHr height={20} />
                     {this.render_with_data()}
                     <SHr height={30} />
+                    <SText center color={STheme.color.lightGray}>{"Al pagar un nuevo paquete, este se activará inmediatamente si no tiene uno vigente. Si ya tiene uno, el nuevo comenzará cuando termine el actual."}</SText>
+                    <SHr h={30} />
+                    <BtnSend
+                        onPress={() => {
+                            // this.form.submit()
+                            SPopup.open({ key: "confirmar", content: this.popupConfirmacion() });
+                            // SNavigation.navigate("/restaurante", { pk: obj.key });
+                        }}
+                    >Confirmar</BtnSend>
                 </Container>
             </SPage>
         );
