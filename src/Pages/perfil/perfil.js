@@ -239,6 +239,7 @@ class perfil extends Component {
             <SView col={'xs-12'} center>
                 <SView row col={'xs-12'}
                     center
+
                 >
                     <SHr height={50} />
                     <SView col={'xs-12'} height={10} style={{
@@ -262,8 +263,10 @@ class perfil extends Component {
                             borderLeftColor: STheme.color.secondary,
                         }}
                         onPress={() => {
+                            STheme.change();
                             // SNavigation.navigate(url);
-                        }}>
+                        }}
+                    >
                         <SHr height={15} />
                         <SView row col={'xs-0.5'}>
 
@@ -306,7 +309,7 @@ class perfil extends Component {
                         titulo: 'Asistencia',
                         icon: 'MAsistencia'
                     })}
-                     {this.opcion({
+                    {this.opcion({
                         url: '/perfil/paquetes',
                         key: this.data.key,
                         titulo: 'Mis paquetes',
@@ -343,7 +346,7 @@ class perfil extends Component {
             // Model.usuario.Action.CLEAR();
 
         }}
-            
+
 
             footer={this.footer()}
         >

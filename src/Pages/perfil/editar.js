@@ -33,6 +33,7 @@ class index extends Component {
                 Apellidos: { label: "Apellidos", isRequired: true, defaultValue: this.data.Apellidos, },
                 "Telefono": { label: "Telefono", defaultValue: this.data["Telefono"], type: "phone" },
                 Correo: { label: "Correo", type: "email", isRequired: true, defaultValue: this.data.Correo, },
+                detalle_app: { label: "detalle_app", type: "textArea", isRequired: true, defaultValue: this.data.detalle_app, },
                 // ...(isApi ? {} : {
                 //     Password: { label: "Contraseña", type: "password", isRequired: true, defaultValue: this.data.Password, icon: <SIcon name={"InputPassword"} width={40} height={30} /> },
                 //     RepPassword: { label: "Repetir contraseña", type: "password", isRequired: true, defaultValue: this.data.Password, icon: <SIcon name={"InputRePassword"} width={40} height={30} /> }
@@ -89,9 +90,7 @@ class index extends Component {
     render() {
         return (
             <>
-                <SPage title={'Editar perfil'} onRefresh={() => {
-                    Model.usuario.Action.CLEAR();
-                }} >
+                <SPage title={'Editar perfil'}  >
                     <SView center>
                         <SView col={"xs-11 md-6 xl-4"} center>
                             <SView height={16} />

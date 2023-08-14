@@ -35,7 +35,7 @@ export default class Card extends Component {
                 }}
             >
                 <SView width={40} height={40} center style={{ borderRadius: 14, overflow: 'hidden' }}>
-                    <SImage src={SSocket.api.root + "/servicio/" + key} style={{
+                    <SImage src={SSocket.api.root + "/servicio/" + key+"?date="+new Date().getTime()} style={{
                         resizeMode: "cover"
                     }} />
                     {/* <SIcon name={"Lista1"} height={16} fill={"transparent"}></SIcon> */}
