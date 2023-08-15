@@ -294,8 +294,14 @@ class perfil extends Component {
                     <SHr height={5} />
                     {this.opcion({
                         url: '/perfil/editar',
-                        key: this.data.key,
+                        key: this.data?.key,
                         titulo: 'Editar perfil',
+                        icon: 'MEdit'
+                    })}
+                    {this.opcion({
+                        url: '/perfil/change_password',
+                        key: this.data?.key,
+                        titulo: 'Cambiar contraseña',
                         icon: 'MEdit'
                     })}
                     {this.opcion({
@@ -305,13 +311,13 @@ class perfil extends Component {
                     })}
                     {this.opcion({
                         url: '/perfil/asistencia',
-                        key: this.data.key,
+                        key: this.data?.key,
                         titulo: 'Asistencia',
                         icon: 'MAsistencia'
                     })}
                     {this.opcion({
                         url: '/perfil/paquetes',
-                        key: this.data.key,
+                        key: this.data?.key,
                         titulo: 'Mis paquetes',
                         icon: 'MPaquete'
                     })}

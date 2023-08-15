@@ -40,6 +40,7 @@ class CardLike extends Component<PublicacionLikePropsType> {
                 borderWidth: 1
             }}
             row center
+            onPress={this.props.onPress}
         >
             <SView col={"xs-4"} row >
                 {/* USUARIO */}

@@ -32,7 +32,7 @@ class index extends Component {
                 Nombres: { label: "Nombres", isRequired: true, defaultValue: this.data["Nombres"], },
                 Apellidos: { label: "Apellidos", isRequired: true, defaultValue: this.data.Apellidos, },
                 "Telefono": { label: "Telefono", defaultValue: this.data["Telefono"], type: "phone" },
-                Correo: { label: "Correo", type: "email", isRequired: true, defaultValue: this.data.Correo, },
+                Correo: { label: "Correo", type: "email", isRequired: true, defaultValue: this.data.Correo, editable: false },
                 detalle_app: { label: "detalle_app", type: "textArea", isRequired: true, defaultValue: this.data.detalle_app, },
                 // ...(isApi ? {} : {
                 //     Password: { label: "Contraseña", type: "password", isRequired: true, defaultValue: this.data.Password, icon: <SIcon name={"InputPassword"} width={40} height={30} /> },
@@ -50,7 +50,8 @@ class index extends Component {
                     key_usuario: Model.usuario.Action.getKey()
                 }).then((resp) => {
                     SStorage.setItem("usr_log", JSON.stringify(finalObj)) //Modificar SStorage datos session
-                    Model.usuario.Action.CLEAR(); //Limpiar caché
+                    // Model.usuario.Action.CLEAR(); //Limpiar caché
+                    Model.usuario.Action.syncUserLog()
                     SNavigation.goBack();
                 }).catch((e) => {
                     SPopup.alert("Error en los datos");

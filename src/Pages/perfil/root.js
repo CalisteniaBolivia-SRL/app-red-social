@@ -174,7 +174,7 @@ class index extends Component {
     render() {
         return (<SPage onRefresh={() => {
             // Model.usuario.Action.CLEAR();
-
+            this.componentDidMount();
         }}
             footer={this.footer()}
         >

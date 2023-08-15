@@ -46,7 +46,12 @@ class likes extends Component {
             space={10}
             data={this.state.data}
             render={(data) => {
-                return <Publicacion.CardLike data={data} usuario={this.state?.usuarios[data?.key_usuario]?.usuario} />
+                return <Publicacion.CardLike data={data}
+                    usuario={this.state?.usuarios[data?.key_usuario]?.usuario}
+                    onPress={() => {
+                        SNavigation.navigate("/perfil/client", { pk: data?.key_usuario })
+                    }}
+                />
             }}
         />
     }

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# link="calisteniabolivia://app/test?algo=name&id=as"
-link="calisteniabolivia://app/paquete/compra_exitosa?pk=asdasdsda"
+link="calisteniabolivia://app/test?algo=name&id=as"
+# link="calisteniabolivia://app/paquete/compra_exitosa?pk=asdasdsda"
 # adb shell am start -W -a android.intent.action.VIEW -d $link
 npx uri-scheme open $link --android
 npx uri-scheme open $link --ios
