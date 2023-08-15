@@ -61,10 +61,15 @@ class index extends Component<BoxMenuLatPropsType> {
                                 ...this.props.datas,
                                 estado: 0
                             },
+                        }).then(e => {
+                            SNavigation.reset("/");    
+                            console.log(e)
+                        }).catch(e => {
+                            console.error(e)
                         })
                         SPopup.close("confirmar")
                         SPopup.close("menuLat")
-                        Model.publicacion.Action.CLEAR() //Limpiar caché
+                        // Model.publicacion.Action.CLEAR() //Limpiar caché
                         // SNavigation.reset("/");
                     }}
                         style={{ backgroundColor: STheme.color.secondary, borderRadius: 8 }}

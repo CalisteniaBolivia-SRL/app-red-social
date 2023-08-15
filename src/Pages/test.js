@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SForm, SHr, SNavigation, SPage, SPopup, SText, SLoad, SInput, SView, STheme, SIcon, SButtom, SDate } from 'servisofts-component';
+import { SForm, SHr, SNavigation, SPage, SPopup, SText, SLoad, SInput, SView, STheme, SIcon, SButtom, SDate, SImage } from 'servisofts-component';
 import Container from '../Components/Container';
 import LikeAnimation from '../Components/Publicacion/LikeAnimation';
 import Model from '../Model';
+import { Image } from 'react-native';
 
 class formulario extends Component {
     constructor(props) {
@@ -23,6 +24,8 @@ class formulario extends Component {
         }}>
             <SText fontSize={20}>Esta pagina solo puedo llegar con un deep link</SText>
             <SText>{JSON.stringify(this.params)}</SText>
+            {/* <Image source={require("./cool-wallpapers-icegif-1.gif")}/> */}
+            {/* <SImage src={} /> */}
             {/* <SText>{Object.keys(usuarios ?? {}).length}</SText> */}
             {/* <SText>{JSON.stringify(ricky ?? {}, "\n", "\t")}</SText> */}
             {/* <SText>{JSON.stringify(ruddy ?? {}, "\n", "\t")}</SText> */}

@@ -5,6 +5,7 @@ import editar from './editar';
 import asistencia from './asistencia';
 import paquetes from './paquetes';
 import datos from './perfil';
+import change_password from './change_password';
 
 export const Parent = {
     name: "perfil",
@@ -17,5 +18,6 @@ export default SPage.combinePages(Parent.name, {
     "asistencia":asistencia,
     paquetes,
     "datos":datos,
+    change_password
 
 });
