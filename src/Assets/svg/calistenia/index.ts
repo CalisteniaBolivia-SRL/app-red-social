@@ -58,6 +58,7 @@ import MAsistencia, { ReactComponent as MAsistenciaW } from './mAsistencia.svg';
 import MDark, { ReactComponent as MDarkW } from './mDark.svg';
 import MSun, { ReactComponent as MSunW } from './mSun.svg';
 import MPaquete, { ReactComponent as MPaqueteW } from './mPaquete.svg';
+import MPassword, { ReactComponent as MPasswordW } from './mPassword.svg';
 
 
 
@@ -120,6 +121,7 @@ const Assets = {
 	"MDark": { Native: MDark, Web: MDarkW },
 	"MSun": { Native: MSun, Web: MSunW },
 	"MPaquete": { Native: MPaquete, Web: MPaqueteW },
+	"MPassword": { Native: MPassword, Web: MPasswordW },
 	
 }
 

@@ -302,7 +302,7 @@ class perfil extends Component {
                         url: '/perfil/change_password',
                         key: this.data?.key,
                         titulo: 'Cambiar contraseña',
-                        icon: 'MEdit'
+                        icon: 'MPassword'
                     })}
                     {this.opcion({
                         url: 'eliminar',
