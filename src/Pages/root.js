@@ -97,7 +97,7 @@ class index extends Component {
                 width: "100%",
             }}
             keyExtractor={item => item.key.toString()}
-            ItemSeparatorComponent={() => <SHr h={35} />}
+            ItemSeparatorComponent={() => <SHr h={40} />}
             renderItem={itm => <Publicacion.Card data={itm.item} usuario={this.state?.usuarios[itm?.item?.key_usuario]?.usuario} />}
         />
     }
