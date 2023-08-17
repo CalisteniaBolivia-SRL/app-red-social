@@ -200,7 +200,7 @@ class index extends Component<PublicacionPropsType> {
         // Mostrar la fecha en base a la diferencia calculada
 
         if (segundos < 60) {
-            return segundos + "Hace instantes";
+            return "Hace instantes";
 
         } else if (minutos < 60) {
             if (minutos <= 1) {
@@ -244,7 +244,14 @@ class index extends Component<PublicacionPropsType> {
         }
     }
     renderFecha() {
-        return <SText fontSize={10} color={STheme.color.gray}>{this.mostrarFechaAtras(this.props?.data?.fecha_on)}</SText>
+        return <SText fontSize={12} color={STheme.color.gray}>{this.mostrarFechaAtras(this.props?.data?.fecha_on)}</SText>
+    }
+    renderComentarios() {
+        if (this.props.data.comentarios != 0) return <SView onPress={() => { SNavigation.navigate("/publicacion/comments", { pk: this.props.data.key }) }}>
+            {/* {(this.props.data.comentarios != 0) ? <SHr height={4} /> : null} */}
+            <SHr height={4} />
+            <SText fontSize={14} color={STheme.color.gray}>{(this.props.data.comentarios != 0) ? "Ver todos los comentarios" : ""}</SText>
+        </SView>
     }
     render() {
         return (<SView col={"xs-12"} >
@@ -254,12 +261,14 @@ class index extends Component<PublicacionPropsType> {
             {this.renderImage()}
             <SHr h={16} />
             {this.renderActions()}
-            <SHr h={16} />
+            <SHr h={8} />
             {this.renderLikes()}
             <SHr />
             {this.renderTitle()}
+            {this.renderComentarios()}
             <SHr height={4} />
             {this.renderFecha()}
+
             {/* <SHr /> */}
         </SView >
         );

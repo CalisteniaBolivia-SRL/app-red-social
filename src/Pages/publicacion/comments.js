@@ -87,11 +87,13 @@ class comments extends Component {
                                             backgroundColor: STheme.color.card,
                                             borderRadius: 100,
                                             overflow: "hidden"
-                                        }}>
+                                        }}
+                                            onPress={() => { SNavigation.navigate("/perfil/client", { pk: obj.key_usuario }) }}
+                                        >
                                             <SImage src={Model.usuario._get_image_download_path(SSocket.api, obj.key_usuario)} />
                                         </SView>
                                         <SView width={16} />
-                                        <SView flex>
+                                        <SView flex onPress={() => { SNavigation.navigate("/perfil/client", { pk: obj.key_usuario }) }}>
                                             <SText fontSize={14} bold>{user?.Nombres} {user?.Apellidos}</SText>
                                             <SHr h={8} />
                                             <SText fontSize={16}>{obj.descripcion}</SText>

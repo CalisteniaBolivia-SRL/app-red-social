@@ -213,14 +213,16 @@ class confirmar extends Component {
                 footer={this.footer()}
                 title={"Confirmar Membresía"}
             >
-                <Container>
+                <Container >
                     {/* <SView col={"xs-12"} >
                         <SText fontSize={26} color={STheme.color.white}>Detalle Membresía</SText>
                     </SView> */}
                     <SHr height={20} />
                     {this.render_with_data()}
                     <SHr height={30} />
-                    <SText center color={STheme.color.lightGray}>{"Al pagar un nuevo paquete, este se activará inmediatamente si no tiene uno vigente. Si ya tiene uno, el nuevo comenzará cuando termine el actual."}</SText>
+                    <SView card style={{padding:10}}>
+                        <SText center color={STheme.color.text} bold>{"IMPORTANTE :  Al pagar un nuevo paquete, este se activará inmediatamente si no tiene uno vigente. Si ya tiene uno, el nuevo comenzará cuando termine el actual."}</SText>
+                    </SView>
                     <SHr h={30} />
                     <BtnSend
                         onPress={() => {

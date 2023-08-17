@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { ScrollView } from 'react-native'
 
 import { SButtom, SDate, SHr, SIcon, SImage, SList, SLoad, SNavigation, SPage, SScrollView2, SText, STheme, SView } from 'servisofts-component';
 import { BottomNavigator, Container, NavBar, Pedido, Restaurante, TopBar, Sucursal, Publicacion } from '../Components';
@@ -18,7 +19,6 @@ class index extends Component {
 
 
     componentDidMount() {
-
         SSocket.sendPromise({
             component: "publicacion",
             type: "getAll",
@@ -98,13 +98,12 @@ class index extends Component {
                 width: "100%",
             }}
             keyExtractor={item => item.key.toString()}
-            ItemSeparatorComponent={() => <SHr h={100} />}
+            ItemSeparatorComponent={() => <SHr h={40} />}
             renderItem={itm => <Publicacion.Card data={itm.item} usuario={this.state?.usuarios[itm?.item?.key_usuario]?.usuario} />}
         />
     }
 
     render() {
-
         return (
             <SPage
                 navBar={<TopBar type={"home"} />}

@@ -12,7 +12,7 @@ export default class change_password extends Component {
         return (
             <SPage title={"Cambiar contraseña"}>
                 <Container>
-                    <SText color={STheme.color.lightGray}>{"La contraseña debe tener al menos seis caractere e incluir una combinación de números, letras y caracteres especiales (!$@%)."}</SText>
+                    <SText color={STheme.color.white} fontSize={14} justify>{"La contraseña debe contener al menos seis caracteres, incluyendo una combinación de números, letras y los siguientes símbolos especiales: (!$@%)."}</SText>
                     <SForm
                         ref={ref => this.form = ref}
                         inputs={{
