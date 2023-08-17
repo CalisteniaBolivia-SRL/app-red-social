@@ -49,6 +49,8 @@ class index extends Component {
         var sucursales = {}
         if (!sucursales) return <SLoad />
         if (!sucursal_servicio) return <SLoad />
+        // console.log(this.state.data)
+        if (Object.keys(this.state.data).length === 0) return <SView row><SHr height={60} /><SIcon name='Iprox' height={30} width={30} fill={STheme.color.text}/><SView width={10}/><SText fontSize={22} center font="Oswald-Bold">Próximamente...</SText></SView>;
 
         return <SList
             buscador={"true"}
