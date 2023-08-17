@@ -47,7 +47,10 @@ class login extends Component {
                         <SHr height={35} />
                         {/* <SectionApis /> */}
                         {/* <SHr height={35} /> */}
-                        <SectionRegister />
+
+                        {/* quitar mientrastanto */}
+                        {/* <SectionRegister /> */}
+
                         <SHr height={50} />
                     </Container>
                 </SView>

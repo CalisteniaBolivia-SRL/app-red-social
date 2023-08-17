@@ -17,7 +17,8 @@ export default class CardUser extends Component {
         var { key, Nombres, Apellidos, Telefono, Correo, CI } = this.props.datas;
         return (
             <SView col={"xs-12"}
-                height={120}
+                // height={120}
+                padding={10}
                 style={{
                     borderRadius: 10,
                     borderColor: STheme.color.darkGray,
@@ -80,7 +81,6 @@ export default class CardUser extends Component {
                         </SView>
                     </SView>
                 </SView>
-
             </SView>
         )
     }

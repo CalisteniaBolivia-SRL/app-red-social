@@ -52,7 +52,7 @@ export default class index extends Component {
                 {!user ?
                     <SIcon name={"Profile"} width={18} height={18} fill={STheme.color.primary} stroke={(this.props.url == "/login") ? STheme.color.secondary : STheme.color.text} />
                     :
-                    <SImage src={Model.usuario._get_image_download_path(SSocket.api, user.key)+"?date="+new Date().getTime()} style={{ borderWidth: 1 }} />
+                    <SImage src={Model.usuario._get_image_download_path(SSocket.api, user.key) + "?date=" + new Date().getTime()} style={{ borderWidth: 1 }} />
                 }
             </SView>
             <SView width={8} height />

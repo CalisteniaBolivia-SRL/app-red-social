@@ -25,7 +25,12 @@ export default class MiPlan extends Component {
     }
 
     getPaquetes() {
-        let data = Object.values(this.state.dataPaquete).filter(datas => (new SDate().equalDay(new SDate(datas.fecha_fin, "yyyy-MM-dd")) || (new Date().getTime() >= new Date(datas.fecha_inicio).getTime() && new Date().getTime() <= new Date(datas.fecha_fin).getTime())))
+        var fechafin = "2023-08-16"
+        // let data = Object.values(this.state.dataPaquete).filter(datas => (new SDate().equalDay(new SDate(datas.fecha_fin, "yyyy-MM-dd")) || (new Date().getTime() >= new Date(datas.fecha_inicio).getTime() && new Date().getTime() <= new Date(datas.fecha_fin).getTime())))
+        let data = Object.values(this.state.dataPaquete).filter(item => {
+            const fechaItem = new SDate().toString("yyyy-MM-dd");
+            return fechaItem >= (item.fecha_inicio) && fechaItem <= (item.fecha_fin);
+          });
 
         let paqueteAll;
         let paqueteData;

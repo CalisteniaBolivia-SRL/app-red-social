@@ -25,48 +25,32 @@ export default function ImagePub({ src }) {
     );
 
     return (
-        <PanGestureHandler
-            onGestureEvent={onPanEvent}
-            onHandlerStateChange={event => {
-                if (event.nativeEvent.oldState === State.ACTIVE) {
-                    Animated.spring(translateX, {
-                        toValue: 0,
-                        useNativeDriver: true,
-                    }).start();
-                    Animated.spring(translateY, {
-                        toValue: 0,
-                        useNativeDriver: true,
-                    }).start();
-                }
-            }}
-        >
-            <Animated.View style={{ width: "100%", flex: 1 }}>
-                <PinchGestureHandler
-                    onGestureEvent={onPinchEvent}
-                    onHandlerStateChange={event => {
-                        if (event.nativeEvent.oldState === State.ACTIVE) {
-                            Animated.spring(scale, {
-                                toValue: 1,
-                                useNativeDriver: true,
-                            }).start();
-                        }
+        <Animated.View style={{ width: "100%", flex: 1 }}>
+            <PinchGestureHandler
+                onGestureEvent={onPinchEvent}
+                onHandlerStateChange={event => {
+                    if (event.nativeEvent.oldState === State.ACTIVE) {
+                        Animated.spring(scale, {
+                            toValue: 1,
+                            useNativeDriver: true,
+                        }).start();
+                    }
+                }}
+            >
+                <Animated.Image
+                    source={{ uri: src }}
+                    style={{
+                        width: "100%",
+                        flex: 1,
+                        transform: [
+                            { scale },
+                            { translateX },
+                            { translateY },
+                        ],
                     }}
-                >
-                    <Animated.Image
-                        source={{ uri: src }}
-                        style={{
-                            width: "100%",
-                            flex: 1,
-                            transform: [
-                                { scale },
-                                { translateX },
-                                { translateY },
-                            ],
-                        }}
-                        resizeMode="contain"
-                    />
-                </PinchGestureHandler>
-            </Animated.View>
-        </PanGestureHandler>
+                    resizeMode="contain"
+                />
+            </PinchGestureHandler>
+        </Animated.View>
     );
 }

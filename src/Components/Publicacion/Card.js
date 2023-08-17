@@ -100,7 +100,8 @@ class index extends Component<PublicacionPropsType> {
         const image_src = Model.publicacion._get_image_download_path(SSocket.api, this.props.data.key ?? "");
         return <SView col={"xs-12"} colSquare activeOpacity={1}
             style={{
-                backgroundColor: "#66666622"
+                backgroundColor: "#66666622",
+                zIndex:999
             }}
             center
             onPress={() => {
@@ -117,10 +118,11 @@ class index extends Component<PublicacionPropsType> {
                     this.nclick = 0;
                 })
             }}>
-            {/* <ImagePub src={Model.publicacion._get_image_download_path(SSocket.api, this.props.data.key)} /> */}
-            <SImage src={image_src} style={{
+            <ImagePub src={image_src} />
+            {/* <SImage src={image_src} style={{
                 resizeMode: "contain"
-            }} />
+                // resizeMode: "cover"
+            }} /> */}
             {Model.usuario.Action.getKey() ? <LikeAnimation ref={ref => this.likeanim = ref} /> : null}
         </SView>
     }
@@ -181,7 +183,7 @@ class index extends Component<PublicacionPropsType> {
     }
     mostrarFechaAtras(fecha) {
         var fechaActual = new Date();
-        var fechaPasada = new Date(fecha);
+        var fechaPasada = new SDate(fecha, "yyyy-MM-ddThh:mm:ss");
 
         // Diferencia en milisegundos entre las dos fechas
         var diferencia = fechaActual.getTime() - fechaPasada.getTime();
@@ -199,7 +201,7 @@ class index extends Component<PublicacionPropsType> {
         // Mostrar la fecha en base a la diferencia calculada
 
         if (segundos < 60) {
-            return segundos + "Hace instantes";
+            return "Hace instantes";
 
         } else if (minutos < 60) {
             if (minutos <= 1) {
@@ -243,7 +245,14 @@ class index extends Component<PublicacionPropsType> {
         }
     }
     renderFecha() {
-        return <SText fontSize={10} color={STheme.color.gray}>{this.mostrarFechaAtras(this.props?.data?.fecha_on)}</SText>
+        return <SText fontSize={12} color={STheme.color.gray}>{this.mostrarFechaAtras(this.props?.data?.fecha_on)}</SText>
+    }
+    renderComentarios() {
+        if (this.props.data.comentarios != 0) return <SView onPress={() => { SNavigation.navigate("/publicacion/comments", { pk: this.props.data.key }) }}>
+            {/* {(this.props.data.comentarios != 0) ? <SHr height={4} /> : null} */}
+            <SHr height={4} />
+            <SText fontSize={14} color={STheme.color.gray}>{(this.props.data.comentarios != 0) ? "Ver todos los comentarios" : ""}</SText>
+        </SView>
     }
     render() {
         return (<SView col={"xs-12"} >
@@ -253,12 +262,14 @@ class index extends Component<PublicacionPropsType> {
             {this.renderImage()}
             <SHr h={16} />
             {this.renderActions()}
-            <SHr h={16} />
+            <SHr h={8} />
             {this.renderLikes()}
             <SHr />
             {this.renderTitle()}
+            {this.renderComentarios()}
             <SHr height={4} />
             {this.renderFecha()}
+
             {/* <SHr /> */}
         </SView >
         );

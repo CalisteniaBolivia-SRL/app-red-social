@@ -12,7 +12,7 @@ import SSocket from 'servisofts-socket'
 import * as amortizar from "./amortizar"
 import SShared from '../../Components/SShared';
 import BarraCargando from '../../Components/BarraCargando';
-
+import { version } from '../../../package.json'
 const debugData = {
     dataUser: {
         key: "c4310023-4413-42dd-9676-e9ed1bd862dc"
@@ -44,16 +44,19 @@ class qr extends Component {
             component: "paqueteVentaUsuario",
             type: "getQr",
             estado: "cargando",
+            version: version,
             key_usuario: key_usuario,
             key_paquete: this.params.pk,
             key_sucursal: this.params.sucursal
-        }, 60 * 2000).then(e => {
+        }, 2 * 60 * 1000).then(e => {
             this.setState({ loading: false, dataqr: e.data })
             this.isRun = true;
             this.hilo()
             console.log(e);
         }).catch(e => {
-            this.setState({ loading: false })
+            this.setState({ loading: false, error: e?.error })
+            SPopup.alert(e?.error)
+            SNavigation.goBack();
             console.error(e)
         })
     }
@@ -88,7 +91,7 @@ class qr extends Component {
             key_sucursal: this.params.sucursal,
         }).then(e => {
             if (e.data.fecha_pago) {
-                SNavigation.navigate("/paquete/compra_exitosa")
+                SNavigation.replace("/paquete/compra_exitosa")
             }
         }).catch(e => {
             console.error(e)

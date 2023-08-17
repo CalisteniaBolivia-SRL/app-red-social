@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { ScrollView } from 'react-native'
 
 import { SButtom, SDate, SHr, SIcon, SImage, SList, SLoad, SNavigation, SPage, SScrollView2, SText, STheme, SView } from 'servisofts-component';
 import { BottomNavigator, Container, NavBar, Pedido, Restaurante, TopBar, Sucursal, Publicacion } from '../Components';
@@ -18,7 +19,6 @@ class index extends Component {
 
 
     componentDidMount() {
-
         SSocket.sendPromise({
             component: "publicacion",
             type: "getAll",
@@ -92,31 +92,32 @@ class index extends Component {
             onRefresh={handleRefresh}
             refreshing={this.state.refreshing}
             // scrollEnabled={false}
+            pinchGestureEnabled={false}
             data={Object.values(data).sort((a, b) => new SDate(a.fecha_on, "yyyy-MM-ddThh:mm:ss").getTime() >= new SDate(b.fecha_on, "yyyy-MM-ddThh:mm:ss").getTime() ? -1 : 1)}
             style={{
                 width: "100%",
             }}
             keyExtractor={item => item.key.toString()}
-            ItemSeparatorComponent={() => <SHr h={100} />}
+            ItemSeparatorComponent={() => <SHr h={40} />}
             renderItem={itm => <Publicacion.Card data={itm.item} usuario={this.state?.usuarios[itm?.item?.key_usuario]?.usuario} />}
         />
     }
 
     render() {
-
         return (
             <SPage
                 navBar={<TopBar type={"home"} />}
                 footer={this.footer()}
                 disableScroll
+                center
             >
-                <Container flex>
+                <Container>
                     {this.renderPublicidad()}
-                    <SView col={"xs-12"} flex>
-                        {this.renderPublicaciones()}
-                    </SView>
-                    <SHr height={40}/>
                 </Container>
+                <SView col={"xs-12 sm-11 md-8 lg-6 xl-4"} flex>
+                    {this.renderPublicaciones()}
+                </SView>
+                {/* <SHr height={40} /> */}
             </SPage>
         );
     }

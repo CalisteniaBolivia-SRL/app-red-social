@@ -77,7 +77,6 @@ class index extends Component {
     footer() {
         return <>
             <BottomNavigator url={"/servicio"} />
-            {/* <BackButtom /> */}
         </>
     }
 }
