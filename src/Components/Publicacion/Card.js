@@ -117,10 +117,11 @@ class index extends Component<PublicacionPropsType> {
                     this.nclick = 0;
                 })
             }}>
-            {/* <ImagePub src={Model.publicacion._get_image_download_path(SSocket.api, this.props.data.key)} /> */}
-            <SImage src={image_src} style={{
+            <ImagePub src={image_src} />
+            {/* <SImage src={image_src} style={{
                 resizeMode: "contain"
-            }} />
+                // resizeMode: "cover"
+            }} /> */}
             {Model.usuario.Action.getKey() ? <LikeAnimation ref={ref => this.likeanim = ref} /> : null}
         </SView>
     }
@@ -181,7 +182,7 @@ class index extends Component<PublicacionPropsType> {
     }
     mostrarFechaAtras(fecha) {
         var fechaActual = new Date();
-        var fechaPasada = new Date(fecha);
+        var fechaPasada = new SDate(fecha, "yyyy-MM-ddThh:mm:ss");
 
         // Diferencia en milisegundos entre las dos fechas
         var diferencia = fechaActual.getTime() - fechaPasada.getTime();

@@ -47,7 +47,7 @@ class qr extends Component {
             key_usuario: key_usuario,
             key_paquete: this.params.pk,
             key_sucursal: this.params.sucursal
-        }, 60 * 2000).then(e => {
+        }, 2 * 60 * 1000).then(e => {
             this.setState({ loading: false, dataqr: e.data })
             this.isRun = true;
             this.hilo()
@@ -88,7 +88,7 @@ class qr extends Component {
             key_sucursal: this.params.sucursal,
         }).then(e => {
             if (e.data.fecha_pago) {
-                SNavigation.navigate("/paquete/compra_exitosa")
+                SNavigation.replace("/paquete/compra_exitosa")
             }
         }).catch(e => {
             console.error(e)
