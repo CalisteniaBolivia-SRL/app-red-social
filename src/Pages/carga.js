@@ -21,17 +21,8 @@ const versionToNumber = (v) => {
     }
     console.log(vn)
     return vn;
-    // for (let i = arrVR.length-1; i >= 0; i--) {
-    //     console.log(i);
-    // }
-    // const s1 = v[0] * (vl * vl);
-    // const s2 = v[1] * (vl);
-    // const s3 = v[2]
-
-
-
-
 }
+
 class index extends Component {
     constructor(props) {
         super(props);

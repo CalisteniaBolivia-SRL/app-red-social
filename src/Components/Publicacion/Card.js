@@ -100,7 +100,8 @@ class index extends Component<PublicacionPropsType> {
         const image_src = Model.publicacion._get_image_download_path(SSocket.api, this.props.data.key ?? "");
         return <SView col={"xs-12"} colSquare activeOpacity={1}
             style={{
-                backgroundColor: "#66666622"
+                backgroundColor: "#66666622",
+                zIndex:999
             }}
             center
             onPress={() => {
