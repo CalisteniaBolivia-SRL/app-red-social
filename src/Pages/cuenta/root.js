@@ -73,7 +73,7 @@ class index extends Component {
                             <SText center font="Oswald-Bold" fontSize={22}
                                 style={{
                                     textTransform: "uppercase"
-                                }}>Para adquiri el paquete debes instroducir tu carnet de identidad</SText>
+                                }}>Para adquirir el paquete debes introducir tu carnet de identidad</SText>
                         </SView>
                         <SHr height={35} />
                         <SForm
@@ -126,7 +126,9 @@ class index extends Component {
                         >Continuar
                         </BtnSend2>
                         <SHr height={65} />
-                        <SView center col={"xs-8"}
+
+                        {/* quitar mientrastanto */}
+                        {/* <SView center col={"xs-8"}
                             onPress={() => {
                                 SNavigation.navigate("/registro");
                             }}
@@ -134,7 +136,7 @@ class index extends Component {
                             <SText fontSize={12} center>
                                 Si eres nuevo en nuestra app y quieres participar de nuestra red social regístrate AQUÍ
                             </SText>
-                        </SView>
+                        </SView> */}
                         <SHr height={35} />
                     </Container>
                     {this.renderFooter()}

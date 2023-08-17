@@ -68,7 +68,7 @@ class CardLike extends Component<PublicacionLikePropsType> {
                     </SView>
                     <SHr height={2} />
                     <SText color={STheme.color.gray} fontSize={12}>
-                        Calistenia Bolivia Cristo
+                    {user?.detalle_app}
                     </SText>
                     <SHr height={2} />
                 </SView>
