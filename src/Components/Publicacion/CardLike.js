@@ -31,6 +31,14 @@ class CardLike extends Component<PublicacionLikePropsType> {
         // if (!this.state.datas) return <SLoad />
         var { key_usuario, nombre } = this.props.data;
         let user = this.props.usuario ?? {}
+
+        let cadena_detalle = user?.detalle_app;
+        if (user?.detalle_app) {
+            cadena_detalle = cadena_detalle.slice(0, 70)
+        } else {
+            cadena_detalle = ""
+
+        }
         return (<SView
             col={"xs-12"}
             style={{
@@ -68,7 +76,7 @@ class CardLike extends Component<PublicacionLikePropsType> {
                     </SView>
                     <SHr height={2} />
                     <SText color={STheme.color.gray} fontSize={12}>
-                    {user?.detalle_app}
+                        {cadena_detalle}
                     </SText>
                     <SHr height={2} />
                 </SView>

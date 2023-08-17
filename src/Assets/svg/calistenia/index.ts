@@ -59,6 +59,7 @@ import MDark, { ReactComponent as MDarkW } from './mDark.svg';
 import MSun, { ReactComponent as MSunW } from './mSun.svg';
 import MPaquete, { ReactComponent as MPaqueteW } from './mPaquete.svg';
 import MPassword, { ReactComponent as MPasswordW } from './mPassword.svg';
+import Iprox, { ReactComponent as IproxW } from './iprox.svg';
 
 
 
@@ -122,6 +123,8 @@ const Assets = {
 	"MSun": { Native: MSun, Web: MSunW },
 	"MPaquete": { Native: MPaquete, Web: MPaqueteW },
 	"MPassword": { Native: MPassword, Web: MPasswordW },
+	"Iprox": { Native: Iprox, Web: IproxW },
+	
 	
 }
 
