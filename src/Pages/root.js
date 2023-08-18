@@ -114,7 +114,7 @@ class index extends Component {
                 <Container>
                     {this.renderPublicidad()}
                 </Container>
-                <SView col={"xs-12 sm-11 md-8 lg-6 xl-4"} flex>
+                <SView col={"xs-11 sm-11 md-8 lg-6 xl-4"} flex>
                     {this.renderPublicaciones()}
                 </SView>
                 {/* <SHr height={40} /> */}
