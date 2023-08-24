@@ -93,7 +93,7 @@ class index extends Component {
                     <SView style={{
                         width: "100%", height: "100%", backgroundColor: STheme.color.card, borderRadius: 100, overflow: "hidden",
                     }} border={STheme.color.card}>
-                        {(Model.usuario.Action.getKey() != this.key_usuario) ? <SImage src={SSocket.api.root + "usuario/" + usuario?.key} enablePreview style={{ resizeMode: 'cover' }} /> :
+                        {(Model.usuario.Action.getKey() != this.key_usuario) ? <SImage src={SSocket.api.root + "usuario/" + usuario?.key + "?date=" + new Date().getTime()} enablePreview style={{ resizeMode: 'cover' }} /> :
                             <SForm
                                 col={"xs-12"}
                                 ref={ref => this.inp_foto = ref}

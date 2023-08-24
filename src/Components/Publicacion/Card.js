@@ -57,7 +57,7 @@ class index extends Component<PublicacionPropsType> {
                 <SView style={{
                     backgroundColor: STheme.color.card, borderRadius: 100, width: 40, height: 40, overflow: "hidden"
                 }}>
-                    <SImage src={SSocket.api.root + "usuario/" + this.props.data?.key_usuario} style={{
+                    <SImage src={SSocket.api.root + "usuario/" + this.props.data?.key_usuario + "?date=" + (new Date().getTime() / (1000 * 60)).toFixed(0)} style={{
                         resizeMode: "cover"
                     }} />
                 </SView>
@@ -101,7 +101,7 @@ class index extends Component<PublicacionPropsType> {
         return <SView col={"xs-12"} colSquare activeOpacity={1}
             style={{
                 backgroundColor: "#66666622",
-                zIndex:999
+                zIndex: 999
             }}
             center
             onPress={() => {
