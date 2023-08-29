@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { SButtom, SHr, SIcon, SImage, SList, SLoad, SNavigation, SPage, SScrollView2, SText, STheme, SView } from 'servisofts-component';
+import { SButtom, SHr, SIcon, SImage, SList, SList2, SLoad, SNavigation, SPage, SScrollView2, SText, STheme, SView } from 'servisofts-component';
 import { BottomNavigator, Container, NavBar, Pedido, Restaurante, TopBar, Sucursal } from '../../Components';
 import Model from '../../Model';
 import SSocket from 'servisofts-socket'
@@ -49,13 +49,11 @@ class index extends Component {
         if (!sucursal_servicio) return <SLoad />
         if(!this.state.data) return <SLoad />
 
-        console.log(this?.state?.data)
-        console.log("gggg");
         if (Object.keys(this?.state?.data).length === 0) return <SView col={"xs-12"} center row><SHr height={60} /><SIcon name='Iprox' height={30} width={30} fill={STheme.color.text}/><SView width={10}/><SText fontSize={22} center font="Oswald-Bold">Próximamente...</SText></SView>;
-
-        return <SList
+        return <SList2
             buscador={"true"}
-            space={14}
+            space={0}
+            horizontal
             data={this.state.data}
             filter={(a => a.estado_app > 0)}
             render={(data) => {
@@ -83,7 +81,7 @@ class index extends Component {
                 <SHr height={50} />
                 <Container>
                     {this.render_with_data()}
-                    <SHr height={25} />
+                    <SHr height={30} />
                 </Container>
             </SPage>
         );
