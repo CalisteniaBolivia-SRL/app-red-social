@@ -120,7 +120,7 @@ class index extends Component<PublicacionPropsType> {
                 })
             }}>
 
-            {this.props?.data?.tipo == "video" ? <SVideo src={image_src} /> : <ImagePub src={image_src} />}
+            {this.props?.data?.tipo == "video" ? <SVideo src={image_src+".mp4"} /> : <ImagePub src={image_src} />}
 
             {/* <SImage src={image_src} style={{
                 resizeMode: "contain"
