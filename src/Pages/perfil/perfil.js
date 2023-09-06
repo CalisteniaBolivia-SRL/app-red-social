@@ -292,6 +292,13 @@ class perfil extends Component {
                         <SHr height={15} />
                     </SView>
                     <SHr height={5} />
+                    
+                    {this.opcion({
+                        url: '/ranking',
+                        key: this.data?.key,
+                        titulo: 'Top Likes',
+                        icon: 'TopLike'
+                    })}
                     {this.opcion({
                         url: '/perfil/editar',
                         key: this.data?.key,
