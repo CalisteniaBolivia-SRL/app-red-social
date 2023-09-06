@@ -60,6 +60,8 @@ import MSun, { ReactComponent as MSunW } from './mSun.svg';
 import MPaquete, { ReactComponent as MPaqueteW } from './mPaquete.svg';
 import MPassword, { ReactComponent as MPasswordW } from './mPassword.svg';
 import Iprox, { ReactComponent as IproxW } from './iprox.svg';
+import Menup, { ReactComponent as MenupW } from './menup.svg';
+import TopLike, { ReactComponent as TopLikeW } from './topLike.svg';
 
 
 
@@ -124,8 +126,9 @@ const Assets = {
 	"MPaquete": { Native: MPaquete, Web: MPaqueteW },
 	"MPassword": { Native: MPassword, Web: MPasswordW },
 	"Iprox": { Native: Iprox, Web: IproxW },
-	
-	
+	"Menup": { Native: Menup, Web: MenupW },
+	"TopLike": { Native: TopLike, Web: TopLikeW },
+
 }
 
 export default Assets;
