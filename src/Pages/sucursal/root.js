@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { SButtom, SHr, SIcon, SImage, SList, SLoad, SNavigation, SPage, SScrollView2, SText, STheme, SView } from 'servisofts-component';
+import { SButtom, SHr, SIcon, SImage, SList, SList2, SLoad, SNavigation, SPage, SScrollView2, SText, STheme, SView } from 'servisofts-component';
 import { BottomNavigator, Container, NavBar, Pedido, Restaurante, TopBar, Sucursal } from '../../Components';
 import Model from '../../Model';
 import SSocket from 'servisofts-socket'
@@ -19,18 +19,16 @@ class index extends Component {
     }
     render_with_data() {
         var sucursales = Model.sucursal.Action.getAll();
-        // var sucursales2 = Model.sucursalUsuario.Action.getAll(key_sucursal);
         if (!sucursales) return <SLoad />
 
-        return <SList
+        return <SList2
             // buscador={"true"}
-
-            space={14}
+            space={0}
+            horizontal
             data={sucursales}
             filter={obj => !!obj.estado_app}
             // order={[{ key: "fecha_on", order: "desc", peso: 1, }]}
             render={(data) => {
-                // return <SText>Hola</SText>
                 return <Sucursal.Card image={1} data={data} key_sucursal={data.key} root={'/sucursal/detalle'} />
             }}
         />
@@ -53,7 +51,7 @@ class index extends Component {
                 <Container>
                     <SHr height={10} />
                     {this.render_with_data()}
-                    <SHr height={20} />
+                    <SHr height={30} />
                 </Container>
             </SPage>
         );
