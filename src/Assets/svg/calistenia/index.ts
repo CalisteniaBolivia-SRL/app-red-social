@@ -62,6 +62,8 @@ import MPassword, { ReactComponent as MPasswordW } from './mPassword.svg';
 import Iprox, { ReactComponent as IproxW } from './iprox.svg';
 import Menup, { ReactComponent as MenupW } from './menup.svg';
 import TopLike, { ReactComponent as TopLikeW } from './topLike.svg';
+import Sound, { ReactComponent as SoundW } from './sound.svg';
+import Nosound, { ReactComponent as NosoundW } from './nosound.svg';
 
 
 
@@ -128,6 +130,9 @@ const Assets = {
 	"Iprox": { Native: Iprox, Web: IproxW },
 	"Menup": { Native: Menup, Web: MenupW },
 	"TopLike": { Native: TopLike, Web: TopLikeW },
+	"Sound": { Native: Sound, Web: SoundW },
+	"Nosound": { Native: Nosound, Web: NosoundW },
+	
 
 }
 
