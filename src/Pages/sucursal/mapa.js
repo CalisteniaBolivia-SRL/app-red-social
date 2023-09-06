@@ -31,7 +31,7 @@ class index extends Component {
 
     getListSucursales() {
         if (!this.loadData()) return null;
-        return Object.values(this.sucursales).filter(a => a.estado_app > 0).map((obj, index) => {
+        return Object.values(this.sucursales).filter(a => a.estado_app > 0 &&  !a.tipo_tienda).map((obj, index) => {
             if (!obj.estado) return;
             return <Sucursal.Marker lat={obj.latitude} lng={obj.longitude} data={obj} onPress={() => {
                 // SNavigation.navigate("/sucursal", { pk: obj.key });

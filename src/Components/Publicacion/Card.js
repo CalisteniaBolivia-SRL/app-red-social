@@ -8,6 +8,7 @@ import Model from '../../Model';
 import LikeAnimation from './LikeAnimation';
 import ImagePub from './ImagePub';
 import TextWithLink from '../TextWithLink';
+import SVideo from '../SVideo';
 export type PublicacionPropsType = {
     data: any,
     usuario: any,
@@ -118,7 +119,9 @@ class index extends Component<PublicacionPropsType> {
                     this.nclick = 0;
                 })
             }}>
-            <ImagePub src={image_src} />
+
+            {this.props?.data?.tipo == "video" ? <SVideo src={image_src} /> : <ImagePub src={image_src} />}
+
             {/* <SImage src={image_src} style={{
                 resizeMode: "contain"
                 // resizeMode: "cover"
@@ -148,6 +151,7 @@ class index extends Component<PublicacionPropsType> {
                 {this.props.data.mylike ? <SIcon name={'Heart'} height={24} fill={STheme.color.danger} /> : <SIcon name={'Heart'} height={24} stroke={STheme.color.text} />}
             </SView>
             <SView width={size / 2} />
+            {/* <SText>{</SText> */}
             <SView width={size} height onPress={() => {
                 SNavigation.navigate("/publicacion/comments", { pk: this.props.data.key })
             }}>

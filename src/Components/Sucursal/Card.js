@@ -39,13 +39,12 @@ class index extends Component<SucursalCardPropsType> {
                     key_sucursal: this.props.key_sucursal, key_servicio: this.props.key_servicio
                 })
             }}
-            style={{ padding: 5 }}
+            style={{ padding: 4 }}
             row
-        // height={120}
         >
-
             <SView col={"xs-12"}
-                card height ={185}
+                card
+                height={180}
                 style={{
                     borderRadius: 10,
                     overflow: 'hidden',
@@ -66,8 +65,8 @@ class index extends Component<SucursalCardPropsType> {
                 <SView col={"xs-12"}
                     style={{ padding: 10 }} >
                     <SView col={"xs-12"}  >
-                        <SText fontSize={18} bold color={STheme.color.text} >{descripcion}</SText>
-                        <SText fontSize={10} color={STheme.color.text}>{direccion}</SText>
+                        <SText fontSize={16} bold color={STheme.color.text} >{descripcion}</SText>
+                        <SText fontSize={10} color={STheme.color.gray}>{direccion}</SText>
 
                     </SView>
 

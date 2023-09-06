@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SForm, SHr, SNavigation, SPage, SPopup, SText, SLoad, SInput, SView, STheme, SIcon, SButtom, SDate, SImage } from 'servisofts-component';
-import Container from '../Components/Container';
-import LikeAnimation from '../Components/Publicacion/LikeAnimation';
-import Model from '../Model';
-import { Image } from 'react-native';
+
+import SVideo from '../Components/SVideo';
 
 class formulario extends Component {
     constructor(props) {
@@ -16,20 +14,17 @@ class formulario extends Component {
     }
 
     render() {
+        return <SPage >
+            <SVideo
+                // poster={"http://192.168.2.1:30018/paquete/7a2274ad-3fec-4d54-a956-d8c2142aa311?time=1693970176258"}
+                source={{ uri: `https://repo.servisofts.com/class/kubernetes/001.-%20Todo%20lo%20que%20aprenderás%20sobre%20Kubernetes%20-%20Platzi1.mp4` }}
+                resizeMode={"contain"}
+                style={{
+                    width: 300,
+                    height: 500
+                }} />
 
-        // let usuarios = Model.usuario.Action.getAll();
-        // let ricky = Model.usuario.Action.getByKey("c4310023-4413-42dd-9676-e9ed1bd862dc");
-        // let ruddy = Model.usuario.Action.getByKey("a34002d9-c8bc-4e58-b98c-ace4aa15f915");
-        return <SPage title={"test"} onRefresh={() => {
-        }}>
-            <SText fontSize={20}>Esta pagina solo puedo llegar con un deep link</SText>
-            <SText>{JSON.stringify(this.params)}</SText>
-            {/* <Image source={require("./cool-wallpapers-icegif-1.gif")}/> */}
-            {/* <SImage src={} /> */}
-            {/* <SText>{Object.keys(usuarios ?? {}).length}</SText> */}
-            {/* <SText>{JSON.stringify(ricky ?? {}, "\n", "\t")}</SText> */}
-            {/* <SText>{JSON.stringify(ruddy ?? {}, "\n", "\t")}</SText> */}
-        </SPage>
+        </SPage >
     }
 }
 const initStates = (state) => {
