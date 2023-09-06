@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
-import { SText, SView, } from 'servisofts-component';
+import { SText, SThread, SView, } from 'servisofts-component';
 
 
 export default class SVideo extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            muted: true,
         };
 
     }
     componentDidMount() {
-        this.video.play()
+        new SThread(100, "before", true).start(() => {
+            this.video.play()
+        })
     }
 
     render() {
@@ -25,9 +28,15 @@ export default class SVideo extends Component {
             }
             this.setState({ paused: this.state.paused })
         }}>
-            <video ref={ref => this.video = ref} src={this.props.src} style={{
-                objectFit: "contain",
-                ...this.props.style
+            <video ref={ref => {
+                if (ref) {
+                    this.video = ref
+                }
+            }} src={this.props.src} style={{
+                objectFit: "cover",
+                width: "100%",
+                flex: 1,
+                // ...this.props.style
             }} autoPlay={!this.props.paused}  >
 
             </video>

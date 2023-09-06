@@ -7,6 +7,7 @@ export default class SVideo extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            muted: true,
         };
 
     }
@@ -17,10 +18,12 @@ export default class SVideo extends Component {
             style={{
                 overflow: "hidden"
             }}
-            onPress={() => this.setState({ paused: !this.state.paused })}
+            activeOpacity={1}
+            onPress={() => this.setState({ muted: !this.state.muted })}
         >
             <Video
-                paused={this.state?.paused}
+                muted={this.state?.muted}
+                // paused={this.state?.paused}
                 source={{
                     uri: this.props.src
                 }}
