@@ -47,6 +47,7 @@ class membresia extends Component {
         var dataMostrar = [];
         Object.values(paquetes).map((obj) => {
             if (obj.estado == 0) return null
+            if (!obj.estado_app) return null
             dato = Object.values(sucursal_paquetes).find(obj2 => obj2.key_paquete == obj.key);
             if (!dato) return null
             dataMostrar.push(obj)
