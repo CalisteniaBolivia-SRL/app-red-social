@@ -8,6 +8,7 @@ import Model from '../../Model';
 import LikeAnimation from './LikeAnimation';
 import ImagePub from './ImagePub';
 import TextWithLink from '../TextWithLink';
+import SVideo from '../SVideo';
 export type PublicacionPropsType = {
     data: any,
     usuario: any,
@@ -118,7 +119,9 @@ class index extends Component<PublicacionPropsType> {
                     this.nclick = 0;
                 })
             }}>
-            <ImagePub src={image_src} />
+
+            {this.props?.data?.tipo == "video" ? <SVideo src={`https://repo.servisofts.com/class/kubernetes/001.-%20Todo%20lo%20que%20aprenderás%20sobre%20Kubernetes%20-%20Platzi1.mp4`} /> : <ImagePub src={image_src} />}
+
             {/* <SImage src={image_src} style={{
                 resizeMode: "contain"
                 // resizeMode: "cover"

@@ -34,7 +34,7 @@ export default class Card extends Component {
 
                 }}
             >
-                <SView width={40} height={40} center style={{ borderRadius: 14, overflow: 'hidden' }}>
+                <SView width={40} height={40} center style={{ borderRadius: 4, overflow: 'hidden' }}>
                     <SImage src={SSocket.api.root + "/servicio/" + key} style={{
                         resizeMode: "cover"
                     }} />

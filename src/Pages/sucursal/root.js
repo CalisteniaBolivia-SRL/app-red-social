@@ -26,7 +26,7 @@ class index extends Component {
             space={0}
             horizontal
             data={sucursales}
-            filter={obj => !!obj.estado_app}
+            filter={obj => !!obj.estado_app && !obj.tipo_tienda}
             // order={[{ key: "fecha_on", order: "desc", peso: 1, }]}
             render={(data) => {
                 return <Sucursal.Card image={1} data={data} key_sucursal={data.key} root={'/sucursal/detalle'} />

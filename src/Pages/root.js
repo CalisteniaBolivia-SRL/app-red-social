@@ -93,7 +93,7 @@ class index extends Component {
             refreshing={this.state.refreshing}
             // scrollEnabled={false}
             pinchGestureEnabled={false}
-            data={Object.values(data).sort((a, b) => new SDate(a.fecha_on, "yyyy-MM-ddThh:mm:ss").getTime() >= new SDate(b.fecha_on, "yyyy-MM-ddThh:mm:ss").getTime() ? -1 : 1)}
+            data={[...Object.values(data).sort((a, b) => new SDate(a.fecha_on, "yyyy-MM-ddThh:mm:ss").getTime() >= new SDate(b.fecha_on, "yyyy-MM-ddThh:mm:ss").getTime() ? -1 : 1)]}
             style={{
                 width: "100%",
             }}
@@ -111,9 +111,12 @@ class index extends Component {
                 disableScroll
                 center
             >
-                <Container>
+                {/* <SButtom onPress={() => {
+                    SNavigation.navigate("/test")
+                }}>TEST</SButtom> */}
+                {/* <Container>
                     {this.renderPublicidad()}
-                </Container>
+                </Container> */}
                 <SView col={"xs-11 sm-11 md-8 lg-6 xl-4"} flex>
                     {this.renderPublicaciones()}
                 </SView>

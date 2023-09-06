@@ -33,6 +33,7 @@ import test from './test';
 import publicacion from './publicacion';
 import servicio from './servicio';
 import version_required from './version_required';
+import ranking from "./ranking/index"
 export default SPage.combinePages("/", {
   // "":test,
   "": carga,
@@ -50,6 +51,7 @@ export default SPage.combinePages("/", {
   "contacto": contacto,
   "novedades": novedades,
   "compras": compras,
+  ranking,
   version_required,
   ...notifications,
   explorar,
