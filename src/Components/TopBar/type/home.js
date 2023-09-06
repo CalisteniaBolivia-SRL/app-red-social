@@ -2,11 +2,15 @@ import React, { Component } from 'react'
 import { SIcon, SNavigation, SText, STheme, SView } from 'servisofts-component';
 
 import { TopBarPropsType } from '..';
+import Model from '../../../Model';
 export default class home extends Component<TopBarPropsType> {
     constructor(props) {
         super(props);
         this.state = {}
     }
+    // componentDidMount(){
+
+    // }
     getBack() {
         if (this.props.preventBack) {
             return null;
@@ -36,8 +40,21 @@ export default class home extends Component<TopBarPropsType> {
                     <SIcon name={"logowhite"} fill={STheme.color.text} width={115} />
 
                 </SView>
-                <SView flex center height>
-                </SView>
+                {(Model.usuario.Action.getKey()) ?
+                    <SView flex center height
+                        style={{
+                            alignItems: "flex-end"
+                        }}>
+                        <SView col={"xs-2.5"} center onPress={() => {
+                            SNavigation.navigate("/perfil/datos", { key: Model.usuario.Action.getKey() })
+                        }}>
+                            <SIcon fill={STheme.color.text} name='Menup' width={23} height={23} />
+                        </SView>
+                    </SView>
+                    :
+                    null
+                }
+
                 {/* <SView width={30} height center onPress={() => {
                     SNavigation.navigate('/ajustes');
                 }} >
