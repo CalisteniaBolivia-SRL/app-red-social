@@ -294,7 +294,7 @@ class perfil extends Component {
                     <SHr height={5} />
                     
                     {this.opcion({
-                        url: '/toplikes',
+                        url: '/ranking',
                         key: this.data?.key,
                         titulo: 'Top Likes',
                         icon: 'TopLike'
