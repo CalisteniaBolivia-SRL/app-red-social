@@ -8,6 +8,8 @@ import Model from '../Model';
 import SSocket from 'servisofts-socket'
 
 import { FlatList } from 'react-native';
+
+
 class index extends Component {
     constructor(props) {
         super(props);
@@ -17,6 +19,17 @@ class index extends Component {
         };
     }
 
+    ref = {}
+    onViewableItemsChanged = ({ viewableItems, changed }) => {
+        // Aquí puedes detectar los ítems que salieron de la vista y pausar su reproducción
+        changed.forEach(item => {
+            if (!item.isViewable) {
+                this.ref[item.key].handleClosed()
+            }else{
+                this.ref[item.key].handleOpen()
+            }
+        });
+    }
 
     componentDidMount() {
         SSocket.sendPromise({
@@ -47,9 +60,9 @@ class index extends Component {
     }
     clearData(resolv) {
         // Model.sucursal.Action.CLEAR();
-        // Model.publicacion.Action.CLEAR();
+        Model.publicacion.Action.CLEAR();
         // Model.usuario.Action.getAll({ force: true, fecha_edit: "1989-01-01T00:00:01" });
-        // Model.usuario.Action.CLEAR();
+        Model.usuario.Action.CLEAR();
         this.componentDidMount();
 
     }
@@ -88,6 +101,7 @@ class index extends Component {
         let data = Model.publicacion.Action._getReducer()?.data ?? {};
         // if (!this.state.data) return <SLoad />
 
+
         return <FlatList
             onRefresh={handleRefresh}
             refreshing={this.state.refreshing}
@@ -97,9 +111,14 @@ class index extends Component {
             style={{
                 width: "100%",
             }}
+            onViewableItemsChanged={this.onViewableItemsChanged}
+            // onViewableItemsChanged={onViewableItemsChanged}
+
             keyExtractor={item => item.key.toString()}
             ItemSeparatorComponent={() => <SHr h={40} />}
-            renderItem={itm => <Publicacion.Card data={itm.item} usuario={this.state?.usuarios[itm?.item?.key_usuario]?.usuario} />}
+            renderItem={itm => <Publicacion.Card
+                ref={ref => this.ref[itm.item.key] = ref}
+                data={itm.item} usuario={this.state?.usuarios[itm?.item?.key_usuario]?.usuario} />}
         />
     }
 

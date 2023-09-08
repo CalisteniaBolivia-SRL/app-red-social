@@ -10,6 +10,12 @@ export default class SVideo extends Component {
         };
 
     }
+    play() {
+        this.player.play()
+    }
+    pause() {
+        this.player.pause()
+    }
     componentDidMount() {
         new SThread(100, "before", true).start(() => {
             this.video.play()

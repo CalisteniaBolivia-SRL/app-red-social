@@ -26,6 +26,8 @@ target 'calistenia_rs_app' do
 
   pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
 
+  pod 'react-native-video', :path => '../node_modules/react-native-video'
+
 end
 
 # target 'ImageNotification' do

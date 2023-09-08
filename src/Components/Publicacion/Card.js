@@ -38,6 +38,18 @@ class index extends Component<PublicacionPropsType> {
         //     console.error(e)
         // })
     }
+
+    handleClosed() {
+        if (this.video_ref) {
+            this.video_ref.pause()
+        }
+    }
+
+    handleOpen() {
+        if (this.video_ref) {
+            this.video_ref.play()
+        }
+    }
     handlePress() {
         if (!this.props.onPress) return null;
         this.props.onPress(this.props.data)
@@ -98,7 +110,8 @@ class index extends Component<PublicacionPropsType> {
         });
     }
     renderImage() {
-        const image_src = Model.publicacion._get_image_download_path(SSocket.api, this.props.data.key ?? "");
+        // const image_src = Model.publicacion._get_image_download_path(SSocket.api, this.props.data.key ?? "");
+        const image_src = SSocket.api.repo + "publicacion/" + this.props.data.key ?? "";
         return <SView col={"xs-12"} colSquare activeOpacity={1}
             style={{
                 backgroundColor: "#66666622",
@@ -120,7 +133,7 @@ class index extends Component<PublicacionPropsType> {
                 })
             }}>
 
-            {this.props?.data?.tipo == "video" ? <SVideo src={image_src+".mp4"} /> : <ImagePub src={image_src} />}
+            {this.props?.data?.tipo == "video" ? <SVideo ref={ref => this.video_ref = ref} src={image_src + ".mp4"} /> : <ImagePub src={image_src} />}
 
             {/* <SImage src={image_src} style={{
                 resizeMode: "contain"
