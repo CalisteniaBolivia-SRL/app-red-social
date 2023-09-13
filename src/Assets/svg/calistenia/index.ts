@@ -64,6 +64,15 @@ import Menup, { ReactComponent as MenupW } from './menup.svg';
 import TopLike, { ReactComponent as TopLikeW } from './topLike.svg';
 import Sound, { ReactComponent as SoundW } from './sound.svg';
 import Nosound, { ReactComponent as NosoundW } from './nosound.svg';
+import Camera, { ReactComponent as CameraW } from './camera.svg';
+import Camera2, { ReactComponent as Camera2W } from './camera2.svg';
+import Camera3, { ReactComponent as Camera3W } from './camera3.svg';
+import RankBack, { ReactComponent as RankBackW } from './rankBack.svg';
+import Light, { ReactComponent as LightW } from './light.svg';
+import LogoSolo, { ReactComponent as LogoSoloW } from './logoSolo.svg';
+import IconFiltro, { ReactComponent as IconFiltroW } from './iconFiltro.svg';
+import IconOption, { ReactComponent as IconOptionW } from './iconOption.svg';
+import Winner, { ReactComponent as WinnerW } from './winner.svg';
 
 
 
@@ -132,7 +141,15 @@ const Assets = {
 	"TopLike": { Native: TopLike, Web: TopLikeW },
 	"Sound": { Native: Sound, Web: SoundW },
 	"Nosound": { Native: Nosound, Web: NosoundW },
-	
+	"Camera": { Native: Camera, Web: CameraW },
+	"Camera2": { Native: Camera2, Web: Camera2W },
+	"Camera3": { Native: Camera3, Web: Camera3W },
+	"RankBack": { Native: RankBack, Web: RankBackW },
+	"Light": { Native: Light, Web: LightW },
+	"LogoSolo": { Native: LogoSolo, Web: LogoSoloW },
+	"IconOption": { Native: IconOption, Web: IconOptionW },
+	"IconFiltro": { Native: IconFiltro, Web: IconFiltroW },
+	"Winner": { Native: Winner, Web: WinnerW },
 
 }
 

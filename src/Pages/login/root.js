@@ -49,7 +49,7 @@ class login extends Component {
                         {/* <SHr height={35} /> */}
 
                         {/* quitar mientrastanto */}
-                        {/* <SectionRegister /> */}
+                        <SectionRegister />
 
                         <SHr height={50} />
                     </Container>

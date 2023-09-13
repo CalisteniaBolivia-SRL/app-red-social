@@ -312,7 +312,7 @@ PODS:
     - React-jsi (= 0.64.4)
     - React-perflogger (= 0.64.4)
   - React-jsinspector (0.64.4)
-  - react-native-cameraroll (4.1.2):
+  - react-native-cameraroll (5.8.0):
     - React-Core
   - react-native-compressor (1.6.1):
     - NextLevelSessionExporter
@@ -341,7 +341,7 @@ PODS:
     - Google-Maps-iOS-Utils (= 2.1.0)
     - GoogleMaps (= 3.5.0)
     - React
-  - react-native-image-picker (4.7.3):
+  - react-native-image-picker (5.0.1):
     - React-Core
   - react-native-image-resizer (1.4.5):
     - React-Core
@@ -350,6 +350,11 @@ PODS:
   - react-native-notifications (4.2.4):
     - React-Core
   - react-native-safe-area-context (3.4.1):
+    - React-Core
+  - react-native-video (5.2.1):
+    - React-Core
+    - react-native-video/Video (= 5.2.1)
+  - react-native-video/Video (5.2.1):
     - React-Core
   - React-perflogger (0.64.4)
   - React-RCTActionSheet (0.64.4):
@@ -417,6 +422,8 @@ PODS:
     - React-perflogger (= 0.64.4)
   - RNAppleAuthentication (2.2.2):
     - React-Core
+  - RNCAsyncStorage (1.19.1):
+    - React-Core
   - RNCMaskedView (0.1.11):
     - React
   - RNFBApp (14.12.0):
@@ -469,7 +476,7 @@ PODS:
     - React-Core
   - RNSVG (12.5.1):
     - React-Core
-  - servisofts-component (2.11.19):
+  - servisofts-component (2.11.22):
     - React-Core
   - servisofts-socket (3.0.7):
     - CocoaAsyncSocket
@@ -498,7 +505,7 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
-  - "react-native-cameraroll (from `../node_modules/@react-native-community/cameraroll`)"
+  - "react-native-cameraroll (from `../node_modules/@react-native-camera-roll/camera-roll`)"
   - react-native-compressor (from `../node_modules/react-native-compressor`)
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
@@ -510,6 +517,7 @@ DEPENDENCIES:
   - react-native-maps (from `../node_modules/react-native-maps`)
   - react-native-notifications (from `../node_modules/react-native-notifications`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - react-native-video (from `../node_modules/react-native-video`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -523,6 +531,7 @@ DEPENDENCIES:
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNAppleAuthentication (from `../node_modules/@invertase/react-native-apple-authentication`)"
+  - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBMessaging (from `../node_modules/@react-native-firebase/messaging`)"
@@ -597,7 +606,7 @@ EXTERNAL SOURCES:
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   react-native-cameraroll:
-    :path: "../node_modules/@react-native-community/cameraroll"
+    :path: "../node_modules/@react-native-camera-roll/camera-roll"
   react-native-compressor:
     :path: "../node_modules/react-native-compressor"
   react-native-document-picker:
@@ -620,6 +629,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-notifications"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-video:
+    :path: "../node_modules/react-native-video"
   React-perflogger:
     :path: "../node_modules/react-native/ReactCommon/reactperflogger"
   React-RCTActionSheet:
@@ -646,6 +657,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNAppleAuthentication:
     :path: "../node_modules/@invertase/react-native-apple-authentication"
+  RNCAsyncStorage:
+    :path: "../node_modules/@react-native-async-storage/async-storage"
   RNCMaskedView:
     :path: "../node_modules/@react-native-community/masked-view"
   RNFBApp:
@@ -714,18 +727,19 @@ SPEC CHECKSUMS:
   React-jsi: 64f80675a66899bf0f4a58b8e3908966fa516234
   React-jsiexecutor: 8c077bef1c64430b6034f27df1000d194551e2eb
   React-jsinspector: d4f6973dd474357dbaaf6f52f31ffc713bf3e766
-  react-native-cameraroll: 60ac50a5209777cbccfe8d7a62d0743a9da87060
+  react-native-cameraroll: af4d7dd786786d15e8b9bcc54e4d535fa1e08e47
   react-native-compressor: 17b13a98c06ffa9262182a78be27099b443fd162
   react-native-document-picker: 644b4c5658f9d781a2ac4c4625ef414c8f797083
   react-native-fbsdk: 8e92c7a334fd8d9c2b5d8b8fcd7ae2c314161099
   react-native-fetch-blob: 0cbdf9764c75d9438c162427395f4bc35a857d5a
   react-native-geolocation: 205c5f619aea7bd54067b7b51e0781cae2f37151
   react-native-google-maps: 0a989abda71059db2caa98b9dacca7a8f38a47d0
-  react-native-image-picker: ae1202414bd5c37c00b2a701daa5b6194a06b7d9
+  react-native-image-picker: afd1d63b9c59a6c1a0daab715cd9c130ae4deea2
   react-native-image-resizer: 506412a2bdd70dde64a61e13505ce10f61a04369
   react-native-maps: f4b89da81626ad7f151a8bfcb79733295d31ce5c
   react-native-notifications: 3de8ef9cd800e5db0225d9aa46b228d2b94ce51e
   react-native-safe-area-context: 5b8a418400eb3d8364aa87300e865c0262cc17b9
+  react-native-video: 79a186e378d327b6c08bc3982c17ef455c6bd75c
   React-perflogger: 5a890ca0911669421b7611661e9b58f91c805f5c
   React-RCTActionSheet: bd180e0879f8424a73650c5c28fbef4f3b5b27fb
   React-RCTAnimation: 1004d2b4be1f2cedfdc4cb2326adc95b989e6c6b
@@ -739,6 +753,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 5b441857030bb6c3abaa7517f333cb01875ae499
   ReactCommon: b4a65d2d6e9eeffd4b32dde1245962b3f43907d0
   RNAppleAuthentication: 0571c08da8c327ae2afc0261b48b4a515b0286a6
+  RNCAsyncStorage: 7f8e2221400b54dd85ca18461ff983c46317d500
   RNCMaskedView: f127cd9652acfa31b91dcff613e07ba18b774db6
   RNFBApp: e4439717c23252458da2b41b81b4b475c86f90c4
   RNFBMessaging: 40dac204b4197a2661dec5be964780c6ec39bf65
@@ -750,10 +765,10 @@ SPEC CHECKSUMS:
   RNScreens: fd535547baa4ef8aeaee1a8b1e3ffd17b8df44a4
   RNShare: a5dc3b9c53ddc73e155b8cd9a94c70c91913c43c
   RNSVG: d7d7bc8229af3842c9cfc3a723c815a52cdd1105
-  servisofts-component: 6aca36411c15514a4dcdd5393dc3890cf3c39cdb
+  servisofts-component: b5c4ecfaf10df030e2c2e5eb062a6140c06cf1a2
   servisofts-socket: df7182b7e71443310ab4ddd8274811a6a0a32384
   Yoga: d1fc3575b8b68891ff5ef3c276daa855e841eb32
 
-PODFILE CHECKSUM: 72150c5bedecf2edaa319b5540a58779080419c8
+PODFILE CHECKSUM: 5b7c6e9bb82fc9176c99a31631be572a9654df93
 
 COCOAPODS: 1.11.3

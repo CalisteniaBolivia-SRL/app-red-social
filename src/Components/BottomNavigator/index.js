@@ -11,6 +11,7 @@ export default class index extends Component {
 
     getOption = (obj) => {
         return <SView col={"xs-2.4"} onPress={() => {
+            if (this.props.onPress) this.props.onPress(obj)
             SNavigation.navigate(obj.href)
             console.log(this.props.url)
         }} row center height >
@@ -74,7 +75,7 @@ export default class index extends Component {
             <SView col={"xs-11"} row flex center >
                 {this.getOption({ key: "home", icon: <SIcon name={"Home"} fill={STheme.color.primary} stroke={(this.props.url == "/root") ? STheme.color.secondary : STheme.color.text} />, href: "/root" })}
                 {this.getOption({ key: "search", icon: <SIcon name={"Search2"} fill={STheme.color.primary} stroke={(this.props.url == "/sucursal") ? STheme.color.secondary : STheme.color.text} />, href: "/sucursal" })}
-                {this.getOptionCenter({ key: "logo", icon: <SIcon name={"LogoBarra"} fill={STheme.color.darkGray} style={{ position: "absolute", top: -24 }} />, href: "/publicacion/add" })}
+                {this.getOptionCenter({ key: "logo", icon: <SIcon name={"LogoBarra"} fill={STheme.color.darkGray} style={{ position: "absolute", top: -24 }} />, href: "/ranking" })}
 
                 {this.getOption({ key: "bag", icon: <SIcon name={"Bag"} fill={STheme.color.primary} stroke={(this.props.url == "/servicio") ? STheme.color.secondary : STheme.color.text} />, href: "/servicio" })}
                 {this.getOptionUser()}

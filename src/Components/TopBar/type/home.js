@@ -40,20 +40,17 @@ export default class home extends Component<TopBarPropsType> {
                     <SIcon name={"logowhite"} fill={STheme.color.text} width={115} />
 
                 </SView>
-                {(Model.usuario.Action.getKey()) ?
-                    <SView flex center height
-                        style={{
-                            alignItems: "flex-end"
-                        }}>
-                        <SView col={"xs-2.5"} center onPress={() => {
-                            SNavigation.navigate("/perfil/datos", { key: Model.usuario.Action.getKey() })
-                        }}>
-                            <SIcon fill={STheme.color.text} name='Menup' width={23} height={23} />
-                        </SView>
+                <SView flex center height
+                    style={{
+                        alignItems: "flex-end"
+                    }}>
+                    <SView width={38} height={38} center onPress={() => {
+                        SNavigation.navigate("/publicacion/add", { key: Model.usuario.Action.getKey() })
+                    }}  >
+                        <SIcon fill={STheme.color.text} name='Camera3' width={23} height={23} stroke={0.5} />
                     </SView>
-                    :
-                    null
-                }
+                </SView>
+
 
                 {/* <SView width={30} height center onPress={() => {
                     SNavigation.navigate('/ajustes');

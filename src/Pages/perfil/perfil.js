@@ -359,8 +359,6 @@ class perfil extends Component {
             // Model.usuario.Action.CLEAR();
 
         }}
-
-
             footer={this.footer()}
         >
             <Container >
