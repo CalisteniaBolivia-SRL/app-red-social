@@ -15,6 +15,8 @@ class index extends Component {
         super(props);
         this.state = {
             refreshing: false,
+            page: 0,
+            limit: 50,
             usuarios: {}
         };
     }
@@ -22,25 +24,49 @@ class index extends Component {
     ref = {}
     onViewableItemsChanged = ({ viewableItems, changed }) => {
         // Aquí puedes detectar los ítems que salieron de la vista y pausar su reproducción
+        let makeVisible = false;
         changed.forEach(item => {
+            if (this.ref[item.key]) return;
             if (!item.isViewable) {
                 this.ref[item.key].handleClosed()
-            }else{
+            } else {
+                // if (makeVisible) return;
+                // Object.keys(this.ref).map(k => {
+                //     if (this.ref[k]) {
+                //         if (this.ref[k].handleClosed) {
+                //             this.ref[k].handleClosed()
+                //         }
+                //     }
+                // })
+                // console.log(item.key)
+                // makeVisible = true;
                 this.ref[item.key].handleOpen()
             }
         });
     }
 
     componentDidMount() {
+        if (this.state.loading) return;
+
+        this.setState({ loading: true })
         SSocket.sendPromise({
             component: "publicacion",
             type: "getAll",
+            pagina: this.state.page,
+            limit: this.state.limit,
             key_usuario: Model.usuario.Action.getKey(),
         }).then((e) => {
+            // this.state.loading = false;
+            this.setState({ loading: false })
+            e.data = {
+                ...Model.publicacion.Action._getReducer()?.data ?? {},
+                ...e.data
+            }
             Model.publicacion.Action._dispatch(e);
+            this.state.page += 1;
+
             const arr = Object.values(e.data)
             // this.setState({ data: arr })
-
             let userKeys = arr.map(val => val.key_usuario);
             const uniqueArr = [...new Set(userKeys)];
             SSocket.sendPromise({
@@ -54,12 +80,16 @@ class index extends Component {
             }).catch((e) => {
                 console.error(e)
             })
+        }).catch(e => {
+            this.state.loading = false;
         })
         // Model.usuario.Action.getAll({ force: true })
 
     }
     clearData(resolv) {
         // Model.sucursal.Action.CLEAR();
+        this.ref = {}
+        this.page = 0;
         Model.publicacion.Action.CLEAR();
         // Model.usuario.Action.getAll({ force: true, fecha_edit: "1989-01-01T00:00:01" });
         Model.usuario.Action.CLEAR();
@@ -106,14 +136,23 @@ class index extends Component {
             onRefresh={handleRefresh}
             refreshing={this.state.refreshing}
             // scrollEnabled={false}
+            ref={ref => this.list = ref}
             pinchGestureEnabled={false}
             data={[...Object.values(data).sort((a, b) => new SDate(a.fecha_on, "yyyy-MM-ddThh:mm:ss").getTime() >= new SDate(b.fecha_on, "yyyy-MM-ddThh:mm:ss").getTime() ? -1 : 1)]}
             style={{
                 width: "100%",
             }}
             onViewableItemsChanged={this.onViewableItemsChanged}
+            viewabilityConfig={{
+                minimumViewTime: 700,
+                itemVisiblePercentThreshold: 75
+            }}
+            onEndReachedThreshold={0.3}
             // onViewableItemsChanged={onViewableItemsChanged}
-
+            onEndReached={() => {
+                this.componentDidMount();
+            }}
+            ListFooterComponent={() => this.state.loading ? <SLoad size="large" /> : null}
             keyExtractor={item => item.key.toString()}
             ItemSeparatorComponent={() => <SHr h={40} />}
             renderItem={itm => <Publicacion.Card
@@ -145,7 +184,12 @@ class index extends Component {
     }
 
     footer() {
-        return <BottomNavigator url={"/root"} />
+        return <BottomNavigator url={"/root"} onPress={(a) => {
+            if (a.href == "/root") {
+                // this.clearData();
+                this.list.scrollToOffset({ offset: 0 })
+            }
+        }} />
     }
 }
 const initStates = (state) => {

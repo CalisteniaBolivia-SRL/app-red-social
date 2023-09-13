@@ -57,10 +57,15 @@ class root extends Component {
                             Model.usuario.Action.registro({
                                 data: { ...values }
                             }).then(resp => {
-                                SNavigation.replace('/');
-
+                                var usuario = resp.data;
+                                Model.usuario.Action.loginByKey({
+                                    usuario: usuario.Correo,
+                                    password: usuario.Password
+                                }).then(resp => {
+                                    SNavigation.replace("/");
+                                })
                             }).catch(e => {
-                                SPopup.alert("Ya existe un usuario con este correo.")
+                                SPopup.alert(`Ya existe un usuario con este ${e?.error}.`)
                             })
 
                             // Model.usuario.Action.validateRegistro({

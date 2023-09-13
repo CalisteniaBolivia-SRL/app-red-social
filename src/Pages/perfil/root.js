@@ -43,13 +43,19 @@ class index extends Component {
             component: "publicacion",
             type: "getAll",
             estado: "cargando",
+            key_usuario: Model.usuario.Action.getKey(),
+            key_perfil: this.key_usuario,
         }).then(res => {
             if (!this.state.publicaciones) return <SLoad />
-            mias = Object.values(res.data).filter(obj => obj.key_usuario == this.key_usuario)
+            mias = Object.values(res.data);
             canti = Object.keys(mias).length;
             this.setState({ publicacionesMias: mias });
             this.setState({ nroPublicaciones: canti });
+            mias.map(a => console.log(a.mylike))
+            console.log("asdasd")
+            mias.map(a => console.log(a.likes))
             const sumLike = mias.map(item => item.likes).reduce((prev, curr) => prev + curr, 0);
+
             this.setState({ nroLike: sumLike });
             // console.log(sumLike + " suma")
         }).catch(err => {

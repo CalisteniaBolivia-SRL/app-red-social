@@ -133,7 +133,7 @@ class index extends Component<PublicacionPropsType> {
                 })
             }}>
 
-            {this.props?.data?.tipo == "video" ? <SVideo ref={ref => this.video_ref = ref} src={image_src + ".mp4"} /> : <ImagePub src={image_src} />}
+            {this.props?.data?.tipo == "video" ? <SVideo ref={ref => this.video_ref = ref} src={image_src + ".mp4"}  poster={image_src} /> : <ImagePub src={image_src} />}
 
             {/* <SImage src={image_src} style={{
                 resizeMode: "contain"
@@ -166,7 +166,8 @@ class index extends Component<PublicacionPropsType> {
             <SView width={size / 2} />
             {/* <SText>{</SText> */}
             <SView width={size} height onPress={() => {
-                SNavigation.navigate("/publicacion/comments", { pk: this.props.data.key })
+                Model.usuario.Action.getKey() ? SNavigation.navigate("/publicacion/comments", { pk: this.props.data.key }) : SNavigation.navigate("/login")
+
             }}>
                 <SIcon name={'Comment'} height={24} fill={STheme.color.text} />
             </SView>
@@ -188,7 +189,10 @@ class index extends Component<PublicacionPropsType> {
     }
     renderLikes() {
         return <SView col={"xs-12"} onPress={() => {
-            SNavigation.navigate("/publicacion/likes", { pk: this.props.data.key })
+            Model.usuario.Action.getKey() ?
+                SNavigation.navigate("/publicacion/likes", { pk: this.props.data.key })
+                :
+                SNavigation.navigate("/login")
         }}>
             <SText bold>{(this.props?.data?.likes ?? 0) + " Me gusta"}</SText>
         </SView>

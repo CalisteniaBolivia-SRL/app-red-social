@@ -20,27 +20,21 @@ class membresia extends Component {
         this.key_sucursal = SNavigation.getParam("key_sucursal");
     }
 
-    componentDidMount() {
-        Model.paquete.Action.CLEAR();
-    }
     render_with_data() {
 
 
-        // var paquete_servicio = Model.paqueteServicio.Action.getAll(); //para más tarde
-        // var sucursal_paquete = Model.sucursal_paquete.Action.getAll();
-        // if (!sucursal_paquete) return <SLoad />
-        // if (!paquete_servicio) return <SLoad />
+        var paquete_servicio = Model.paqueteServicio.Action.getAll(); //para más tarde
+        var sucursal_paquete = Model.sucursal_paquete.Action.getAll();
+        if (!sucursal_paquete) return <SLoad />
+        if (!paquete_servicio) return <SLoad />
         // var paquete = Model.paquete.Action.getByKey(data.key_paquete);
-        var paquetes = Model.paquete.Action.getAll({
-            key_servicio: this.key_servicio,
-            key_sucursal: this.key_sucursal,
-        });
+        var paquetes = Model.paquete.Action.getAll();
         if (!paquetes) return <SLoad />
 
         // Object.values(publicaciones).filter(obj => obj.key_usuario == usuario.key);
 
-        // const paquetes_del_servicio = Object.values(paquete_servicio).filter(o => o.key_servicio == this.key_servicio);
-        // const sucursal_paquetes = Object.values(sucursal_paquete).filter(sucursal_paquete_ => sucursal_paquete_.key_sucursal == this.key_sucursal && !!paquetes_del_servicio.find(a => a.key_paquete == sucursal_paquete_.key_paquete));
+        const paquetes_del_servicio = Object.values(paquete_servicio).filter(o => o.key_servicio == this.key_servicio);
+        const sucursal_paquetes = Object.values(sucursal_paquete).filter(sucursal_paquete_ => sucursal_paquete_.key_sucursal == this.key_sucursal && !!paquetes_del_servicio.find(a => a.key_paquete == sucursal_paquete_.key_paquete));
 
         // sucursal_paquete
         // console.log(paquetes)
@@ -48,12 +42,14 @@ class membresia extends Component {
         // console.log(sucursal_paquete)
 
         // console.log(sucursal_paquetes)
+        let dato;
+        let datoOk;
         var dataMostrar = [];
         Object.values(paquetes).map((obj) => {
             if (obj.estado == 0) return null
             if (!obj.estado_app) return null
-            // dato = Object.values(sucursal_paquetes).find(obj2 => obj2.key_paquete == obj.key);
-            // if (!dato) return null
+            dato = Object.values(sucursal_paquetes).find(obj2 => obj2.key_paquete == obj.key);
+            if (!dato) return null
             dataMostrar.push(obj)
         })
         return <SList
@@ -77,9 +73,6 @@ class membresia extends Component {
         return (
             <SPage
                 footer={this.footer()}
-                onRefresh={(callback)=>{
-                    Model.paquete.Action.CLEAR();
-                }}
                 title={"Comprar"}
                 hidden
             >
