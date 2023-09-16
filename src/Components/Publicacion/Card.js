@@ -115,7 +115,8 @@ class index extends Component<PublicacionPropsType> {
         return <SView col={"xs-12"} colSquare activeOpacity={1}
             style={{
                 backgroundColor: "#66666622",
-                zIndex: 999
+                zIndex: 999,
+                // minHeight: 300,
             }}
             center
             onPress={() => {
@@ -133,7 +134,7 @@ class index extends Component<PublicacionPropsType> {
                 })
             }}>
 
-            {this.props?.data?.tipo == "video" ? <SVideo ref={ref => this.video_ref = ref} src={image_src + ".mp4"}  poster={image_src} /> : <ImagePub src={image_src} />}
+            {this.props?.data?.tipo == "video" ? <SVideo ref={ref => this.video_ref = ref} src={image_src + ".mp4"} poster={image_src} /> : <ImagePub src={image_src} />}
 
             {/* <SImage src={image_src} style={{
                 resizeMode: "contain"

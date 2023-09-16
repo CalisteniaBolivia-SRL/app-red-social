@@ -26,21 +26,16 @@ class index extends Component {
         // Aquí puedes detectar los ítems que salieron de la vista y pausar su reproducción
         let makeVisible = false;
         changed.forEach(item => {
-            if (this.ref[item.key]) return;
+            if (!this.ref[item.key]) return;
             if (!item.isViewable) {
-                this.ref[item.key].handleClosed()
+                if (this.ref[item.key].handleClosed) {
+                    this.ref[item.key].handleClosed()
+
+                }
             } else {
-                // if (makeVisible) return;
-                // Object.keys(this.ref).map(k => {
-                //     if (this.ref[k]) {
-                //         if (this.ref[k].handleClosed) {
-                //             this.ref[k].handleClosed()
-                //         }
-                //     }
-                // })
-                // console.log(item.key)
-                // makeVisible = true;
-                this.ref[item.key].handleOpen()
+                if (this.ref[item.key].handleOpen) {
+                    this.ref[item.key].handleOpen()
+                }
             }
         });
     }
@@ -62,6 +57,7 @@ class index extends Component {
                 ...Model.publicacion.Action._getReducer()?.data ?? {},
                 ...e.data
             }
+            // e.type = "getAll"
             Model.publicacion.Action._dispatch(e);
             this.state.page += 1;
 
@@ -89,7 +85,7 @@ class index extends Component {
     clearData(resolv) {
         // Model.sucursal.Action.CLEAR();
         this.ref = {}
-        this.page = 0;
+        this.state.page = 0;
         Model.publicacion.Action.CLEAR();
         // Model.usuario.Action.getAll({ force: true, fecha_edit: "1989-01-01T00:00:01" });
         Model.usuario.Action.CLEAR();
@@ -148,6 +144,7 @@ class index extends Component {
                 itemVisiblePercentThreshold: 75
             }}
             onEndReachedThreshold={0.3}
+
             // onViewableItemsChanged={onViewableItemsChanged}
             onEndReached={() => {
                 this.componentDidMount();
