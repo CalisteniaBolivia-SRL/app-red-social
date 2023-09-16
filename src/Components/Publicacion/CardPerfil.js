@@ -55,10 +55,11 @@ class index extends Component<CardPerfilPropsType> {
         </SView>
     }
     renderImage() {
+        const image_src = SSocket.api.repo + "publicacion/" + this.props.data.key ?? "";
         return <SView col={"xs-12"} colSquare onPress={() => {
             SNavigation.navigate("/publicacion/post", { pk: this.props.data.key })
         }}>
-            <SImage src={Model.publicacion._get_image_download_path(SSocket.api, this.props.data.key)} style={{
+            <SImage src={image_src} style={{
                 resizeMode: "cover"
             }} />
         </SView>
