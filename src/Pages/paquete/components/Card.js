@@ -23,9 +23,9 @@ export default class Card extends Component {
 
                 style={{
                     borderRadius: 10,
-                    borderLeftWidth: 2,
-                    borderTopWidth: 2,
-                    borderBottomWidth: 2,
+                    borderLeftWidth: 3,
+                    borderTopWidth: 3,
+                    borderBottomWidth: 3,
                     borderColor:(!promo_usuario ? "transparent" : "cyan")
                     // padding: 8
                 }}
