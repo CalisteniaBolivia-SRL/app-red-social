@@ -11,16 +11,25 @@ export default class Card extends Component {
     }
 
     render() {
-        var { key, descripcion, state, precio } = this.props.datas;
+        {/* TODO: alvaro toco este codigo para colorear paquete */ }
+        var { key, descripcion, state, precio, promo_usuario } = this.props.datas;
         return (
             <SView
                 height={55}
                 col={"xs-12"}
                 backgroundColor={STheme.color.darkGray}
+
+                // style={{ borderRightWidth: 3, borderColor: STheme.color.secondary }}
+
                 style={{
                     borderRadius: 10,
+                    borderLeftWidth: 2,
+                    borderTopWidth: 2,
+                    borderBottomWidth: 2,
+                    borderColor:(!promo_usuario ? "transparent" : "cyan")
                     // padding: 8
                 }}
+                // border={!promo_usuario ? "transparent" : "cyan"}
                 row
                 center
                 onPress={() => { SNavigation.navigate('/paquete/membresia/detalle', { sucursal: this.props.key_sucursal, pk: key }) }}
