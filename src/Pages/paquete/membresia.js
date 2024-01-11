@@ -9,6 +9,7 @@ import BtnSend from './components/BtnSend';
 import Header from './components/Header';
 import Card from './components/Card';
 import BackButtom from '../../Components/BackButtom';
+import SSocket from "servisofts-socket";
 
 class membresia extends Component {
     constructor(props) {
@@ -22,7 +23,29 @@ class membresia extends Component {
 
     componentDidMount() {
         Model.paquete.Action.CLEAR();
+        this.getPaquetePromo();
     }
+
+    getPaquetePromo() {
+
+        var key_usuario = Model.usuario.Action.getKey();
+
+
+        this.setState({ loading: "cargando", data: null });
+        SSocket.sendPromise({
+            component: "paquete_promo_usuario",
+            type: "getAll",
+            key_usuario: key_usuario
+            // key_usuario: "5868de4c-87d0-4b5d-8572-7a255d817e6b"
+        })
+            .then((resp) => {
+                this.setState({ loading: false, data: resp.data });
+            })
+            .catch((e) => {
+                this.setState({ loading: false, error: e });
+            });
+    }
+
     render_with_data() {
 
 
@@ -36,7 +59,7 @@ class membresia extends Component {
             key_sucursal: this.key_sucursal,
         });
         if (!paquetes) return <SLoad />
-
+        if (!this.state.data) return <SLoad />
         // Object.values(publicaciones).filter(obj => obj.key_usuario == usuario.key);
 
         // const paquetes_del_servicio = Object.values(paquete_servicio).filter(o => o.key_servicio == this.key_servicio);
@@ -48,10 +71,18 @@ class membresia extends Component {
         // console.log(sucursal_paquete)
 
         // console.log(sucursal_paquetes)
+        let arr_paquete_promo_usuario = Object.values(this.state.data)
         var dataMostrar = [];
         Object.values(paquetes).map((obj) => {
             if (obj.estado == 0) return null
-            if (!obj.estado_app) return null
+
+            let obj_ppu = arr_paquete_promo_usuario.find(a => a.key_paquete == obj.key)
+
+            if (!obj_ppu) {
+                if (!obj.estado_app) return null
+            }else{
+                obj.promo_usuario = obj_ppu;
+            }
             // dato = Object.values(sucursal_paquetes).find(obj2 => obj2.key_paquete == obj.key);
             // if (!dato) return null
             dataMostrar.push(obj)
@@ -77,12 +108,13 @@ class membresia extends Component {
         return (
             <SPage
                 footer={this.footer()}
-                onRefresh={(callback)=>{
+                onRefresh={(callback) => {
                     Model.paquete.Action.CLEAR();
                 }}
                 title={"Comprar"}
                 hidden
             >
+                {/* TODO: alvaro toco este codigo para mostrar paaquete promo usuario */}
                 <SHr height={50} />
                 <Container>
                     {/* <SView col={"xs-12"} >
