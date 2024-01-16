@@ -32,6 +32,7 @@ import cupones from './cupones';
 import test from './test';
 import publicacion from './publicacion';
 import servicio from './servicio';
+import paquete_promo_usuario from './paquete_promo_usuario';
 import version_required from './version_required';
 import ranking from "./ranking/index"
 export default SPage.combinePages("/", {
@@ -46,6 +47,7 @@ export default SPage.combinePages("/", {
   ...cuenta,
   ...publicacion,
   ...servicio,
+  ...paquete_promo_usuario,
   "terminos": terminos,
   "test": test,
   "contacto": contacto,
