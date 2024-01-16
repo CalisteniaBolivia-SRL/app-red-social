@@ -1,12 +1,15 @@
 import { Text, View } from 'react-native'
 import React, { Component } from 'react'
-import { SHr, SIcon, SImage, SText, STheme, SView } from 'servisofts-component'
+import { SHr, SIcon, SImage, SNavigation, SText, STheme, SView } from 'servisofts-component'
 import Icons from 'servisofts-component/img'
 import SSocket from 'servisofts-socket';
 
+const handlePress = (key) => {
+    SNavigation.navigate("/perfil/client", { pk: key });
+}
 
 type PropsType = {
-    index:Number,
+    index: Number,
     data: {
         key_usuario: string,
         cantidad: number, // cantidad de likes
@@ -21,7 +24,7 @@ type PropsType = {
 }
 export default class ListCard extends Component<PropsType> {
 
-   
+
     render() {
         // this.props.data.key_usuario
         // var propsFilter = this.props.filter(a => (a.index == 0) || (a.index == 1) || (a.index == 2 ))
@@ -39,11 +42,14 @@ export default class ListCard extends Component<PropsType> {
             case 9: label = "no"; break;
             case 10: label = "mo"; break;
         }
+        // TODO:ALVARO TOCO AQUI PARA QUE REDIRIJA
         return (
             <View col={"xs-12"} row center>
-                <SView col={"xs-11.7"} height={45} style={{ alignContent: 'flex-start' }} row >
+                <SView col={"xs-11.7"} height={45} style={{ alignContent: 'flex-start' }} row
+                    onPress={handlePress.bind(this, this.props?.data?.key_usuario)}
+                >
                     <SView style={{ position: 'absolute' }} height>
-                        <SIcon name={"RankBack"} height={50} width={200}/>
+                        <SIcon name={"RankBack"} height={50} width={200} />
                     </SView>
                     <SHr height={5} />
                     <SView col={"xs-2"} row center>
@@ -52,14 +58,14 @@ export default class ListCard extends Component<PropsType> {
                         <SText color={STheme.color.text} fontSize={11}>{label}</SText>
                     </SView>
                     <SView col={"xs-10"} backgroundColor={STheme.color.white} height={35} row center
-                    style={{transform: [{ skewX: '-18deg' }]}}
+                        style={{ transform: [{ skewX: '-18deg' }] }}
                     >
                         <SView col={"xs-10"} row>
                             <SView width={10} />
                             <SText fontSize={15} color={STheme.color.black}>{this.props?.data?.usuario?.Nombres}</SText>
                         </SView>
                         <SView col={"xs-2"} flex center style={{ textAlign: "right" }} height>
-                            <SView width={40} style={{transform: [{ skewX: '18deg' }]}}>
+                            <SView width={40} style={{ transform: [{ skewX: '18deg' }] }}>
                                 <SView style={{
                                     width: 30,
                                     height: 30, borderRadius: 30, overflow: "hidden", borderWidth: 1, borderColor: "#fff"
