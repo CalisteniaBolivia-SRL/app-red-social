@@ -8,7 +8,7 @@ export const Parent = {
 }
 export default SPage.combinePages(Parent.name, {
     // "": root,
-    "": root_backup,
+    "": root,
     "sucursales": sucursales,
 
 });
