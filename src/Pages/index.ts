@@ -32,10 +32,9 @@ import cupones from './cupones';
 import test from './test';
 import publicacion from './publicacion';
 import servicio from './servicio';
- import paquete_promo_usuario from './paquete_promo_usuario';
+import paquete_promo_usuario from './paquete_promo_usuario';
 import version_required from './version_required';
 import ranking from "./ranking/index"
-import mapa from './sucursal/mapa';
 //import root2 from './paquete_promo_usuario/root2';
 export default SPage.combinePages("/", {
   // "":test,
@@ -53,7 +52,6 @@ export default SPage.combinePages("/", {
   "contacto": contacto,
   "novedades": novedades,
   "compras": compras,
-  // "compras": compras,
   ranking,
   version_required,
   ...notifications,
@@ -70,8 +68,7 @@ export default SPage.combinePages("/", {
   ...tarjeta,
   ...chat,
   ...ayuda,
-  // ...paquete_promo_usuario,
-  "paquete_promo_usuario": mapa,
+  ...paquete_promo_usuario,
   ...cupones
   // ...ayuda
 });
