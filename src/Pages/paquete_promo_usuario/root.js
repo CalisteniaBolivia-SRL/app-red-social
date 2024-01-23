@@ -23,16 +23,12 @@ class index extends Component {
         if (!paquete) return <SLoad />
         var { key, descripcion, observacion, dias, precio, participantes } = paquete;
         return <>
-
-            <SView col={"xs-11"} height={"95%"} border={'yellow'} style={{borderWidth:2, borderRadius:12, padding:16}} row onPress={() => {
-                
-                SNavigation.navigate("/paquete_promo_usuario/sucursales", {  key_paquete: this.key_paquete});
-
+            <SView col={"xs-11"} height={"95%"} border={'yellow'} style={{ borderWidth: 2, borderRadius: 12, padding: 16 }} row onPress={() => {
+                SNavigation.navigate("/paquete_promo_usuario/sucursales", { key_paquete: this.key_paquete });
             }} >
                 <SText color={STheme.color.text} font='OpenSans-ExtraBold' fontSize={32} style={{ textTransform: "uppercase" }} center>🎉FULL PROMO🎉</SText>
                 <SHr></SHr>
                 <SHr></SHr>
-
                 <SView center style={{
                     width: "100%",
                     height: 350,
@@ -51,7 +47,6 @@ class index extends Component {
                     <SHr></SHr>
                     <BtnSend onPress={() => { SNavigation.navigate("/paquete_promo_usuario/sucursales", { key_paquete: this.key_paquete }); }} >Adquirir paquete</BtnSend>
                 </SView>
-
             </SView>
         </>
     }
@@ -64,17 +59,7 @@ class index extends Component {
         };
 
         return (
-            <SPage
-                center
-            // navBar={this.navBar()}
-            // footer={this.footer()}
-            // title={"Comprar"}
-            // hidden
-            // onRefresh={(resolve) => {
-            //     Model.servicio.Action.CLEAR();
-            //     if (resolve) resolve();
-            // }}
-            >
+            <SPage center  >
                 <Container >
                     {this.render_alvaro()}
                 </Container>
