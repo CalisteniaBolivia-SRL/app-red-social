@@ -5,16 +5,13 @@ import { AccentBar, BottomNavigator, TopBar } from '../../Components';
 import Container from '../../Components/Container';
 import Model from '../../Model';
 import SSocket from 'servisofts-socket';
-
-import Card from './components/Card';
-import BackButtom from '../../Components/BackButtom';
 import BtnSend from '../registro/components/BtnSend';
 
 class index extends Component {
     constructor(props) {
         super(props);
-        this.state = { };
-        this.key_paquete = SNavigation.getParam("pk", '397c3437-8237-44b2-9f6b-38e1f8e847d9')
+        this.state = {};
+        this.key_paquete = SNavigation.getParam("pk")
     }
 
 
@@ -26,11 +23,18 @@ class index extends Component {
         if (!paquete) return <SLoad />
         var { key, descripcion, observacion, dias, precio, participantes } = paquete;
         return <>
-            <SView col={"xs-11"} height={500} border={'cyan'} row onPress={() => {
-                SNavigation.navigate("/paquete", { key_servicio: "1" }); this.fadeOut();
+
+            <SView col={"xs-11"} height={"95%"} border={'yellow'} style={{borderWidth:2, borderRadius:12, padding:16}} row onPress={() => {
+                
+                SNavigation.navigate("/paquete_promo_usuario/sucursales", {  key_paquete: this.key_paquete});
+
             }} >
+                <SText color={STheme.color.text} font='OpenSans-ExtraBold' fontSize={32} style={{ textTransform: "uppercase" }} center>🎉FULL PROMO🎉</SText>
+                <SHr></SHr>
+                <SHr></SHr>
+
                 <SView center style={{
-                    width: 350,
+                    width: "100%",
                     height: 350,
                     justifyContent: "center",
                     alignItems: "center",
@@ -39,12 +43,15 @@ class index extends Component {
                 }}>
                     <SImage src={SSocket.api.root + "paquete/" + this.key_paquete + "?time=" + new Date().getTime()} width={"100%"} height={"100%"} style={{ resizeMode: 'cover', }} />
                 </SView>
+                <SHr></SHr>
+                <SHr></SHr>
                 <SView col={"xs-12"} height>
                     <SText color={"red"} fontSize={18} style={{ textTransform: "uppercase" }} center>Obserbacion del paquete</SText>
                     <SText color={STheme.color.text} fontSize={18} style={{ textTransform: "uppercase" }} center>{observacion}</SText>
                     <SHr></SHr>
-                    <BtnSend onPress={() => { SNavigation.navigate("/paquete", { key_servicio: "1" }); }} >Adquirir paquete</BtnSend>
+                    <BtnSend onPress={() => { SNavigation.navigate("/paquete_promo_usuario/sucursales", { key_paquete: this.key_paquete }); }} >Adquirir paquete</BtnSend>
                 </SView>
+
             </SView>
         </>
     }
@@ -58,27 +65,27 @@ class index extends Component {
 
         return (
             <SPage
-                // navBar={this.navBar()}
-                // footer={this.footer()}
-                // title={"Comprar"}
-                // hidden
-                onRefresh={(resolve) => {
-                    Model.servicio.Action.CLEAR();
-                    if (resolve) resolve();
-                }}
+                center
+            // navBar={this.navBar()}
+            // footer={this.footer()}
+            // title={"Comprar"}
+            // hidden
+            // onRefresh={(resolve) => {
+            //     Model.servicio.Action.CLEAR();
+            //     if (resolve) resolve();
+            // }}
             >
-                <Container>
+                <Container >
                     {this.render_alvaro()}
-                    {/* <SHr height={20} /> */}
                 </Container>
             </SPage>
         );
     }
-    footer() {
-        return <>
-            <BottomNavigator url={"/servicio"} />
-        </>
-    }
+    // footer() {
+    //     return <>
+    //         <BottomNavigator url={"/servicio"} />
+    //     </>
+    // }
 }
 const initStates = (state) => {
     return { state }
