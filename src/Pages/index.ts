@@ -32,13 +32,14 @@ import cupones from './cupones';
 import test from './test';
 import publicacion from './publicacion';
 import servicio from './servicio';
+ import paquete_promo_usuario from './paquete_promo_usuario';
 import version_required from './version_required';
 import ranking from "./ranking/index"
+//import root2 from './paquete_promo_usuario/root2';
 export default SPage.combinePages("/", {
   // "":test,
   "": carga,
   "root": root,
-  "carga": carga,
   ...login,
   ...registro,
   ...paquete,
@@ -67,6 +68,7 @@ export default SPage.combinePages("/", {
   ...tarjeta,
   ...chat,
   ...ayuda,
+  ...paquete_promo_usuario,
   ...cupones
   // ...ayuda
 });
