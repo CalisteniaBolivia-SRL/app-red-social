@@ -14,19 +14,18 @@ class index extends Component {
     }
 
     render_alvaro() {
-        if (!this.key_paquete) return <SLoad />
         var paquete = Model.paquete.Action.getByKey(this.key_paquete);
         if (!paquete) return <SLoad />
         var { key, descripcion, observacion, dias, precio, participantes } = paquete;
         return <>
-            <SView col={"xs-11"} flex center border={'transparent'} style={{ borderWidth: 1, borderRadius: 12, padding: 16 }} row onPress={() => {
+            <SView col={"xs-11"} height={"100%"} center border={'yellow'} style={{ borderWidth: 2, borderRadius: 12, padding: 16 }} row onPress={() => {
                 SNavigation.navigate("/paquete_promo_usuario/sucursales", { key_paquete: this.key_paquete });
             }} >
                 <SText color={STheme.color.text} font='OpenSans-ExtraBold' fontSize={32} style={{ textTransform: "uppercase" }} center>🎉FULL PROMO🎉</SText>
                 {/* <SHr height={"10%"}></SHr> */}
                 <SView center border={"transparent"} style={{
                     width: "100%",
-                    height: 300,
+                    height: 250,
                     justifyContent: "center",
                     alignItems: "center",
                     borderRadius: 15,
@@ -49,7 +48,7 @@ class index extends Component {
     render() {
         return (
             <SPage center  >
-                <Container center >
+                <Container >
                     {this.render_alvaro()}
                 </Container>
             </SPage>

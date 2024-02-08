@@ -36,7 +36,9 @@ class index extends Component<SucursalCardPropsType> {
         return (<SView col={"xs-6"} activeOpacity={0.8}
             onPress={() => {
                 SNavigation.navigate(this.props.root, {
-                    key_sucursal: this.props.key_sucursal, key_servicio: this.props.key_servicio
+                    key_sucursal: this.props?.key_sucursal,
+                     key_servicio: this.props?.key_servicio,
+                    ...(this.props.params??{})
                 })
             }}
             style={{ padding: 4 }}
