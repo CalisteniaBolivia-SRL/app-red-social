@@ -29,7 +29,12 @@ class membresia extends Component {
     getPaquetePromo() {
 
         var key_usuario = Model.usuario.Action.getKey();
-
+        if (!this.key_usuario) {
+            this.setState({
+                data: {}
+            })
+            return;
+        }
 
         this.setState({ loading: "cargando", data: null });
         SSocket.sendPromise({
@@ -80,7 +85,7 @@ class membresia extends Component {
 
             if (!obj_ppu) {
                 if (!obj.estado_app) return null
-            }else{
+            } else {
                 obj.promo_usuario = obj_ppu;
             }
             // dato = Object.values(sucursal_paquetes).find(obj2 => obj2.key_paquete == obj.key);
