@@ -219,7 +219,7 @@ class confirmar extends Component {
         // var usuario = Model.usuario.Action.getUsuarioLog();
         // if (!usuario) return <SLoad />
 
-        console.log("para ", this.params.dataUser.Nombres)
+        console.log("para ", defaultData)
         return (
             <SPage
                 footer={this.footer()}
