@@ -48,8 +48,16 @@ class confirmar extends Component {
                     <SView col={"xs-1"} />
                     {this.btn({
                         title: "Sí, Confirmar", onPress: () => {
+
+
+                            this.params.dataUser = {
+                                ...this.params.dataUser,
+                                ...this.form_factura.getValues()
+                            }
+
+                            // console.log("this.form_factura ", { ...this.params })
                             SPopup.close("confirmar");
-                            SNavigation.navigate("/paquete/membresia/qr", { ...this.params, });
+                            SNavigation.navigate("/paquete/membresia/qr", { ...this.params });
                         }, active: true
                     })}
                 </SView>
@@ -108,7 +116,7 @@ class confirmar extends Component {
 
     render_with_data() {
         var paquete = Model.paquete.Action.getByKey(this.params.pk);
-        var usuario;
+        // var usuario;
         {/* USUARIO */ }
         // var usuario = Model.usuario.Action.getUsuarioLog();
         var sucursal = Model.sucursal.Action.getByKey(this.params.sucursal);
@@ -208,6 +216,10 @@ class confirmar extends Component {
         var defaultData = {
             ...this.params,
         };
+        // var usuario = Model.usuario.Action.getUsuarioLog();
+        // if (!usuario) return <SLoad />
+
+        console.log("para ", this.params.dataUser.Nombres)
         return (
             <SPage
                 footer={this.footer()}
@@ -220,17 +232,49 @@ class confirmar extends Component {
                     <SHr height={20} />
                     {this.render_with_data()}
                     <SHr height={30} />
-                    <SView card style={{padding:10}}>
+                    <SView card style={{ padding: 10 }}>
                         <SText center color={STheme.color.text} bold>{"IMPORTANTE :  Al pagar un nuevo paquete, este se activará inmediatamente si no tiene uno vigente. Si ya tiene uno, el nuevo comenzará cuando termine el actual."}</SText>
                     </SView>
+                    <SHr h={20} />
+
+
+                    <SView col={"xs-12"} flex style={{ alignItems: "flex-start" }}>
+                        <SText color={"yellow"}>CONFIRMAR: INFORMACIÓN PARA LA FACTURA</SText>
+                    </SView>
+                    <SHr h={4} />
+
+                    <SView col={"xs-12"} card style={{ padding: 10 }} row>
+
+
+                        <SView col={"xs-12"}>
+
+                            <SForm
+                                ref={ref => this.form_factura = ref}
+                                props={{ col: "xs-12", dir: "row" }}
+                                inputProps={{ col: "xs-12", separation: 4 }}
+                                style={{ justifyContent: "space-between" }}
+                                inputs={{
+                                    "Correo": { label: "CORREO", defaultValue: this.params.dataUser?.Correo ?? "" },
+                                    "Nit": { label: "NIT", defaultValue: this.params.dataUser?.Nit ?? "0", isRequired: true, style: { borderColor: "cyan", borderRadius: 8, } },
+                                    "RazonSocial": { focus: true, label: "RAZÓN SOCIAL", defaultValue: this.params.dataUser?.RazonSocial ?? "SN", isRequired: true, style: { borderColor: "cyan", borderRadius: 8, } },
+                                }}></SForm>
+                        </SView>
+
+                    </SView>
                     <SHr h={30} />
+
+
                     <BtnSend
                         onPress={() => {
                             // this.form.submit()
+
                             SPopup.open({ key: "confirmar", content: this.popupConfirmacion() });
                             // SNavigation.navigate("/restaurante", { pk: obj.key });
                         }}
                     >Confirmar</BtnSend>
+
+                    <SHr h={30} />
+
                 </Container>
             </SPage>
         );

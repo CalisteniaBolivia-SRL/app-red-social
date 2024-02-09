@@ -47,7 +47,11 @@ class qr extends Component {
             version: version,
             key_usuario: key_usuario,
             key_paquete: this.params.pk,
-            key_sucursal: this.params.sucursal
+            key_sucursal: this.params.sucursal,
+            nit: this.params.dataUser.Nit,
+            razon_social: this.params.dataUser.RazonSocial,
+            correos: [this.params.dataUser.Correo],
+
         }, 2 * 60 * 1000).then(e => {
             this.setState({ loading: false, dataqr: e.data })
             this.isRun = true;
@@ -185,31 +189,34 @@ class qr extends Component {
                                 <SHr />
                                 <SText fontSize={10} color={STheme.color.gray}>{this.state?.dataqr?.qrid}</SText>
                             </SView>
-
-                            <SHr height={16} />
+                            <SHr height={14} />
+                            <SText color={STheme.color.text} style={{ fontSize: 12 }}>IMPORTANTE</SText>
+                            <SHr height={4} />
                             <SView col={"xs-12"} height={100} row center  >
-                                <SView col={"xs-2"} height center>
+                                <SView col={"xs-9"} border="red" backgroundColor='red' style={{ borderRadius: 4, padding: 4 }} center>
+                                    {/* <SText color={STheme.color.text} style={{ fontSize: 12 }}>IMPORTANTE: PAGO QR ES ÚNICO; PARA SEGUNDA TRANSACCIÓN, GENERE NUEVO QR.</SText> */}
+                                    <SText color={STheme.color.text} style={{ fontSize: 12 }}>Pago QR único; para segunda transacción, genere nuevo QR</SText>
+                                    {/* <SText color={STheme.color.text} style={{ fontSize: 12 }}>PAGO QR ÚNICO POR USUARIO; PARA OTRO, SE GENERA NUEVO QR.</SText> */}
                                 </SView>
-                                <SView flex center height={60} >
-                                    <SView height={60} colSquare center style={{ backgroundColor: 'white', borderRadius: 8, borderColor: STheme.color.black, borderWidth: 2, padding: 8 }} onPress={() => {
-                                        SShared.saveB64(this.getQr())
-                                    }}>
-                                        <SIcon name={"ImgSave"} fill={STheme.color.black} />
+                                <SHr height={16} />
+                                <SView col={"xs-9"} border="transparent" row >
+                                    <SView flex center>
+                                        <SView height={60} colSquare center style={{ backgroundColor: 'white', borderRadius: 8, borderColor: STheme.color.black, borderWidth: 2, padding: 8 }} onPress={() => {
+                                            SShared.saveB64(this.getQr())
+                                        }}>
+                                            <SIcon name={"ImgSave"} fill={STheme.color.black} />
+                                        </SView>
+                                    </SView>
+                                    <SView flex center>
+                                        <SView height={60} colSquare center style={{ backgroundColor: 'white', borderRadius: 8, borderColor: STheme.color.black, borderWidth: 2, padding: 8 }} onPress={() => {
+                                            SShared.sharedB64(this.getQr(), { message: "", titulo: "" })
+                                        }}>
+                                            <SIcon name={"ImgShare"} fill={STheme.color.black} />
+                                        </SView>
                                     </SView>
                                 </SView>
-                                <SView flex center height={60} >
-                                    <SView height={60} colSquare center style={{ backgroundColor: 'white', borderRadius: 8, borderColor: STheme.color.black, borderWidth: 2, padding: 8 }} onPress={() => {
-                                        SShared.sharedB64(this.getQr(), { message: "", titulo: "" })
-                                    }}>
-                                        <SIcon name={"ImgShare"} fill={STheme.color.black} />
-                                    </SView>
-                                </SView>
-                                <SView col={"xs-2"} height center></SView>
                             </SView>
-                            <SHr height={16} />
-                            {/* <Contador date={this.state?.pay_order?.fecha_exp} ></Contador> */}
-
-                            <SHr height={20} />
+                            <SHr height={40} />
                         </SView>
                     </SView>
                     <SHr />

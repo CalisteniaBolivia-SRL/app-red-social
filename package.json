@@ -1,6 +1,6 @@
 {
   "name": "calistenia_rs_app",
-  "version": "2.0.32",
+  "version": "2.0.33",
   "description": "calistenia_rs_app",
   "scripts": {
     "start": "react-native start",
@@ -54,7 +54,7 @@
     "react-redux": "^7.2.4",
     "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
-    "servisofts-component": "2.11.22",
+    "servisofts-component": "^2.11.22",
     "servisofts-model": "1.0.3",
     "servisofts-page": "1.0.8",
     "servisofts-rn-chat": "1.0.6",
