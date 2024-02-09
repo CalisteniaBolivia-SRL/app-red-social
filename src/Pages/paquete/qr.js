@@ -192,32 +192,31 @@ class qr extends Component {
                             <SHr height={14} />
                             <SText color={STheme.color.text} style={{ fontSize: 12 }}>IMPORTANTE</SText>
                             <SHr height={4} />
-                            <SView col={"xs-12"} height={100} row center  >
-                                <SView col={"xs-9"} border="red" backgroundColor='#D70000' style={{ borderRadius: 4, padding: 4 }} center>
+                            <SView col={"xs-12"} height={50} row center border="transparent" >
+                                <SView col={"xs-9"} border="#D70000" backgroundColor='#D70000' style={{ borderRadius: 4, padding: 4 }} center >
                                     {/* <SText color={STheme.color.text} style={{ fontSize: 12 }}>IMPORTANTE: PAGO QR ES ÚNICO; PARA SEGUNDA TRANSACCIÓN, GENERE NUEVO QR.</SText> */}
                                     <SText color={STheme.color.text} style={{ fontSize: 12 }}>Pago QR es único; para segunda transacción, genere nuevo QR</SText>
                                     {/* <SText color={STheme.color.text} style={{ fontSize: 12 }}>PAGO QR ÚNICO POR USUARIO; PARA OTRO, SE GENERA NUEVO QR.</SText> */}
                                 </SView>
-                            
-                                <SHr height={16} />
-                                <SView col={"xs-9"} border="transparent" row >
-                                    <SView flex center>
-                                        <SView height={60} colSquare center style={{ backgroundColor: 'white', borderRadius: 8, borderColor: STheme.color.black, borderWidth: 2, padding: 8 }} onPress={() => {
-                                            SShared.saveB64(this.getQr())
-                                        }}>
-                                            <SIcon name={"ImgSave"} fill={STheme.color.black} />
-                                        </SView>
+                            </SView>
+                            <SHr height={16} />
+                            <SView col={"xs-9"} border="transparent" row >
+                                <SView flex center>
+                                    <SView height={60} colSquare center style={{ backgroundColor: 'white', borderRadius: 8, borderColor: STheme.color.black, borderWidth: 2, padding: 8 }} onPress={() => {
+                                        SShared.saveB64(this.getQr())
+                                    }}>
+                                        <SIcon name={"ImgSave"} fill={STheme.color.black} />
                                     </SView>
-                                    <SView flex center>
-                                        <SView height={60} colSquare center style={{ backgroundColor: 'white', borderRadius: 8, borderColor: STheme.color.black, borderWidth: 2, padding: 8 }} onPress={() => {
-                                            SShared.sharedB64(this.getQr(), { message: "", titulo: "" })
-                                        }}>
-                                            <SIcon name={"ImgShare"} fill={STheme.color.black} />
-                                        </SView>
+                                </SView>
+                                <SView flex center>
+                                    <SView height={60} colSquare center style={{ backgroundColor: 'white', borderRadius: 8, borderColor: STheme.color.black, borderWidth: 2, padding: 8 }} onPress={() => {
+                                        SShared.sharedB64(this.getQr(), { message: "", titulo: "" })
+                                    }}>
+                                        <SIcon name={"ImgShare"} fill={STheme.color.black} />
                                     </SView>
                                 </SView>
                             </SView>
-                            <SHr height={40} />
+                            <SHr height={32} />
                         </SView>
                     </SView>
                     <SHr />
