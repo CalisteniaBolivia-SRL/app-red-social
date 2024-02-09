@@ -100,7 +100,7 @@ class detalle extends Component {
                 </SView>
                 <SView col={"xs-9"} height>
                     <SText color={STheme.color.text} fontSize={18} style={{ textTransform: "uppercase" }}>{descripcion}</SText>
-                    <SHr h={4}/>
+                    <SHr h={4} />
                     <SView col={"xs-12"} flex>
                         <SText color={STheme.color.text} fontSize={12} >{observacion}</SText>
                     </SView>
@@ -158,12 +158,14 @@ class detalle extends Component {
             <SHr height={26} />
             <BtnSend
                 onPress={() => {
-                    {/* USUARIO */ }
                     var usuario = Model.usuario.Action.getUsuarioLog();
                     // if (!usuario) return SPopup.open({ key: "confirmar", content: this.popupMensajeLogin() });
                     if (!usuario) return SNavigation.navigate("/cuenta", { ...this.params });
-
-                    SNavigation.navigate("/paquete/membresia/confirmar", { ...this.params });
+                    let clonacion = {
+                        ...this.params,
+                        dataUser: usuario
+                    }
+                    SNavigation.navigate("/paquete/membresia/confirmar", clonacion);
                 }}
             >Adquirir paquete</BtnSend>
         </SView>

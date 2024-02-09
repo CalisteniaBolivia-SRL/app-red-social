@@ -193,11 +193,12 @@ class qr extends Component {
                             <SText color={STheme.color.text} style={{ fontSize: 12 }}>IMPORTANTE</SText>
                             <SHr height={4} />
                             <SView col={"xs-12"} height={100} row center  >
-                                <SView col={"xs-9"} border="red" backgroundColor='red' style={{ borderRadius: 4, padding: 4 }} center>
+                                <SView col={"xs-9"} border="red" backgroundColor='#D70000' style={{ borderRadius: 4, padding: 4 }} center>
                                     {/* <SText color={STheme.color.text} style={{ fontSize: 12 }}>IMPORTANTE: PAGO QR ES ÚNICO; PARA SEGUNDA TRANSACCIÓN, GENERE NUEVO QR.</SText> */}
-                                    <SText color={STheme.color.text} style={{ fontSize: 12 }}>Pago QR único; para segunda transacción, genere nuevo QR</SText>
+                                    <SText color={STheme.color.text} style={{ fontSize: 12 }}>Pago QR es único; para segunda transacción, genere nuevo QR</SText>
                                     {/* <SText color={STheme.color.text} style={{ fontSize: 12 }}>PAGO QR ÚNICO POR USUARIO; PARA OTRO, SE GENERA NUEVO QR.</SText> */}
                                 </SView>
+                            
                                 <SHr height={16} />
                                 <SView col={"xs-9"} border="transparent" row >
                                     <SView flex center>
