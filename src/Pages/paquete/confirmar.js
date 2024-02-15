@@ -55,12 +55,14 @@ class confirmar extends Component {
 
               // TODO: aqui actualizamos los datos de factura
               const usuario = Model.usuario.Action.getUsuarioLog();
+              if (!usuario) return <SLoad />
+
               const comparacion =
                 usuario?.RazonSocial !== this.params.dataUser?.RazonSocial ||
                 usuario?.Nit !== this.params.dataUser?.Nit ||
                 usuario?.Correo !== this.params.dataUser?.Correo;
               if (comparacion) {
-                Model.usuario.Action.editar({ data: this.params.dataUser });
+                Model.usuario.Action.editar({ data: this.params?.dataUser });
                 console.log("Los datos de facturación se actualizaron con éxito.");
               } else {
                 console.log("facturación Usuario no actualizado")
