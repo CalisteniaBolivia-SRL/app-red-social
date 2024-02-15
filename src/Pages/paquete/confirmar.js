@@ -48,14 +48,24 @@ class confirmar extends Component {
           <SView col={"xs-1"} />
           {this.btn({
             title: "Sí, Confirmar", onPress: () => {
-
-
               this.params.dataUser = {
                 ...this.params.dataUser,
                 ...this.form_factura.getValues()
               }
 
-              // console.log("this.form_factura ", { ...this.params })
+              // TODO: aqui actualizamos los datos de factura
+              const usuario = Model.usuario.Action.getUsuarioLog();
+              const comparacion =
+                usuario?.RazonSocial !== this.params.dataUser?.RazonSocial ||
+                usuario?.Nit !== this.params.dataUser?.Nit ||
+                usuario?.Correo !== this.params.dataUser?.Correo;
+              if (comparacion) {
+                Model.usuario.Action.editar({ data: this.params.dataUser });
+                console.log("Los datos de facturación se actualizaron con éxito.");
+              } else {
+                console.log("facturación Usuario no actualizado")
+              }
+
               SPopup.close("confirmar");
               SNavigation.navigate("/paquete/membresia/qr", { ...this.params });
             }, active: true
@@ -233,7 +243,8 @@ class confirmar extends Component {
           {this.render_with_data()}
           <SHr height={30} />
           <SView card style={{ padding: 10 }}>
-            <SText center color={STheme.color.text} bold>{"IMPORTANTE :  Al pagar un nuevo paquete, este se activará inmediatamente si no tiene uno vigente. Si ya tiene uno, el nuevo comenzará cuando termine el actual."}</SText>
+            <SText center color={STheme.color.text} bold>{"IMPORTANTE: Al pagar un nuevo paquete. Si ya tiene uno, el nuevo comenzará cuando termine el actual."}</SText>
+            {/* <SText center color={STheme.color.text} bold>{"IMPORTANTE :  Al pagar un nuevo paquete, este se activará inmediatamente si no tiene uno vigente. Si ya tiene uno, el nuevo comenzará cuando termine el actual."}</SText> */}
           </SView>
           <SHr h={20} />
 
@@ -257,7 +268,8 @@ class confirmar extends Component {
                   "Correo": { label: "CORREO", defaultValue: this.params.dataUser?.Correo ?? "" },
                   "Nit": { label: "NIT", defaultValue: this.params.dataUser?.Nit ?? "0", isRequired: true, style: { borderColor: "cyan", borderRadius: 8, } },
                   "RazonSocial": { focus: true, label: "RAZÓN SOCIAL", defaultValue: this.params.dataUser?.RazonSocial ?? "SN", isRequired: true, style: { borderColor: "cyan", borderRadius: 8, } },
-                }}></SForm>
+                }}
+              ></SForm>
             </SView>
 
           </SView>
