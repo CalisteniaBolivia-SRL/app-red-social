@@ -1,8 +1,9 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SForm, SHr, SImage, SLoad, SNavigation, SPage, SPopup, SText, STheme, SView } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
 import { BottomNavigator } from '../../Components';
+
 import Container from '../../Components/Container';
 import Model from '../../Model';
 import BtnSend from './components/BtnSend';
@@ -24,6 +25,9 @@ class confirmar extends Component {
 
   popupConfirmacion() {
     var INSTACE = this;
+    const usuario = Model.usuario.Action.getUsuarioLog();
+    // if (!usuario) return <SLoad />
+
     return <SView
       style={{
         width: "100%",
@@ -48,21 +52,24 @@ class confirmar extends Component {
           <SView col={"xs-1"} />
           {this.btn({
             title: "Sí, Confirmar", onPress: () => {
+              // console.log("NUEVO ",...this.form_factura.getValues())
               this.params.dataUser = {
                 ...this.params.dataUser,
-                ...this.form_factura.getValues()
+                ...this.form_factura?.getValues()
               }
 
               // TODO: aqui actualizamos los datos de factura
-              const usuario = Model.usuario.Action.getUsuarioLog();
-              if (!usuario) return <SLoad />
+              // const usuario = Model.usuario.Action.getUsuarioLog();
+              // if (!usuario) return <SLoad />
 
               const comparacion =
                 usuario?.RazonSocial !== this.params.dataUser?.RazonSocial ||
                 usuario?.Nit !== this.params.dataUser?.Nit ||
                 usuario?.Correo !== this.params.dataUser?.Correo;
+
               if (comparacion) {
                 Model.usuario.Action.editar({
+                  key_usuario: this.params.dataUser?.key,
                   data: {
                     ...this.params?.dataUser
                   }
