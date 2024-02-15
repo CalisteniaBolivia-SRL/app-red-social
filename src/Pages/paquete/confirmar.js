@@ -62,7 +62,16 @@ class confirmar extends Component {
                 usuario?.Nit !== this.params.dataUser?.Nit ||
                 usuario?.Correo !== this.params.dataUser?.Correo;
               if (comparacion) {
-                Model.usuario.Action.editar({ data: this.params?.dataUser });
+                Model.usuario.Action.editar({
+                  data: {
+                    ...this.params?.dataUser
+                  }
+                }).then((e) => {
+                  console.log("eixto", e);
+                }).catch(e => {
+                  console.log("error", e)
+                })
+
                 console.log("Los datos de facturación se actualizaron con éxito.");
               } else {
                 console.log("facturación Usuario no actualizado")
