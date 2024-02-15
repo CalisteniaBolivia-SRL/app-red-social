@@ -7,8 +7,6 @@ import Model from '../../Model';
 import SSocket from 'servisofts-socket';
 import BtnSend from './components/BtnSend';
 
-
-
 class detalle extends Component {
     constructor(props) {
         super(props);
