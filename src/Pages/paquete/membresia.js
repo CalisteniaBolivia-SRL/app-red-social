@@ -29,10 +29,8 @@ class membresia extends Component {
     getPaquetePromo() {
 
         var key_usuario = Model.usuario.Action.getKey();
-        if (!this.key_usuario) {
-            this.setState({
-                data: {}
-            })
+        if (!key_usuario) {
+            this.setState({ data: {} })
             return;
         }
 
@@ -41,8 +39,7 @@ class membresia extends Component {
             component: "paquete_promo_usuario",
             type: "getAll",
             key_usuario: key_usuario
-            // key_usuario: "5868de4c-87d0-4b5d-8572-7a255d817e6b"
-        })
+         })
             .then((resp) => {
                 this.setState({ loading: false, data: resp.data });
             })
