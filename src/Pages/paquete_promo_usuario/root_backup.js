@@ -6,7 +6,7 @@ import Container from '../../Components/Container';
 import Model from '../../Model';
 import BtnSend from '../registro/components/BtnSend';
 
-class index extends Component {
+class root_backup extends Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -58,4 +58,4 @@ class index extends Component {
 const initStates = (state) => {
     return { state }
 };
-export default connect(initStates)(index);
+export default connect(initStates)(root_backup);

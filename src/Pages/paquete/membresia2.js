@@ -10,7 +10,7 @@ import Header from './components/Header';
 import Card from './components/Card';
 import BackButtom from '../../Components/BackButtom';
 
-class membresia extends Component {
+class membresia2 extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -97,4 +97,4 @@ class membresia extends Component {
 const initStates = (state) => {
     return { state }
 };
-export default connect(initStates)(membresia);
+export default connect(initStates)(membresia2);

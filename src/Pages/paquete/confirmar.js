@@ -261,7 +261,7 @@ class confirmar extends Component {
           {this.render_with_data()}
           <SHr height={30} />
           <SView card style={{ padding: 10 }}>
-            <SText center color={STheme.color.text} bold>{"IMPORTANTE: Al pagar un nuevo paquete. Si ya tiene uno, el nuevo comenzará cuando termine el actual."}</SText>
+            <SText center color={STheme.color.text} bold>{"IMPORTANTE: Su fecha de inicio empieza a correr desde la fecha del pago; si tiene un paquete activo, queda registrado a continuación de su mensualidad."}</SText>
             {/* <SText center color={STheme.color.text} bold>{"IMPORTANTE :  Al pagar un nuevo paquete, este se activará inmediatamente si no tiene uno vigente. Si ya tiene uno, el nuevo comenzará cuando termine el actual."}</SText> */}
           </SView>
           <SHr h={20} />

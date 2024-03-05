@@ -18,18 +18,13 @@ export default class Card extends Component {
                 height={55}
                 col={"xs-12"}
                 backgroundColor={STheme.color.darkGray}
-
-                // style={{ borderRightWidth: 3, borderColor: STheme.color.secondary }}
-
                 style={{
                     borderRadius: 10,
                     borderLeftWidth: 3,
                     borderTopWidth: 3,
                     borderBottomWidth: 3,
-                    borderColor:(!promo_usuario ? "transparent" : "cyan")
-                    // padding: 8
+                    borderColor: (!promo_usuario ? "transparent" : STheme.color.secondary)
                 }}
-                // border={!promo_usuario ? "transparent" : "cyan"}
                 row
                 center
                 onPress={() => { SNavigation.navigate('/paquete/membresia/detalle', { sucursal: this.props.key_sucursal, pk: key }) }}
@@ -45,7 +40,7 @@ export default class Card extends Component {
                             <SText bold color={STheme.color.text} fontSize={15}>{descripcion}</SText>
                         </SView>
                         <SView flex />
-                        <SView width={90} card height={55} center style={{ borderRightWidth: 3, borderColor: STheme.color.secondary }}>
+                        <SView width={90} card height={52} center style={{ borderRadius: 2, borderRightWidth: 3, borderColor: STheme.color.secondary }}>
                             <SText bold style={{ alignItems: "flex-end" }} fontSize={15} color={STheme.color.text}>Bs. {precio}</SText>
                         </SView>
                     </SView>
