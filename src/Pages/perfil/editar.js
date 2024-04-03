@@ -29,11 +29,22 @@ class index extends Component {
             }}
             inputs={{
                 foto_p: { type: "image", isRequired: false, defaultValue: SSocket.api.root + "usuario/" + this.data?.key + "?date=" + new Date().getTime(), col: "xs-4 sm-3.5 md-3 lg-2.5 xl-2.5", style: { borderRadius: 100, overflow: 'hidden', width: 130, height: 130, borderWidth: 1, borderColor: STheme.color.lightGray, } },
-                Nombres: { label: "Nombres", isRequired: true, defaultValue: this.data["Nombres"], },
-                Apellidos: { label: "Apellidos", isRequired: true, defaultValue: this.data.Apellidos, },
-                "Telefono": { label: "Telefono", defaultValue: this.data["Telefono"], type: "phone" },
+                // Nombres: { label: "Nombres", isRequired: true, defaultValue: this.data["Nombres"], },
+                // Apellidos: { label: "Apellidos", isRequired: true, defaultValue: this.data.Apellidos, },
+                // "Telefono": { label: "Telefono", defaultValue: this.data["Telefono"], type: "phone" },
+                // Correo: { label: "Correo", type: "email", isRequired: true, defaultValue: this.data.Correo, editable: false },
+                // detalle_app: { label: "detalle_app", type: "textArea", isRequired: true, defaultValue: this.data.detalle_app, },
+
+                CI: { label: "CI", isRequired: true, defaultValue: this.data.CI, editable: false },
+                Nombres: { label: "Nombres", isRequired: true, defaultValue: this.data.Nombres, editable: false },
+                Apellidos: { label: "Apellidos", isRequired: true, defaultValue: this.data.Apellidos, editable: false },
+                "Telefono": { label: "Telefono", defaultValue: this.data["Telefono"], type: "phone", editable: false },
                 Correo: { label: "Correo", type: "email", isRequired: true, defaultValue: this.data.Correo, editable: false },
-                detalle_app: { label: "detalle_app", type: "textArea", isRequired: true, defaultValue: this.data.detalle_app, },
+                detalle_app: { label: "Presentación", type: "textArea", isRequired: true, defaultValue: this.data.detalle_app, style: { borderRadius: 8, borderWidth: 0.5, borderColor: "cyan" } },
+                Nit: { label: "Nit", type: "number", isRequired: true, defaultValue: this.data.Nit, style: { borderRadius: 8, borderWidth: 0.5, borderColor: "cyan" } },
+                RazonSocial: { label: "Razón Social", isRequired: true, defaultValue: this.data.RazonSocial, style: { borderRadius: 8, borderWidth: 0.5, borderColor: "cyan" } },
+
+
                 // ...(isApi ? {} : {
                 //     Password: { label: "Contraseña", type: "password", isRequired: true, defaultValue: this.data.Password, icon: <SIcon name={"InputPassword"} width={40} height={30} /> },
                 //     RepPassword: { label: "Repetir contraseña", type: "password", isRequired: true, defaultValue: this.data.Password, icon: <SIcon name={"InputRePassword"} width={40} height={30} /> }
@@ -99,6 +110,8 @@ class index extends Component {
                             <SText color={"#DE5738"} fontSize={18} >MIS DATOS</SText>
                         </SView> */}
                             {this.getForm()}
+                            <SView height={16} />
+                            <SText>Para actualizar su información, llame al 77301118.</SText>
                             <SView height={16} />
                             <SView col={"xs-11"} row center>
                                 <PButtom fontSize={20} onPress={() => {
