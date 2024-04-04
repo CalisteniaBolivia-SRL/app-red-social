@@ -19,11 +19,11 @@ class index extends Component {
         return this.data;
     }
 
-    getForm() {
+    getForm1() {
         if (!this.load_data()) return <SLoad />
         // var isApi = this.data.gmail_key || this.data.facebook_key
         return <SForm
-            ref={(ref) => { this.form = ref; }}
+            ref={(ref) => { this.form123 = ref; }}
             style={{
                 alignItems: "center",
             }}
@@ -34,7 +34,22 @@ class index extends Component {
                 Apellidos: { label: "Apellidos", isRequired: true, defaultValue: this.data.Apellidos, editable: false, style: { borderRadius: 8, backgroundColor: "#212020" } },
                 "Telefono": { label: "Telefono", defaultValue: this.data["Telefono"], type: "phone", editable: false, style: { borderRadius: 8, backgroundColor: "#212020" } },
                 Correo: { label: "Correo", type: "email", isRequired: true, defaultValue: this.data.Correo, editable: false, style: { borderRadius: 8, backgroundColor: "#212020" } },
-                detalle_app: { label: "Presentación", type: "textArea", isRequired: true, defaultValue: this.data.detalle_app, style: { borderRadius: 8, borderLeftWidth: 1,  borderColor: STheme.color.secondary } },
+            }}
+
+        />
+    }
+    getForm() {
+        if (!this.load_data()) return <SLoad />
+        // var isApi = this.data.gmail_key || this.data.facebook_key
+        return <SForm
+            ref={(ref) => { this.form = ref; }}
+            // row
+            style={{
+                alignItems: "center",
+                // justifyContent: "space-between",
+            }}
+            inputs={{
+                detalle_app: { label: "Presentación", type: "textArea", isRequired: true, defaultValue: this.data.detalle_app, style: { borderRadius: 8, borderLeftWidth: 1, borderColor: STheme.color.secondary } },
                 Nit: { label: "Nit", type: "number", isRequired: true, defaultValue: this.data.Nit, style: { borderRadius: 8, borderLeftWidth: 1, borderColor: STheme.color.secondary } },
                 RazonSocial: { label: "Razón Social", isRequired: true, defaultValue: this.data.RazonSocial, style: { borderRadius: 8, borderLeftWidth: 1, borderColor: STheme.color.secondary } },
                 // ...(isApi ? {} : {
@@ -47,7 +62,7 @@ class index extends Component {
                     ...this.data,
                     ...values
                 }
-                this.form.uploadFiles(Model.usuario._get_image_upload_path(SSocket.api, this.data.key), "foto_p");
+                this.form123.uploadFiles(Model.usuario._get_image_upload_path(SSocket.api, this.data.key), "foto_p");
                 Model.usuario.Action.editar({
                     data: finalObj,
                     key_usuario: Model.usuario.Action.getKey()
@@ -56,7 +71,7 @@ class index extends Component {
                     // Model.usuario.Action.CLEAR(); //Limpiar caché
                     Model.usuario.Action.syncUserLog()
                     // console.log("mira ",finalObj)
-                    // SNavigation.goBack();
+                    SNavigation.goBack();
                 }).catch((e) => {
                     SPopup.alert("Error en los datos");
                 })
@@ -102,9 +117,12 @@ class index extends Component {
                             {/* <SView col={"xs-12"} center>
                             <SText color={"#DE5738"} fontSize={18} >MIS DATOS</SText>
                         </SView> */}
-                            {this.getForm()}
-                            <SView height={16} />
+                            {this.getForm1()}
+                            <SView height={4} />
                             <SText>Para actualizar su información, llame al 77301118.</SText>
+                            {/* <SView height={2} col={"xs-12"} style={{ borderColor: "#212020", borderBottomWidth: 1 }}></SView> */}
+
+                            {this.getForm()}
                             <SView height={16} />
                             <SView col={"xs-11"} row center>
                                 <PButtom fontSize={20} onPress={() => {
